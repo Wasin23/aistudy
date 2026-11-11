@@ -1,0 +1,14 @@
+{
+  "name": "openclaw-memory-zilliz",
+  "version": "1.0.0",
+  "description": "Zilliz/Milvus vector memory plugin for OpenClaw",
+  "type": "module",
+  "dependencies": {
+    "@sinclair/typebox": "0.34.48"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

@@ -1,0 +1,1184 @@
+=== SIMULATION START ===
+  M0 biomes: b0=-9  b1=-5  b2=-9  b3=-8  b4=+12  b5=-10  b6=-9  b7=+10  b8=-7  b9=-7  (jackpot=[4, 7])
+  M1 biomes: b0=+8  b1=-7  b2=-9  b3=-9  b4=-5  b5=-5  b6=-9  b7=+8  b8=-7  b9=-10  (jackpot=[0, 7])
+  M2 biomes: b0=-5  b1=-5  b2=-5  b3=-7  b4=-8  b5=-8  b6=-10  b7=-8  b8=+11  b9=+10  (jackpot=[8, 9])
+[tick 00000] CTRL SHIFT  -1 → 0  (M0:100.0  M1:100.0  M2:100.0)
+[tick 00002] CTRL SHIFT  0 → 1  (M0:89.0  M1:100.0  M2:97.0)
+[tick 00002] XFER  M0 → M2  amt=5  res:10.3→5.3  tgt_res→5.0
+[tick 00002] XFER  M2 → M0  amt=5  res:5.0→0.0  tgt_res→10.3
+[tick 00003] XFER  M0 → M2  amt=5  res:7.5→2.5  tgt_res→5.0
+[tick 00003] XFER  M2 → M0  amt=5  res:5.0→0.0  tgt_res→7.5
+[tick 00007] XFER  M2 → M0  amt=5  res:8.5→3.5  tgt_res→5.0
+[tick 00008] CTRL SHIFT  1 → 2  (M0:73.5  M1:71.3  M2:74.2)
+[tick 00009] XFER  M2 → M1  amt=5  res:7.6→2.6  tgt_res→5.0
+[tick 00010] XFER  M1 → M0  amt=5  res:11.5→6.5  tgt_res→5.0
+[tick 00012] XFER  M2 → M1  amt=5  res:7.9→2.9  tgt_res→6.2
+[tick 00013] XFER  M2 → M1  amt=5  res:11.5→6.5  tgt_res→8.5
+[tick 00014] XFER  M1 → M0  amt=5  res:5.8→0.8  tgt_res→5.0
+[tick 00015] XFER  M2 → M1  amt=5  res:8.8→3.8  tgt_res→5.0
+[tick 00017] XFER  M2 → M1  amt=5  res:8.1→3.1  tgt_res→5.0
+[tick 00018] FIGHT START  M1 vs M2  agg=0.509  h=16.0 vs 75.1
+[tick 00018] CTRL SHIFT  2 → 0  (M0:24.3  M1:16.0  M2:75.1)
+[tick 00018] XFER  M0 → M1  amt=5  res:8.9→3.9  tgt_res→13.2
+[tick 00020] FDRIFT mind 1 pattern [0, 0, 1, 1]  +1 → -5
+[tick 00020] FDRIFT mind 2 pattern [0, 1, 1, 1]  -1 → +4
+[tick 00020] XFER  M0 → M1  amt=5  res:9.0→4.0  tgt_res→14.4
+[tick 00021] FDRIFT mind 1 pattern [0, 1, 0, 1]  +3 → -3
+[tick 00021] XFER  M0 → M1  amt=5  res:11.6→6.6  tgt_res→19.4
+[tick 00024] XFER  M0 → M1  amt=5  res:8.0→3.0  tgt_res→21.1
+[tick 00026] XFER  M0 → M1  amt=5  res:9.3→4.3  tgt_res→20.9
+[tick 00027] XFER  M0 → M1  amt=5  res:15.0→10.0  tgt_res→22.8
+[tick 00028] XFER  M0 → M1  amt=5  res:7.2→2.2  tgt_res→30.4
+[tick 00030] XFER  M0 → M1  amt=5  res:7.5→2.5  tgt_res→38.1
+[tick 00031] XFER  M0 → M1  amt=5  res:13.2→8.2  tgt_res→39.5
+[tick 00032] FDRIFT mind 2 pattern [0, 0, 0, 0]  -2 → +3
+[tick 00032] XFER  M0 → M1  amt=5  res:5.4→0.4  tgt_res→48.6
+[tick 00033] XFER  M0 → M1  amt=5  res:11.4→6.4  tgt_res→55.4
+[tick 00035] XFER  M0 → M1  amt=5  res:15.6→10.6  tgt_res→59.8
+[tick 00036] XFER  M0 → M1  amt=5  res:17.2→12.2  tgt_res→60.5
+[tick 00037] FDRIFT mind 1 pattern [1, 1, 0, 0]  +8 → -4
+[tick 00037] XFER  M0 → M1  amt=5  res:9.3→4.3  tgt_res→64.1
+[tick 00039] XFER  M0 → M1  amt=5  res:8.5→3.5  tgt_res→66.2
+[tick 00041] FDRIFT mind 2 pattern [1, 0, 1, 1]  -4 → +3
+[tick 00041] XFER  M0 → M1  amt=5  res:6.0→1.0  tgt_res→64.2
+[tick 00042] XFER  M0 → M1  amt=5  res:8.5→3.5  tgt_res→67.7
+[tick 00044] XFER  M0 → M1  amt=5  res:7.8→2.8  tgt_res→63.8
+[tick 00045] FDRIFT mind 1 pattern [1, 0, 1, 1]  +7 → -6
+[tick 00045] XFER  M0 → M1  amt=5  res:10.4→5.4  tgt_res→64.4
+[tick 00046] XFER  M0 → M1  amt=5  res:11.9→6.9  tgt_res→64.9
+[tick 00047] FDRIFT mind 1 pattern [1, 0, 0, 1]  -4 → +1
+[tick 00049] FDRIFT mind 1 pattern [1, 0, 0, 0]  -1 → +0
+[tick 00049] XFER  M0 → M1  amt=5  res:9.2→4.2  tgt_res→57.0
+[tick 00050] SNAP   ctrl=0  chosen=[7, 8, 6, 6, 5, 1][b7]  M0:46.6(41L,jkp=b[4, 7])  M1:79.5(14L,jkp=b[0, 7])  M2:97.3(14L,jkp=b[8, 9])
+[tick 00050] XFER  M0 → M1  amt=5  res:12.9→7.9  tgt_res→57.8
+[tick 00051] XFER  M0 → M1  amt=5  res:5.1→0.1  tgt_res→60.5
+[tick 00053] FDRIFT mind 2 pattern [0, 1, 1, 1]  +4 → -6
+[tick 00054] XFER  M0 → M1  amt=5  res:6.9→1.9  tgt_res→57.7
+[tick 00055] FDRIFT mind 1 pattern [0, 0, 0, 0]  +3 → +2
+[tick 00056] FDRIFT mind 2 pattern [0, 1, 0, 0]  -2 → +6
+[tick 00056] XFER  M0 → M1  amt=5  res:11.7→6.7  tgt_res→55.3
+[tick 00057] XFER  M0 → M1  amt=5  res:13.4→8.4  tgt_res→56.1
+[tick 00058] XFER  M0 → M1  amt=5  res:15.8→10.8  tgt_res→56.9
+[tick 00059] FDRIFT mind 2 pattern [0, 0, 1, 0]  +1 → -6
+[tick 00059] XFER  M0 → M1  amt=5  res:8.0→3.0  tgt_res→57.7
+[tick 00060] XFER  M0 → M1  amt=5  res:12.7→7.7  tgt_res→59.5
+[tick 00061] FDRIFT mind 1 pattern [1, 1, 0, 0]  -4 → -5
+[tick 00061] XFER  M0 → M1  amt=5  res:14.2→9.2  tgt_res→60.2
+[tick 00062] XFER  M0 → M1  amt=5  res:17.6→12.6  tgt_res→62.8
+[tick 00063] FDRIFT mind 1 pattern [1, 0, 1, 0]  +3 → -1
+[tick 00063] XFER  M0 → M1  amt=5  res:21.0→16.0  tgt_res→63.4
+[tick 00064] XFER  M0 → M1  amt=5  res:13.0→8.0  tgt_res→64.0
+[tick 00065] FIGHT END  M1 vs M2  winner=none  reason=timeout  ticks=48  mastery=[15,14]
+[tick 00065] XFER  M0 → M1  amt=5  res:18.3→13.3  tgt_res→64.6
+[tick 00065] XFER  M1 → M0  amt=5  res:64.6→59.6  tgt_res→18.3
+[tick 00065] XFER  M2 → M1  amt=5  res:76.3→71.3  tgt_res→64.6
+[tick 00066] CTRL SHIFT  0 → 2  (M0:45.9  M1:99.4  M2:100.0)
+[tick 00066] XFER  M0 → M1  amt=5  res:15.3→10.3  tgt_res→65.2
+[tick 00066] XFER  M1 → M0  amt=5  res:65.2→60.2  tgt_res→15.3
+[tick 00066] XFER  M2 → M1  amt=5  res:66.7→61.7  tgt_res→65.2
+[tick 00067] CTRL SHIFT  2 → 1  (M0:38.8  M1:97.9  M2:94.3)
+[tick 00067] XFER  M0 → M1  amt=5  res:12.3→7.3  tgt_res→72.8
+[tick 00067] XFER  M1 → M0  amt=5  res:72.8→67.8  tgt_res→12.3
+[tick 00067] XFER  M2 → M1  amt=5  res:57.3→52.3  tgt_res→72.8
+[tick 00068] XFER  M0 → M1  amt=5  res:9.4→4.4  tgt_res→82.6
+[tick 00068] XFER  M1 → M0  amt=5  res:82.6→77.6  tgt_res→9.4
+[tick 00068] XFER  M2 → M1  amt=5  res:48.3→43.3  tgt_res→82.6
+[tick 00069] XFER  M0 → M1  amt=5  res:6.6→1.6  tgt_res→92.2
+[tick 00069] XFER  M1 → M0  amt=5  res:92.2→87.2  tgt_res→6.6
+[tick 00069] XFER  M2 → M1  amt=5  res:39.5→34.5  tgt_res→92.2
+[tick 00070] XFER  M1 → M0  amt=5  res:89.4→84.4  tgt_res→8.9
+[tick 00070] XFER  M2 → M1  amt=5  res:30.9→25.9  tgt_res→89.4
+[tick 00071] XFER  M0 → M1  amt=5  res:6.2→1.2  tgt_res→89.2
+[tick 00071] XFER  M1 → M0  amt=5  res:89.2→84.2  tgt_res→6.2
+[tick 00071] XFER  M2 → M1  amt=5  res:34.9→29.9  tgt_res→89.2
+[tick 00072] XFER  M1 → M0  amt=5  res:93.4→88.4  tgt_res→8.5
+[tick 00072] XFER  M2 → M1  amt=5  res:26.5→21.5  tgt_res→93.4
+[tick 00073] XFER  M0 → M1  amt=5  res:18.9→13.9  tgt_res→93.1
+[tick 00073] XFER  M1 → M0  amt=5  res:93.1→88.1  tgt_res→18.9
+[tick 00073] XFER  M2 → M1  amt=5  res:18.4→13.4  tgt_res→93.1
+[tick 00074] XFER  M0 → M1  amt=5  res:15.8→10.8  tgt_res→92.8
+[tick 00074] XFER  M1 → M0  amt=5  res:92.8→87.8  tgt_res→15.8
+[tick 00074] XFER  M2 → M1  amt=5  res:10.5→5.5  tgt_res→92.8
+[tick 00075] XFER  M0 → M1  amt=5  res:12.8→7.8  tgt_res→94.6
+[tick 00075] XFER  M1 → M0  amt=5  res:94.6→89.6  tgt_res→12.8
+[tick 00076] XFER  M0 → M1  amt=5  res:9.9→4.9  tgt_res→89.4
+[tick 00076] XFER  M1 → M0  amt=5  res:89.4→84.4  tgt_res→9.9
+[tick 00077] XFER  M0 → M2  amt=10  res:19.1→9.1  tgt_res→10.0
+[tick 00077] XFER  M1 → M0  amt=5  res:79.4→74.4  tgt_res→14.1
+[tick 00077] XFER  M2 → M1  amt=5  res:10.0→5.0  tgt_res→79.4
+[tick 00078] XFER  M0 → M2  amt=10  res:24.6→14.6  tgt_res→12.3
+[tick 00078] XFER  M1 → M0  amt=5  res:74.5→69.5  tgt_res→19.6
+[tick 00078] XFER  M2 → M1  amt=5  res:12.3→7.3  tgt_res→74.5
+[tick 00079] XFER  M0 → M2  amt=10  res:16.5→6.5  tgt_res→14.6
+[tick 00079] XFER  M1 → M0  amt=5  res:69.8→64.8  tgt_res→11.5
+[tick 00079] XFER  M2 → M1  amt=5  res:14.6→9.6  tgt_res→69.8
+[tick 00080] XFER  M1 → M0  amt=5  res:65.2→60.2  tgt_res→13.7
+[tick 00080] XFER  M2 → M1  amt=5  res:6.8→1.8  tgt_res→65.2
+[tick 00081] XFER  M0 → M2  amt=10  res:21.1→11.1  tgt_res→10.0
+[tick 00081] XFER  M1 → M0  amt=5  res:60.7→55.7  tgt_res→16.1
+[tick 00081] XFER  M2 → M1  amt=5  res:10.0→5.0  tgt_res→60.7
+[tick 00082] XFER  M0 → M2  amt=10  res:13.1→3.1  tgt_res→12.3
+[tick 00082] XFER  M1 → M0  amt=5  res:62.1→57.1  tgt_res→8.1
+[tick 00082] XFER  M2 → M1  amt=5  res:12.3→7.3  tgt_res→62.1
+[tick 00083] XFER  M1 → M0  amt=5  res:57.8→52.8  tgt_res→10.4
+[tick 00084] XFER  M1 → M0  amt=5  res:48.7→43.7  tgt_res→12.6
+[tick 00085] XFER  M1 → M0  amt=5  res:48.2→43.2  tgt_res→14.7
+[tick 00086] XFER  M0 → M2  amt=10  res:11.8→1.8  tgt_res→10.0
+[tick 00086] XFER  M1 → M0  amt=5  res:48.5→43.5  tgt_res→6.8
+[tick 00086] XFER  M2 → M1  amt=5  res:10.0→5.0  tgt_res→48.5
+[tick 00087] CRIT   mind 0  strikes_left=2  learned=70
+[tick 00087] XFER  M1 → M2  amt=5  res:55.1→50.1  tgt_res→7.3
+[tick 00087] XFER  M2 → M1  amt=5  res:7.3→2.3  tgt_res→55.1
+[tick 00088] XFER  M1 → M2  amt=5  res:60.5→55.5  tgt_res→5.0
+[tick 00089] XFER  M1 → M2  amt=5  res:53.9→48.9  tgt_res→7.3
+[tick 00090] XFER  M1 → M2  amt=5  res:55.5→50.5  tgt_res→9.6
+[tick 00091] XFER  M1 → M2  amt=5  res:58.0→53.0  tgt_res→11.8
+[tick 00092] XFER  M1 → M2  amt=5  res:48.9→43.9  tgt_res→14.0
+[tick 00093] XFER  M1 → M2  amt=5  res:40.1→35.1  tgt_res→16.1
+[tick 00094] XFER  M1 → M2  amt=5  res:37.1→32.1  tgt_res→18.1
+[tick 00095] XFER  M1 → M2  amt=5  res:28.6→23.6  tgt_res→32.4
+[tick 00096] XFER  M1 → M2  amt=5  res:20.4→15.4  tgt_res→33.9
+[tick 00097] XFER  M1 → M2  amt=5  res:12.4→7.4  tgt_res→35.4
+[tick 00098] XFER  M1 → M2  amt=5  res:10.3→5.3  tgt_res→36.9
+[tick 00114] XFER  M1 → M2  amt=10  res:10.1→0.1  tgt_res→16.8
+[tick 00116] XFER  M1 → M2  amt=10  res:13.1→3.1  tgt_res→20.9
+[tick 00120] FIGHT START  M2 vs M1  agg=0.551  h=8.3 vs 77.1
+[tick 00120] CTRL SHIFT  1 → -1  (M0:REC  M1:77.1  M2:8.3)
+[tick 00121] FDRIFT mind 2 pattern [1, 0, 0, 1]  +9 → +1
+[tick 00125] FDRIFT mind 2 pattern [1, 0, 1, 0]  -7 → +3
+[tick 00127] FDRIFT mind 2 pattern [1, 0, 1, 1]  -2 → +5
+[tick 00128] FDRIFT mind 2 pattern [0, 0, 0, 0]  +3 → +5
+[tick 00131] FDRIFT mind 2 pattern [1, 0, 0, 0]  -4 → +2
+[tick 00132] FDRIFT mind 1 pattern [1, 0, 0, 1]  -5 → +1
+[tick 00137] REVIVE mind 0  strikes_left=2
+[tick 00137] CTRL SHIFT  -1 → 0  (M0:100.0  M1:81.2  M2:44.3)
+[tick 00137] XFER  M0 → M2  amt=15  res:19.9→4.9  tgt_res→24.0
+[tick 00138] XFER  M0 → M2  amt=15  res:17.2→2.2  tgt_res→38.7
+[tick 00139] FDRIFT mind 1 pattern [0, 0, 1, 1]  -6 → +5
+[tick 00142] XFER  M0 → M1  amt=10  res:13.2→3.2  tgt_res→16.2
+[tick 00144] XFER  M0 → M1  amt=10  res:10.3→0.3  tgt_res→27.9
+[tick 00146] FDRIFT mind 1 pattern [0, 1, 1, 1]  -5 → -2
+[tick 00147] XFER  M0 → M1  amt=10  res:12.3→2.3  tgt_res→28.2
+[tick 00148] XFER  M0 → M1  amt=10  res:14.0→4.0  tgt_res→35.8
+[tick 00150] SNAP   ctrl=0  chosen=[4, 1, 8, 9, 6, 5][b4]  M0:93.1(82L,jkp=b[4, 7])  M1:82.5(54L,jkp=b[0, 7])  M2:76.8(54L,jkp=b[8, 9])
+[tick 00150] XFER  M0 → M1  amt=10  res:12.4→2.4  tgt_res→38.7
+[tick 00151] FDRIFT mind 2 pattern [1, 0, 0, 0]  +2 → -5
+[tick 00152] FDRIFT mind 1 pattern [0, 0, 1, 0]  -3 → -1
+[tick 00153] FDRIFT mind 1 pattern [1, 1, 1, 1]  +1 → -2
+[tick 00156] XFER  M0 → M2  amt=15  res:22.6→7.6  tgt_res→23.3
+[tick 00164] FDRIFT mind 1 pattern [1, 0, 0, 1]  +1 → -5
+[tick 00164] XFER  M0 → M2  amt=20  res:43.0→23.0  tgt_res→32.6
+[tick 00167] FDRIFT mind 1 pattern [1, 0, 1, 0]  -6 → +2
+[tick 00167] FIGHT END  M2 vs M1  winner=none  reason=timeout  ticks=48  mastery=[15,15]
+[tick 00167] XFER  M0 → M1  amt=10  res:35.0→25.0  tgt_res→40.8
+[tick 00167] XFER  M1 → M2  amt=10  res:40.8→30.8  tgt_res→39.5
+[tick 00167] XFER  M2 → M0  amt=5  res:39.5→34.5  tgt_res→30.0
+[tick 00168] CTRL SHIFT  0 → 1  (M0:93.6  M1:100.0  M2:100.0)
+[tick 00168] XFER  M0 → M1  amt=10  res:38.9→28.9  tgt_res→47.8
+[tick 00168] XFER  M1 → M2  amt=10  res:47.8→37.8  tgt_res→40.9
+[tick 00168] XFER  M2 → M0  amt=5  res:40.9→35.9  tgt_res→33.9
+[tick 00169] XFER  M0 → M1  amt=10  res:40.7→30.7  tgt_res→54.7
+[tick 00169] XFER  M1 → M2  amt=10  res:54.7→44.7  tgt_res→42.4
+[tick 00169] XFER  M2 → M0  amt=5  res:42.4→37.4  tgt_res→35.7
+[tick 00170] XFER  M0 → M1  amt=10  res:44.5→34.5  tgt_res→60.4
+[tick 00170] XFER  M1 → M2  amt=10  res:60.4→50.4  tgt_res→43.7
+[tick 00170] XFER  M2 → M0  amt=5  res:43.7→38.7  tgt_res→39.5
+[tick 00171] CTRL SHIFT  1 → 0  (M0:100.0  M1:100.0  M2:87.0)
+[tick 00171] XFER  M0 → M1  amt=10  res:49.6→39.6  tgt_res→56.4
+[tick 00171] XFER  M1 → M2  amt=10  res:56.4→46.4  tgt_res→45.1
+[tick 00171] XFER  M2 → M0  amt=5  res:45.1→40.1  tgt_res→44.6
+[tick 00172] XFER  M0 → M1  amt=10  res:40.7→30.7  tgt_res→52.5
+[tick 00172] XFER  M1 → M2  amt=10  res:52.5→42.5  tgt_res→55.8
+[tick 00172] XFER  M2 → M0  amt=5  res:55.8→50.8  tgt_res→35.7
+[tick 00173] XFER  M0 → M1  amt=10  res:42.4→32.4  tgt_res→56.3
+[tick 00173] XFER  M1 → M2  amt=10  res:56.3→46.3  tgt_res→56.8
+[tick 00173] XFER  M2 → M0  amt=5  res:56.8→51.8  tgt_res→37.4
+[tick 00174] XFER  M0 → M1  amt=10  res:46.0→36.0  tgt_res→52.4
+[tick 00174] XFER  M1 → M2  amt=10  res:52.4→42.4  tgt_res→57.7
+[tick 00174] XFER  M2 → M0  amt=5  res:57.7→52.7  tgt_res→41.0
+[tick 00175] XFER  M0 → M1  amt=10  res:37.3→27.3  tgt_res→48.6
+[tick 00175] XFER  M1 → M2  amt=10  res:48.6→38.6  tgt_res→68.0
+[tick 00175] XFER  M2 → M0  amt=5  res:68.0→63.0  tgt_res→32.3
+[tick 00176] XFER  M0 → M1  amt=10  res:41.7→31.7  tgt_res→45.0
+[tick 00176] XFER  M1 → M2  amt=10  res:45.0→35.0  tgt_res→68.6
+[tick 00176] XFER  M2 → M0  amt=5  res:68.6→63.6  tgt_res→36.7
+[tick 00177] XFER  M0 → M1  amt=10  res:43.5→33.5  tgt_res→41.4
+[tick 00177] XFER  M1 → M2  amt=10  res:41.4→31.4  tgt_res→69.2
+[tick 00177] XFER  M2 → M0  amt=5  res:69.2→64.2  tgt_res→38.5
+[tick 00178] XFER  M0 → M1  amt=10  res:49.1→39.1  tgt_res→38.0
+[tick 00178] XFER  M1 → M2  amt=10  res:38.0→28.0  tgt_res→69.7
+[tick 00178] XFER  M2 → M0  amt=5  res:69.7→64.7  tgt_res→44.1
+[tick 00179] XFER  M0 → M1  amt=10  res:40.3→30.3  tgt_res→34.6
+[tick 00179] XFER  M1 → M2  amt=10  res:34.6→24.6  tgt_res→70.3
+[tick 00179] XFER  M2 → M0  amt=5  res:70.3→65.3  tgt_res→35.3
+[tick 00180] XFER  M0 → M1  amt=10  res:31.7→21.7  tgt_res→31.4
+[tick 00180] XFER  M1 → M2  amt=10  res:31.4→21.4  tgt_res→70.8
+[tick 00180] XFER  M2 → M0  amt=5  res:70.8→65.8  tgt_res→26.7
+[tick 00181] XFER  M0 → M1  amt=10  res:34.6→24.6  tgt_res→35.7
+[tick 00181] XFER  M1 → M2  amt=10  res:35.7→25.7  tgt_res→71.4
+[tick 00181] XFER  M2 → M0  amt=5  res:71.4→66.4  tgt_res→29.6
+[tick 00182] XFER  M0 → M1  amt=10  res:39.4→29.4  tgt_res→32.4
+[tick 00182] XFER  M1 → M2  amt=10  res:32.4→22.4  tgt_res→71.9
+[tick 00182] XFER  M2 → M0  amt=5  res:71.9→66.9  tgt_res→34.4
+[tick 00183] XFER  M0 → M1  amt=10  res:30.9→20.9  tgt_res→29.2
+[tick 00183] XFER  M1 → M2  amt=10  res:29.2→19.2  tgt_res→72.4
+[tick 00183] XFER  M2 → M0  amt=5  res:72.4→67.4  tgt_res→25.9
+[tick 00184] XFER  M0 → M2  amt=20  res:22.6→2.6  tgt_res→82.8
+[tick 00184] XFER  M1 → M2  amt=10  res:16.2→6.2  tgt_res→92.8
+[tick 00184] XFER  M2 → M0  amt=5  res:92.8→87.8  tgt_res→7.6
+[tick 00185] XFER  M2 → M0  amt=5  res:82.7→77.7  tgt_res→9.8
+[tick 00186] XFER  M2 → M0  amt=5  res:72.9→67.9  tgt_res→12.1
+[tick 00187] XFER  M0 → M2  amt=20  res:20.4→0.4  tgt_res→83.3
+[tick 00187] XFER  M2 → M1  amt=10  res:83.3→73.3  tgt_res→10.0
+[tick 00188] XFER  M2 → M1  amt=10  res:68.6→58.6  tgt_res→24.8
+[tick 00189] XFER  M0 → M2  amt=20  res:21.0→1.0  tgt_res→74.4
+[tick 00189] XFER  M1 → M2  amt=15  res:21.6→6.6  tgt_res→89.4
+[tick 00189] XFER  M2 → M1  amt=10  res:89.4→79.4  tgt_res→16.6
+[tick 00190] FIGHT START  M2 vs M0  agg=0.502  h=24.5 vs 100.0
+[tick 00190] CTRL SHIFT  0 → 1  (M0:100.0  M1:71.2  M2:24.5)
+[tick 00190] FDRIFT mind 0 pattern [1, 1, 0, 0]  -7 → -3
+[tick 00190] XFER  M1 → M2  amt=15  res:22.0→7.0  tgt_res→96.3
+[tick 00194] FDRIFT mind 2 pattern [0, 0, 0, 1]  -3 → -4
+[tick 00195] XFER  M1 → M2  amt=15  res:18.2→3.2  tgt_res→91.9
+[tick 00202] FDRIFT mind 0 pattern [0, 0, 1, 0]  -4 → -5
+[tick 00203] XFER  M1 → M2  amt=15  res:15.4→0.4  tgt_res→96.2
+[tick 00204] FDRIFT mind 0 pattern [1, 1, 0, 0]  -3 → +0
+[tick 00206] FDRIFT mind 2 pattern [1, 0, 1, 1]  -2 → -5
+[tick 00207] FDRIFT mind 0 pattern [1, 1, 1, 1]  +9 → +0
+[tick 00211] XFER  M1 → M0  amt=10  res:10.5→0.5  tgt_res→10.0
+[tick 00214] XFER  M1 → M0  amt=10  res:12.9→2.9  tgt_res→16.6
+[tick 00216] XFER  M1 → M2  amt=15  res:15.9→0.9  tgt_res→78.6
+[tick 00218] XFER  M1 → M0  amt=10  res:13.9→3.9  tgt_res→17.9
+[tick 00219] FDRIFT mind 2 pattern [1, 0, 1, 0]  +9 → -4
+[tick 00219] FDRIFT mind 0 pattern [1, 1, 0, 1]  -5 → +3
+[tick 00219] XFER  M1 → M0  amt=10  res:11.9→1.9  tgt_res→24.8
+[tick 00222] XFER  M1 → M0  amt=10  res:13.0→3.0  tgt_res→28.3
+[tick 00223] FDRIFT mind 2 pattern [1, 1, 1, 0]  +7 → -1
+[tick 00223] FDRIFT mind 0 pattern [1, 1, 1, 0]  -2 → -6
+[tick 00225] FDRIFT mind 0 pattern [1, 0, 0, 1]  -1 → +6
+[tick 00226] XFER  M1 → M0  amt=10  res:14.0→4.0  tgt_res→25.5
+[tick 00228] XFER  M1 → M0  amt=10  res:12.0→2.0  tgt_res→29.1
+[tick 00229] FDRIFT mind 0 pattern [0, 1, 1, 0]  +3 → +6
+[tick 00231] FDRIFT mind 2 pattern [1, 1, 1, 0]  -1 → -5
+[tick 00231] XFER  M1 → M0  amt=10  res:11.9→1.9  tgt_res→29.3
+[tick 00233] FDRIFT mind 0 pattern [0, 1, 1, 1]  +8 → +5
+[tick 00234] FDRIFT mind 2 pattern [1, 0, 1, 0]  -4 → +6
+[tick 00234] XFER  M1 → M0  amt=10  res:13.7→3.7  tgt_res→34.3
+[tick 00235] FDRIFT mind 2 pattern [0, 1, 0, 1]  +9 → +0
+[tick 00235] XFER  M1 → M0  amt=10  res:10.6→0.6  tgt_res→40.7
+[tick 00236] FDRIFT mind 2 pattern [1, 1, 0, 1]  -2 → -5
+[tick 00236] FIGHT END  M2 vs M0  winner=M0  reason=mastery  ticks=47  mastery=[14,16]
+[tick 00236] LOOT  M0←M2  mastery_diff=2  mult=1.6  looted=31.7  gained=50.7  winner_res→97.4
+[tick 00236] XFER  M0 → M2  amt=25  res:92.0→67.0  tgt_res→25.0
+[tick 00236] XFER  M2 → M1  amt=10  res:25.0→15.0  tgt_res→17.6
+[tick 00237] XFER  M0 → M2  amt=25  res:62.5→37.5  tgt_res→37.0
+[tick 00237] XFER  M1 → M0  amt=10  res:25.1→15.1  tgt_res→47.5
+[tick 00237] XFER  M2 → M1  amt=10  res:37.0→27.0  tgt_res→25.1
+[tick 00238] XFER  M0 → M2  amt=25  res:50.9→25.9  tgt_res→48.7
+[tick 00238] XFER  M1 → M2  amt=15  res:32.4→17.4  tgt_res→63.7
+[tick 00238] XFER  M2 → M1  amt=10  res:63.7→53.7  tgt_res→27.4
+[tick 00239] XFER  M0 → M2  amt=25  res:32.7→7.7  tgt_res→74.6
+[tick 00239] XFER  M1 → M2  amt=15  res:36.7→21.7  tgt_res→89.6
+[tick 00239] XFER  M2 → M1  amt=10  res:89.6→79.6  tgt_res→31.7
+[tick 00240] XFER  M1 → M2  amt=15  res:41.0→26.0  tgt_res→89.7
+[tick 00240] XFER  M2 → M1  amt=10  res:89.7→79.7  tgt_res→36.0
+[tick 00241] XFER  M1 → M2  amt=15  res:43.0→28.0  tgt_res→89.8
+[tick 00241] XFER  M2 → M1  amt=10  res:89.8→79.8  tgt_res→38.0
+[tick 00242] CTRL SHIFT  1 → 0  (M0:100.0  M1:100.0  M2:70.1)
+[tick 00242] XFER  M0 → M2  amt=25  res:32.4→7.4  tgt_res→100.0
+[tick 00242] XFER  M1 → M2  amt=15  res:34.4→19.4  tgt_res→115.0
+[tick 00242] XFER  M2 → M1  amt=10  res:115.0→105.0  tgt_res→29.4
+[tick 00243] XFER  M1 → M2  amt=15  res:35.5→20.5  tgt_res→114.3
+[tick 00243] XFER  M2 → M1  amt=10  res:114.3→104.3  tgt_res→30.5
+[tick 00244] XFER  M0 → M2  amt=25  res:30.2→5.2  tgt_res→123.7
+[tick 00244] XFER  M1 → M2  amt=15  res:38.5→23.5  tgt_res→138.7
+[tick 00244] XFER  M2 → M1  amt=10  res:138.7→128.7  tgt_res→33.5
+[tick 00245] XFER  M1 → M2  amt=15  res:30.0→15.0  tgt_res→137.3
+[tick 00245] XFER  M2 → M1  amt=10  res:137.3→127.3  tgt_res→25.0
+[tick 00246] XFER  M0 → M2  amt=25  res:31.3→6.3  tgt_res→146.0
+[tick 00246] XFER  M1 → M2  amt=15  res:21.7→6.7  tgt_res→161.0
+[tick 00246] XFER  M2 → M1  amt=10  res:161.0→151.0  tgt_res→16.7
+[tick 00247] XFER  M0 → M1  amt=15  res:16.6→1.6  tgt_res→34.4
+[tick 00247] XFER  M1 → M2  amt=15  res:34.4→19.4  tgt_res→159.0
+[tick 00247] XFER  M2 → M1  amt=10  res:159.0→149.0  tgt_res→29.4
+[tick 00248] XFER  M1 → M2  amt=15  res:26.0→11.0  tgt_res→157.0
+[tick 00248] XFER  M2 → M1  amt=10  res:157.0→147.0  tgt_res→21.0
+[tick 00249] XFER  M1 → M2  amt=15  res:24.3→9.3  tgt_res→155.1
+[tick 00249] XFER  M2 → M1  amt=10  res:155.1→145.1  tgt_res→19.3
+[tick 00250] SNAP   ctrl=0  chosen=[5, 9, 6, 6, 1, 0][b5]  M0:85.1(130L,jkp=b[4, 7])  M1:86.0(123L,jkp=b[0, 7])  M2:23.6(87L,jkp=b[8, 9])
+[tick 00250] XFER  M1 → M2  amt=15  res:16.3→1.3  tgt_res→153.2
+[tick 00250] XFER  M2 → M1  amt=10  res:153.2→143.2  tgt_res→11.3
+[tick 00251] CTRL SHIFT  0 → 1  (M0:87.6  M1:88.5  M2:26.1)
+[tick 00251] XFER  M2 → M1  amt=10  res:136.4→126.4  tgt_res→18.4
+[tick 00252] XFER  M1 → M2  amt=15  res:24.7→9.7  tgt_res→135.1
+[tick 00252] XFER  M2 → M1  amt=10  res:135.1→125.1  tgt_res→19.7
+[tick 00253] XFER  M1 → M2  amt=15  res:22.7→7.7  tgt_res→133.9
+[tick 00253] XFER  M2 → M1  amt=10  res:133.9→123.9  tgt_res→17.7
+[tick 00254] XFER  M1 → M2  amt=15  res:24.7→9.7  tgt_res→132.7
+[tick 00254] XFER  M2 → M1  amt=10  res:132.7→122.7  tgt_res→19.7
+[tick 00255] XFER  M1 → M2  amt=15  res:26.8→11.8  tgt_res→131.5
+[tick 00255] XFER  M2 → M1  amt=10  res:131.5→121.5  tgt_res→21.8
+[tick 00256] FIGHT START  M2 vs M1  agg=0.524  h=15.2 vs 93.2
+[tick 00256] CTRL SHIFT  1 → 0  (M0:50.2  M1:93.2  M2:15.2)
+[tick 00258] FDRIFT mind 1 pattern [0, 1, 0, 0]  +9 → +1
+[tick 00261] FDRIFT mind 1 pattern [1, 1, 1, 0]  -3 → +5
+[tick 00270] FDRIFT mind 2 pattern [0, 0, 1, 0]  +1 → -1
+[tick 00271] FDRIFT mind 1 pattern [1, 1, 0, 1]  +2 → -4
+[tick 00272] FDRIFT mind 2 pattern [0, 1, 0, 1]  +2 → -5
+[tick 00272] FDRIFT mind 1 pattern [1, 1, 0, 0]  -3 → -4
+[tick 00275] FDRIFT mind 2 pattern [1, 1, 1, 0]  -6 → +3
+[tick 00278] FDRIFT mind 1 pattern [0, 0, 0, 1]  +9 → -4
+[tick 00279] FDRIFT mind 1 pattern [1, 1, 1, 1]  -3 → +0
+[tick 00287] FIGHT END  M2 vs M1  winner=M2  reason=mastery  ticks=32  mastery=[16,15]
+[tick 00287] LOOT  M2←M1  mastery_diff=1  mult=1.4  looted=29.1  gained=40.8  winner_res→64.6
+[tick 00287] XFER  M2 → M0  amt=10  res:60.1→50.1  tgt_res→82.3
+[tick 00288] CTRL SHIFT  0 → 1  (M0:65.5  M1:91.9  M2:75.7)
+[tick 00288] XFER  M2 → M0  amt=10  res:46.1→36.1  tgt_res→87.4
+[tick 00289] XFER  M2 → M0  amt=10  res:32.6→22.6  tgt_res→92.2
+[tick 00290] XFER  M2 → M0  amt=10  res:19.4→9.4  tgt_res→108.0
+[tick 00294] XFER  M1 → M2  amt=15  res:15.3→0.3  tgt_res→15.0
+[tick 00294] XFER  M2 → M0  amt=10  res:15.0→5.0  tgt_res→105.7
+[tick 00297] XFER  M1 → M2  amt=15  res:16.9→1.9  tgt_res→15.0
+[tick 00297] XFER  M2 → M0  amt=10  res:15.0→5.0  tgt_res→117.0
+[tick 00299] XFER  M1 → M2  amt=15  res:17.7→2.7  tgt_res→15.0
+[tick 00299] XFER  M2 → M0  amt=10  res:15.0→5.0  tgt_res→136.3
+[tick 00300] SNAP   ctrl=1  chosen=[7, 9, 6, 6, 6, 8][b7]  M0:65.9(152L,jkp=b[4, 7])  M1:100.0(138L,jkp=b[0, 7])  M2:22.3(102L,jkp=b[8, 9])
+[tick 00301] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 00301] FIGHT START  M2 vs M1  agg=0.566  h=24.8 vs 100.0
+[tick 00301] CTRL SHIFT  1 → 0  (M0:68.4  M1:100.0  M2:24.8)
+[tick 00301] FDRIFT mind 1 pattern [0, 0, 1, 0]  +3 → -4
+[tick 00302] FDRIFT mind 2 pattern [1, 1, 1, 0]  +1 → +2
+[tick 00303] FDRIFT mind 1 pattern [0, 1, 0, 1]  +2 → -2
+[tick 00307] FDRIFT mind 2 pattern [0, 1, 0, 1]  -2 → +0
+[tick 00309] FDRIFT mind 1 pattern [1, 1, 1, 0]  -2 → +3
+[tick 00311] FDRIFT mind 2 pattern [1, 1, 0, 0]  -2 → -4
+[tick 00312] FDRIFT mind 2 pattern [1, 1, 1, 1]  +6 → +1
+[tick 00313] FDRIFT mind 1 pattern [1, 0, 1, 1]  +7 → +2
+[tick 00318] FDRIFT mind 2 pattern [0, 1, 0, 1]  +0 → -6
+[tick 00319] XFER  M0 → M1  amt=20  res:154.4→134.4  tgt_res→26.6
+[tick 00320] FDRIFT mind 2 pattern [0, 1, 1, 1]  -2 → +5
+[tick 00320] XFER  M0 → M1  amt=20  res:127.9→107.9  tgt_res→46.2
+[tick 00327] FDRIFT mind 2 pattern [0, 1, 1, 0]  +5 → +6
+[tick 00327] FDRIFT mind 1 pattern [1, 1, 0, 0]  +7 → +2
+[tick 00331] FDRIFT mind 1 pattern [0, 1, 1, 1]  -4 → +4
+[tick 00333] FDRIFT mind 2 pattern [0, 0, 0, 0]  +1 → +6
+[tick 00340] FDRIFT mind 2 pattern [0, 1, 0, 1]  -6 → -2
+[tick 00340] FDRIFT mind 1 pattern [1, 0, 1, 0]  +7 → +0
+[tick 00340] XFER  M0 → M1  amt=20  res:134.4→114.4  tgt_res→43.4
+[tick 00341] XFER  M0 → M1  amt=20  res:109.4→89.4  tgt_res→61.1
+[tick 00342] FDRIFT mind 2 pattern [1, 1, 1, 0]  +2 → +4
+[tick 00342] XFER  M0 → M1  amt=20  res:84.2→64.2  tgt_res→76.8
+[tick 00343] XFER  M0 → M1  amt=20  res:67.1→47.1  tgt_res→97.5
+[tick 00344] XFER  M0 → M1  amt=20  res:53.3→33.3  tgt_res→112.7
+[tick 00345] XFER  M0 → M1  amt=20  res:41.0→21.0  tgt_res→129.3
+[tick 00346] XFER  M0 → M1  amt=20  res:34.1→14.1  tgt_res→142.9
+[tick 00347] XFER  M0 → M1  amt=20  res:27.2→7.2  tgt_res→159.7
+[tick 00348] FIGHT END  M2 vs M1  winner=none  reason=timeout  ticks=48  mastery=[15,15]
+[tick 00348] XFER  M1 → M2  amt=15  res:153.1→138.1  tgt_res→15.0
+[tick 00349] XFER  M1 → M2  amt=15  res:134.0→119.0  tgt_res→27.0
+[tick 00350] SNAP   ctrl=0  chosen=[4, 1, 6, 1, 8, 3][b4]  M0:100.0(153L,jkp=b[4, 7])  M1:96.0(139L,jkp=b[0, 7])  M2:40.7(103L,jkp=b[8, 9])
+[tick 00350] XFER  M0 → M1  amt=20  res:30.7→10.7  tgt_res→132.9
+[tick 00350] XFER  M1 → M2  amt=15  res:132.9→117.9  tgt_res→38.7
+[tick 00351] XFER  M0 → M1  amt=20  res:22.7→2.7  tgt_res→138.6
+[tick 00351] XFER  M1 → M2  amt=15  res:138.6→123.6  tgt_res→50.1
+[tick 00352] XFER  M1 → M2  amt=15  res:117.4→102.4  tgt_res→61.1
+[tick 00353] CTRL SHIFT  0 → 1  (M0:91.9  M1:99.4  M2:30.1)
+[tick 00353] XFER  M1 → M2  amt=15  res:106.4→91.4  tgt_res→71.7
+[tick 00353] XFER  M2 → M0  amt=15  res:71.7→56.7  tgt_res→15.0
+[tick 00354] XFER  M1 → M2  amt=15  res:96.7→81.7  tgt_res→67.5
+[tick 00354] XFER  M2 → M0  amt=15  res:67.5→52.5  tgt_res→34.5
+[tick 00355] XFER  M0 → M1  amt=20  res:31.0→11.0  tgt_res→106.3
+[tick 00355] XFER  M1 → M2  amt=15  res:106.3→91.3  tgt_res→63.5
+[tick 00355] XFER  M2 → M0  amt=15  res:63.5→48.5  tgt_res→26.0
+[tick 00356] XFER  M0 → M1  amt=20  res:22.7→2.7  tgt_res→116.6
+[tick 00356] XFER  M1 → M2  amt=15  res:116.6→101.6  tgt_res→59.5
+[tick 00356] XFER  M2 → M0  amt=15  res:59.5→44.5  tgt_res→17.7
+[tick 00357] XFER  M0 → M1  amt=20  res:23.9→3.9  tgt_res→126.6
+[tick 00357] XFER  M1 → M2  amt=15  res:126.6→111.6  tgt_res→55.7
+[tick 00357] XFER  M2 → M0  amt=15  res:55.7→40.7  tgt_res→18.9
+[tick 00358] FIGHT START  M2 vs M1  agg=0.537  h=14.4 vs 100.0
+[tick 00358] CTRL SHIFT  1 → 0  (M0:74.6  M1:100.0  M2:14.4)
+[tick 00358] XFER  M0 → M1  amt=20  res:27.0→7.0  tgt_res→127.7
+[tick 00359] FDRIFT mind 2 pattern [1, 1, 1, 1]  -1 → +2
+[tick 00366] FDRIFT mind 2 pattern [1, 0, 0, 1]  -3 → +0
+[tick 00367] FDRIFT mind 1 pattern [1, 1, 0, 1]  -6 → -2
+[tick 00372] FDRIFT mind 2 pattern [1, 0, 0, 0]  -4 → +2
+[tick 00378] FDRIFT mind 2 pattern [0, 1, 1, 0]  +3 → +5
+[tick 00378] FDRIFT mind 1 pattern [0, 1, 1, 1]  +8 → +5
+[tick 00380] FDRIFT mind 1 pattern [0, 0, 0, 0]  -1 → +0
+[tick 00391] FDRIFT mind 1 pattern [1, 0, 0, 0]  -6 → +0
+[tick 00396] FDRIFT mind 1 pattern [0, 0, 0, 1]  -2 → -6
+[tick 00396] FIGHT END  M2 vs M1  winner=M2  reason=mastery  ticks=39  mastery=[16,15]
+[tick 00396] LOOT  M2←M1  mastery_diff=1  mult=1.4  looted=25.6  gained=35.8  winner_res→52.7
+[tick 00396] XFER  M2 → M0  amt=15  res:48.6→33.6  tgt_res→57.5
+[tick 00397] CTRL SHIFT  0 → 1  (M0:78.7  M1:99.2  M2:97.3)
+[tick 00397] XFER  M2 → M0  amt=15  res:30.1→15.1  tgt_res→79.4
+[tick 00400] SNAP   ctrl=1  chosen=[7, 8, 4, 4, 0, 0][b7]  M0:72.2(153L,jkp=b[4, 7])  M1:97.8(149L,jkp=b[0, 7])  M2:75.5(114L,jkp=b[8, 9])
+[tick 00404] XFER  M1 → M2  amt=15  res:18.6→3.6  tgt_res→20.0
+[tick 00404] XFER  M2 → M0  amt=15  res:20.0→5.0  tgt_res→88.8
+[tick 00406] XFER  M1 → M2  amt=15  res:17.6→2.6  tgt_res→15.0
+[tick 00406] XFER  M2 → M0  amt=15  res:15.0→0.0  tgt_res→101.6
+[tick 00408] XFER  M1 → M2  amt=15  res:17.3→2.3  tgt_res→15.0
+[tick 00408] XFER  M2 → M0  amt=15  res:15.0→0.0  tgt_res→113.7
+[tick 00414] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 00414] FIGHT START  M2 vs M1  agg=0.511  h=8.4 vs 94.8
+[tick 00414] CTRL SHIFT  1 → 0  (M0:48.7  M1:94.8  M2:8.4)
+[tick 00415] FDRIFT mind 2 pattern [1, 1, 1, 0]  -5 → +3
+[tick 00430] FDRIFT mind 2 pattern [0, 1, 1, 1]  -1 → +6
+[tick 00430] FDRIFT mind 1 pattern [1, 1, 1, 0]  +3 → +5
+[tick 00432] FDRIFT mind 1 pattern [0, 1, 1, 0]  +1 → +5
+[tick 00438] FDRIFT mind 1 pattern [1, 0, 0, 1]  +9 → -4
+[tick 00441] FDRIFT mind 1 pattern [0, 1, 0, 0]  -2 → +5
+[tick 00443] XFER  M0 → M1  amt=25  res:154.3→129.3  tgt_res→29.3
+[tick 00445] XFER  M0 → M1  amt=25  res:133.1→108.1  tgt_res→47.7
+[tick 00446] FIGHT END  M2 vs M1  winner=M1  reason=mastery  ticks=33  mastery=[15,16]
+[tick 00446] LOOT  M1←M2  mastery_diff=1  mult=1.4  looted=6.0  gained=8.4  winner_res→61.1
+[tick 00446] XFER  M0 → M1  amt=25  res:104.8→79.8  tgt_res→81.7
+[tick 00446] XFER  M1 → M2  amt=15  res:81.7→66.7  tgt_res→15.0
+[tick 00446] XFER  M2 → M1  amt=15  res:15.0→0.0  tgt_res→81.7
+[tick 00447] XFER  M1 → M2  amt=15  res:76.8→61.8  tgt_res→15.0
+[tick 00448] XFER  M1 → M2  amt=15  res:67.4→52.4  tgt_res→27.0
+[tick 00449] XFER  M1 → M2  amt=15  res:55.9→40.9  tgt_res→38.7
+[tick 00450] SNAP   ctrl=0  chosen=[7, 1, 7, 7, 2, 7][b7]  M0:100.0(175L,jkp=b[4, 7])  M1:100.0(162L,jkp=b[0, 7])  M2:16.8(129L,jkp=b[8, 9])
+[tick 00450] XFER  M1 → M2  amt=15  res:47.7→32.7  tgt_res→50.1
+[tick 00451] XFER  M1 → M2  amt=15  res:31.7→16.7  tgt_res→61.1
+[tick 00452] XFER  M1 → M2  amt=15  res:22.2→7.2  tgt_res→71.7
+[tick 00453] XFER  M1 → M2  amt=15  res:16.0→1.0  tgt_res→82.1
+[tick 00455] HEADSTART  mind 0  kept 3 patterns from prev fight
+[tick 00455] FIGHT START  M2 vs M0  agg=0.514  h=5.4 vs 100.0
+[tick 00455] CTRL SHIFT  0 → 1  (M0:100.0  M1:100.0  M2:5.4)
+[tick 00458] FDRIFT mind 2 pattern [1, 0, 1, 0]  -6 → +2
+[tick 00459] FDRIFT mind 0 pattern [1, 1, 0, 1]  +0 → +5
+[tick 00459] XFER  M1 → M2  amt=15  res:16.4→1.4  tgt_res→86.1
+[tick 00467] FDRIFT mind 0 pattern [0, 0, 0, 0]  -5 → +2
+[tick 00467] XFER  M1 → M2  amt=15  res:21.4→6.4  tgt_res→83.2
+[tick 00468] FDRIFT mind 2 pattern [0, 1, 1, 0]  +8 → -6
+[tick 00470] XFER  M1 → M2  amt=15  res:20.1→5.1  tgt_res→83.6
+[tick 00471] FDRIFT mind 2 pattern [1, 0, 0, 1]  +2 → +1
+[tick 00472] FDRIFT mind 0 pattern [0, 0, 0, 0]  +2 → +3
+[tick 00475] FDRIFT mind 2 pattern [0, 0, 0, 0]  -3 → +6
+[tick 00478] FDRIFT mind 2 pattern [1, 0, 0, 1]  +1 → +0
+[tick 00482] FDRIFT mind 2 pattern [0, 0, 0, 0]  +6 → +5
+[tick 00484] XFER  M1 → M2  amt=15  res:18.7→3.7  tgt_res→56.9
+[tick 00488] FIGHT END  M2 vs M0  winner=M2  reason=mastery  ticks=34  mastery=[16,14]
+[tick 00488] LOOT  M2←M0  mastery_diff=2  mult=1.6  looted=35.3  gained=56.5  winner_res→104.2
+[tick 00488] XFER  M2 → M1  amt=20  res:98.6→78.6  tgt_res→27.9
+[tick 00489] CTRL SHIFT  1 → 0  (M0:99.5  M1:92.2  M2:57.3)
+[tick 00489] XFER  M1 → M2  amt=15  res:24.6→9.6  tgt_res→88.7
+[tick 00489] XFER  M2 → M1  amt=20  res:88.7→68.7  tgt_res→29.6
+[tick 00490] XFER  M1 → M2  amt=15  res:35.5→20.5  tgt_res→79.2
+[tick 00490] XFER  M2 → M1  amt=20  res:79.2→59.2  tgt_res→40.5
+[tick 00491] XFER  M1 → M2  amt=15  res:36.8→21.8  tgt_res→69.9
+[tick 00491] XFER  M2 → M1  amt=20  res:69.9→49.9  tgt_res→41.8
+[tick 00492] XFER  M1 → M2  amt=15  res:38.1→23.1  tgt_res→60.9
+[tick 00492] XFER  M2 → M1  amt=20  res:60.9→40.9  tgt_res→43.1
+[tick 00493] XFER  M1 → M2  amt=15  res:39.3→24.3  tgt_res→52.2
+[tick 00493] XFER  M2 → M1  amt=20  res:52.2→32.2  tgt_res→44.3
+[tick 00494] XFER  M1 → M2  amt=15  res:40.4→25.4  tgt_res→43.7
+[tick 00494] XFER  M2 → M1  amt=20  res:43.7→23.7  tgt_res→45.4
+[tick 00495] XFER  M1 → M2  amt=15  res:47.3→32.3  tgt_res→35.5
+[tick 00495] XFER  M2 → M1  amt=20  res:35.5→15.5  tgt_res→52.3
+[tick 00496] XFER  M1 → M2  amt=15  res:48.2→33.2  tgt_res→27.5
+[tick 00497] XFER  M1 → M2  amt=15  res:29.7→14.7  tgt_res→39.2
+[tick 00497] XFER  M2 → M1  amt=20  res:39.2→19.2  tgt_res→34.7
+[tick 00498] XFER  M1 → M2  amt=15  res:31.2→16.2  tgt_res→31.1
+[tick 00498] XFER  M2 → M1  amt=20  res:31.1→11.1  tgt_res→36.2
+[tick 00499] XFER  M1 → M2  amt=15  res:32.6→17.6  tgt_res→23.3
+[tick 00499] XFER  M2 → M1  amt=20  res:23.3→3.3  tgt_res→37.6
+[tick 00500] XFER  M1 → M2  amt=15  res:34.0→19.0  tgt_res→15.7
+[tick 00501] XFER  M1 → M2  amt=15  res:15.9→0.9  tgt_res→27.7
+[tick 00501] XFER  M2 → M1  amt=20  res:27.7→7.7  tgt_res→20.9
+[tick 00502] XFER  M1 → M2  amt=15  res:17.8→2.8  tgt_res→20.0
+[tick 00505] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 00505] FIGHT START  M2 vs M0  agg=0.557  h=18.8 vs 98.0
+[tick 00505] CTRL SHIFT  0 → 1  (M0:98.0  M1:82.3  M2:18.8)
+[tick 00507] FDRIFT mind 0 pattern [1, 1, 0, 1]  +6 → +2
+[tick 00508] XFER  M1 → M2  amt=15  res:15.6→0.6  tgt_res→39.0
+[tick 00513] FDRIFT mind 0 pattern [1, 1, 0, 1]  +2 → -6
+[tick 00517] XFER  M1 → M2  amt=20  res:22.3→2.3  tgt_res→46.9
+[tick 00518] FDRIFT mind 0 pattern [1, 1, 1, 1]  +3 → -6
+[tick 00519] FDRIFT mind 0 pattern [1, 1, 1, 0]  -4 → +3
+[tick 00522] FDRIFT mind 0 pattern [0, 0, 0, 1]  -5 → +0
+[tick 00523] FDRIFT mind 2 pattern [0, 1, 0, 1]  -6 → +0
+[tick 00525] FDRIFT mind 2 pattern [1, 0, 0, 1]  +1 → -5
+[tick 00526] FDRIFT mind 2 pattern [0, 0, 0, 0]  +0 → +6
+[tick 00527] FDRIFT mind 0 pattern [0, 1, 1, 1]  -5 → +0
+[tick 00531] FDRIFT mind 2 pattern [0, 0, 1, 0]  +2 → -1
+[tick 00531] FDRIFT mind 0 pattern [1, 0, 1, 1]  +3 → +1
+[tick 00531] XFER  M1 → M2  amt=20  res:24.4→4.4  tgt_res→53.6
+[tick 00533] FDRIFT mind 2 pattern [1, 0, 0, 0]  -5 → +3
+[tick 00537] FDRIFT mind 0 pattern [0, 0, 0, 1]  +0 → -1
+[tick 00539] XFER  M1 → M2  amt=25  res:27.9→2.9  tgt_res→83.1
+[tick 00546] FDRIFT mind 2 pattern [1, 1, 1, 0]  -1 → +1
+[tick 00548] FIGHT END  M2 vs M0  winner=M2  reason=mastery  ticks=44  mastery=[16,14]
+[tick 00548] LOOT  M2←M0  mastery_diff=2  mult=1.6  looted=47.3  gained=75.7  winner_res→149.0
+[tick 00548] XFER  M2 → M1  amt=25  res:142.8→117.8  tgt_res→28.2
+[tick 00549] CTRL SHIFT  1 → 2  (M0:98.4  M1:95.2  M2:100.0)
+[tick 00549] XFER  M1 → M0  amt=15  res:24.9→9.9  tgt_res→15.0
+[tick 00549] XFER  M2 → M1  amt=25  res:111.7→86.7  tgt_res→34.9
+[tick 00550] SNAP   ctrl=2  chosen=[9, 5, 2, 7, 2, 3][b9]  M0:83.4(153L,jkp=b[4, 7])  M1:81.4(163L,jkp=b[0, 7])  M2:95.4(141L,jkp=b[8, 9])
+[tick 00550] XFER  M1 → M0  amt=15  res:31.3→16.3  tgt_res→27.0
+[tick 00550] XFER  M2 → M0  amt=20  res:91.9→71.9  tgt_res→47.0
+[tick 00551] XFER  M2 → M1  amt=25  res:67.7→42.7  tgt_res→38.3
+[tick 00552] XFER  M1 → M2  amt=20  res:34.7→14.7  tgt_res→72.6
+[tick 00552] XFER  M2 → M1  amt=25  res:72.6→47.6  tgt_res→39.7
+[tick 00553] XFER  M1 → M2  amt=20  res:36.0→16.0  tgt_res→77.5
+[tick 00553] XFER  M2 → M0  amt=20  res:77.5→57.5  tgt_res→55.7
+[tick 00554] XFER  M2 → M0  amt=20  res:69.1→49.1  tgt_res→71.5
+[tick 00555] XFER  M2 → M1  amt=25  res:59.0→34.0  tgt_res→35.1
+[tick 00556] XFER  M1 → M2  amt=20  res:31.6→11.6  tgt_res→64.3
+[tick 00556] XFER  M2 → M1  amt=25  res:64.3→39.3  tgt_res→36.6
+[tick 00557] XFER  M1 → M2  amt=20  res:33.0→13.0  tgt_res→69.4
+[tick 00557] XFER  M2 → M1  amt=25  res:69.4→44.4  tgt_res→38.0
+[tick 00558] XFER  M1 → M2  amt=20  res:34.3→14.3  tgt_res→60.6
+[tick 00558] XFER  M2 → M1  amt=25  res:60.6→35.6  tgt_res→39.3
+[tick 00559] XFER  M1 → M2  amt=20  res:35.6→15.6  tgt_res→62.4
+[tick 00559] XFER  M2 → M1  amt=25  res:62.4→37.4  tgt_res→40.6
+[tick 00560] XFER  M1 → M2  amt=20  res:36.9→16.9  tgt_res→69.3
+[tick 00560] XFER  M2 → M1  amt=25  res:69.3→44.3  tgt_res→41.9
+[tick 00561] XFER  M1 → M2  amt=20  res:38.2→18.2  tgt_res→62.9
+[tick 00561] XFER  M2 → M1  amt=25  res:62.9→37.9  tgt_res→43.2
+[tick 00562] XFER  M1 → M2  amt=20  res:39.4→19.4  tgt_res→69.2
+[tick 00562] XFER  M2 → M1  amt=25  res:69.2→44.2  tgt_res→44.4
+[tick 00563] XFER  M1 → M2  amt=20  res:40.5→20.5  tgt_res→73.2
+[tick 00563] XFER  M2 → M1  amt=25  res:73.2→48.2  tgt_res→45.5
+[tick 00564] XFER  M1 → M2  amt=20  res:50.1→30.1  tgt_res→64.3
+[tick 00564] XFER  M2 → M1  amt=25  res:64.3→39.3  tgt_res→55.1
+[tick 00565] XFER  M1 → M2  amt=20  res:50.9→30.9  tgt_res→55.6
+[tick 00565] XFER  M2 → M0  amt=20  res:55.6→35.6  tgt_res→47.4
+[tick 00566] XFER  M1 → M2  amt=20  res:27.5→7.5  tgt_res→61.5
+[tick 00566] XFER  M2 → M1  amt=25  res:61.5→36.5  tgt_res→32.5
+[tick 00567] XFER  M1 → M2  amt=20  res:35.5→15.5  tgt_res→52.9
+[tick 00567] XFER  M2 → M1  amt=25  res:52.9→27.9  tgt_res→40.5
+[tick 00568] XFER  M1 → M2  amt=20  res:36.8→16.8  tgt_res→53.9
+[tick 00568] XFER  M2 → M0  amt=20  res:53.9→33.9  tgt_res→56.0
+[tick 00569] XFER  M1 → M0  amt=5  res:13.8→8.8  tgt_res→56.8
+[tick 00569] XFER  M2 → M1  amt=25  res:42.0→17.0  tgt_res→33.8
+[tick 00570] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 00570] FIGHT START  M0 vs M2  agg=0.509  h=23.2 vs 100.0
+[tick 00570] CTRL SHIFT  2 → 1  (M0:23.2  M1:12.1  M2:100.0)
+[tick 00570] FDRIFT mind 2 pattern [0, 1, 0, 0]  +8 → +0
+[tick 00570] XFER  M1 → M2  amt=20  res:38.7→18.7  tgt_res→37.5
+[tick 00571] FDRIFT mind 2 pattern [1, 1, 1, 1]  -2 → -4
+[tick 00571] XFER  M1 → M2  amt=20  res:24.8→4.8  tgt_res→57.3
+[tick 00573] XFER  M1 → M0  amt=5  res:6.0→1.0  tgt_res→47.6
+[tick 00576] XFER  M1 → M0  amt=5  res:5.9→0.9  tgt_res→42.1
+[tick 00577] FDRIFT mind 2 pattern [1, 0, 1, 1]  -4 → -1
+[tick 00580] FDRIFT mind 2 pattern [0, 0, 0, 1]  +2 → +4
+[tick 00583] FDRIFT mind 0 pattern [0, 0, 0, 0]  -4 → +2
+[tick 00592] FDRIFT mind 0 pattern [0, 0, 1, 1]  +5 → +2
+[tick 00594] FDRIFT mind 0 pattern [0, 1, 1, 1]  -3 → +4
+[tick 00595] FDRIFT mind 2 pattern [1, 1, 0, 1]  +5 → +2
+[tick 00595] FIGHT END  M0 vs M2  winner=M2  reason=mastery  ticks=26  mastery=[13,16]
+[tick 00595] LOOT  M2←M0  mastery_diff=3  mult=1.8  looted=23.4  gained=42.1  winner_res→78.9
+[tick 00595] XFER  M2 → M1  amt=25  res:74.9→49.9  tgt_res→40.7
+[tick 00596] CTRL SHIFT  1 → 2  (M0:81.7  M1:21.4  M2:100.0)
+[tick 00596] XFER  M1 → M0  amt=5  res:37.0→32.0  tgt_res→5.0
+[tick 00596] XFER  M2 → M1  amt=25  res:60.0→35.0  tgt_res→57.0
+[tick 00597] XFER  M1 → M0  amt=5  res:52.7→47.7  tgt_res→7.3
+[tick 00597] XFER  M2 → M1  amt=25  res:33.9→8.9  tgt_res→72.7
+[tick 00598] XFER  M1 → M0  amt=5  res:68.1→63.1  tgt_res→9.6
+[tick 00598] XFER  M2 → M0  amt=20  res:21.0→1.0  tgt_res→29.6
+[tick 00599] HEADSTART  mind 1  kept 3 patterns from prev fight
+[tick 00599] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 00599] FIGHT START  M1 vs M2  agg=0.515  h=13.0 vs 100.0
+[tick 00599] CTRL SHIFT  2 → 0  (M0:72.9  M1:13.0  M2:100.0)
+[tick 00599] FDRIFT mind 2 pattern [1, 0, 0, 1]  -4 → +0
+[tick 00600] SNAP   ctrl=0  chosen=[4, 0, 6, 6, 2, 9][b4]  M0:75.4(156L,jkp=b[4, 7])  M1:13.0(165L,jkp=b[0, 7])  M2:100.0(143L,jkp=b[8, 9])
+[tick 00600] FDRIFT mind 2 pattern [0, 1, 1, 0]  -2 → -5
+[tick 00603] FDRIFT mind 1 pattern [0, 0, 0, 1]  +6 → -2
+[tick 00614] FDRIFT mind 1 pattern [0, 0, 0, 1]  -2 → -5
+[tick 00615] FDRIFT mind 1 pattern [1, 1, 0, 0]  +2 → +0
+[tick 00617] FDRIFT mind 2 pattern [0, 1, 1, 0]  -5 → +1
+[tick 00618] FDRIFT mind 2 pattern [1, 0, 0, 0]  +8 → -4
+[tick 00620] FDRIFT mind 1 pattern [1, 0, 1, 0]  -3 → +3
+[tick 00627] FDRIFT mind 2 pattern [0, 1, 0, 1]  +5 → -4
+[tick 00629] FDRIFT mind 2 pattern [1, 1, 1, 0]  +8 → +0
+[tick 00633] FDRIFT mind 1 pattern [0, 0, 0, 1]  -5 → +2
+[tick 00637] FDRIFT mind 2 pattern [0, 1, 0, 1]  -4 → +4
+[tick 00639] FDRIFT mind 1 pattern [0, 0, 1, 1]  +1 → -6
+[tick 00640] FDRIFT mind 1 pattern [1, 0, 1, 0]  +3 → +4
+[tick 00642] FDRIFT mind 1 pattern [1, 1, 1, 1]  -1 → +0
+[tick 00646] FIGHT END  M1 vs M2  winner=none  reason=timeout  ticks=48  mastery=[15,15]
+[tick 00647] CTRL SHIFT  0 → 2  (M0:81.1  M1:42.0  M2:100.0)
+[tick 00650] SNAP   ctrl=2  chosen=[8, 2, 4, 2, 8, 9][b8]  M0:64.0(170L,jkp=b[4, 7])  M1:17.0(139L,jkp=b[0, 7])  M2:94.4(124L,jkp=b[8, 9])
+[tick 00650] XFER  M2 → M0  amt=25  res:25.1→0.1  tgt_res→81.2
+[tick 00652] FIGHT START  M1 vs M2  agg=0.556  h=10.2 vs 99.4
+[tick 00652] CTRL SHIFT  2 → 0  (M0:62.2  M1:10.2  M2:99.4)
+[tick 00654] FDRIFT mind 1 pattern [0, 0, 0, 1]  -3 → -5
+[tick 00659] FDRIFT mind 2 pattern [1, 1, 0, 1]  -5 → -1
+[tick 00664] FDRIFT mind 2 pattern [1, 0, 0, 0]  -5 → +4
+[tick 00667] FDRIFT mind 1 pattern [1, 0, 0, 1]  +0 → -3
+[tick 00671] FDRIFT mind 1 pattern [0, 1, 0, 1]  -4 → +4
+[tick 00671] FDRIFT mind 2 pattern [1, 0, 0, 1]  -7 → +2
+[tick 00673] FDRIFT mind 1 pattern [1, 0, 1, 0]  +5 → -3
+[tick 00674] FDRIFT mind 1 pattern [0, 1, 0, 1]  +4 → -1
+[tick 00674] FDRIFT mind 2 pattern [0, 0, 1, 1]  -6 → +4
+[tick 00676] FIGHT END  M1 vs M2  winner=M2  reason=mastery  ticks=25  mastery=[12,16]
+[tick 00676] LOOT  M2←M1  mastery_diff=4  mult=2.0  looted=11.9  gained=23.9  winner_res→60.0
+[tick 00676] XFER  M2 → M0  amt=25  res:58.2→33.2  tgt_res→131.6
+[tick 00677] CTRL SHIFT  0 → 2  (M0:96.8  M1:20.9  M2:100.0)
+[tick 00677] XFER  M2 → M0  amt=25  res:44.1→19.1  tgt_res→150.2
+[tick 00678] XFER  M2 → M0  amt=25  res:26.8→1.8  tgt_res→168.2
+[tick 00679] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 00679] FIGHT START  M1 vs M2  agg=0.536  h=5.3 vs 100.0
+[tick 00679] CTRL SHIFT  2 → 0  (M0:90.6  M1:5.3  M2:100.0)
+[tick 00687] FDRIFT mind 1 pattern [1, 0, 1, 1]  -4 → -6
+[tick 00687] FDRIFT mind 2 pattern [1, 1, 0, 0]  -7 → -3
+[tick 00690] FDRIFT mind 1 pattern [1, 0, 0, 0]  -2 → +0
+[tick 00692] FDRIFT mind 2 pattern [1, 0, 0, 1]  +3 → +6
+[tick 00695] FDRIFT mind 1 pattern [0, 1, 0, 1]  -7 → +1
+[tick 00700] SNAP   ctrl=0  chosen=[4, 0, 0, 3, 3, 7][b4]  M0:89.6(172L,jkp=b[4, 7])  M1:10.6(141L,jkp=b[0, 7])  M2:100.0(126L,jkp=b[8, 9])
+[tick 00708] FIGHT END  M1 vs M2  winner=M1  reason=mastery  ticks=30  mastery=[16,15]
+[tick 00708] LOOT  M1←M2  mastery_diff=1  mult=1.4  looted=17.2  gained=24.1  winner_res→26.1
+[tick 00708] XFER  M1 → M0  amt=5  res:22.8→17.8  tgt_res→215.1
+[tick 00709] XFER  M1 → M0  amt=5  res:14.8→9.8  tgt_res→211.1
+[tick 00710] XFER  M1 → M0  amt=5  res:7.0→2.0  tgt_res→219.4
+[tick 00714] HEADSTART  mind 1  kept 3 patterns from prev fight
+[tick 00714] FIGHT START  M1 vs M0  agg=0.515  h=4.0 vs 94.5
+[tick 00714] CTRL SHIFT  0 → 2  (M0:94.5  M1:4.0  M2:61.3)
+[tick 00717] XFER  M2 → M0  amt=25  res:31.7→6.7  tgt_res→216.5
+[tick 00718] FDRIFT mind 0 pattern [0, 1, 1, 1]  -1 → +1
+[tick 00719] FDRIFT mind 0 pattern [0, 0, 1, 0]  +5 → -5
+[tick 00720] FDRIFT mind 1 pattern [0, 1, 1, 1]  +1 → -1
+[tick 00721] FDRIFT mind 0 pattern [0, 0, 1, 0]  -5 → -3
+[tick 00724] XFER  M2 → M0  amt=25  res:29.6→4.6  tgt_res→202.2
+[tick 00725] FIGHT CRIT  mind 1  strikes_left=2
+[tick 00725] FIGHT END  M1 vs M0  winner=M0  reason=death  ticks=12  mastery=[8,6]
+[tick 00725] LOOT  M0←M1  mastery_diff=0  mult=1.2  looted=0.0  gained=0.0  winner_res→202.2
+[tick 00726] CTRL SHIFT  2 → 0  (M0:100.0  M1:REC  M2:87.1)
+[tick 00744] CRIT   mind 2  strikes_left=2  learned=156
+[tick 00750] SNAP   ctrl=0  chosen=[7, 5, 9, 2, 1, 2][b7]  M0:100.0(185L,jkp=b[4, 7])  M1:REC(146L,jkp=b[0, 7])  M2:REC(156L,jkp=b[8, 9])
+[tick 00775] REVIVE mind 1  strikes_left=2
+[tick 00775] CTRL SHIFT  0 → 1  (M0:99.7  M1:100.0  M2:REC)
+[tick 00776] CTRL SHIFT  1 → 0  (M0:100.0  M1:100.0  M2:REC)
+[tick 00780] CTRL SHIFT  0 → 1  (M0:93.0  M1:97.5  M2:REC)
+[tick 00788] XFER  M1 → M0  amt=20  res:44.3→24.3  tgt_res→180.8
+[tick 00789] XFER  M1 → M0  amt=20  res:21.0→1.0  tgt_res→192.9
+[tick 00794] REVIVE mind 2  strikes_left=2
+[tick 00794] CTRL SHIFT  1 → 2  (M0:61.6  M1:89.0  M2:100.0)
+[tick 00797] CTRL SHIFT  2 → 1  (M0:49.0  M1:81.7  M2:80.8)
+[tick 00797] XFER  M1 → M0  amt=5  res:6.9→1.9  tgt_res→146.3
+[tick 00798] XFER  M1 → M0  amt=5  res:6.5→1.5  tgt_res→155.7
+[tick 00799] XFER  M1 → M0  amt=5  res:7.0→2.0  tgt_res→163.8
+[tick 00801] XFER  M1 → M0  amt=5  res:6.6→1.6  tgt_res→165.4
+[tick 00803] XFER  M1 → M0  amt=5  res:7.7→2.7  tgt_res→168.0
+[tick 00805] XFER  M1 → M0  amt=5  res:5.8→0.8  tgt_res→158.2
+[tick 00806] XFER  M1 → M0  amt=5  res:5.4→0.4  tgt_res→164.3
+[tick 00809] XFER  M1 → M0  amt=5  res:6.9→1.9  tgt_res→157.8
+[tick 00810] FIGHT START  M2 vs M1  agg=0.503  h=16.0 vs 91.3
+[tick 00810] CTRL SHIFT  1 → 0  (M0:48.3  M1:91.3  M2:16.0)
+[tick 00815] FDRIFT mind 1 pattern [1, 1, 0, 0]  -4 → +6
+[tick 00818] FDRIFT mind 1 pattern [0, 0, 1, 1]  -6 → +5
+[tick 00823] FDRIFT mind 2 pattern [0, 0, 0, 1]  +5 → -5
+[tick 00828] FDRIFT mind 1 pattern [1, 0, 0, 1]  -3 → +1
+[tick 00835] FDRIFT mind 1 pattern [0, 1, 0, 1]  -7 → +5
+[tick 00845] FDRIFT mind 2 pattern [1, 0, 0, 0]  -2 → -4
+[tick 00849] FDRIFT mind 1 pattern [0, 0, 0, 0]  -5 → +3
+[tick 00850] SNAP   ctrl=0  chosen=[9, 9, 9, 8, 0, 2][b9]  M0:77.1(186L,jkp=b[4, 7])  M1:100.0(160L,jkp=b[0, 7])  M2:3.8(159L,jkp=b[8, 9])
+[tick 00852] FDRIFT mind 2 pattern [0, 1, 1, 1]  -5 → -3
+[tick 00852] FDRIFT mind 1 pattern [0, 1, 1, 1]  +6 → +2
+[tick 00852] FIGHT CRIT  mind 2  strikes_left=1
+[tick 00852] FIGHT END  M2 vs M1  winner=M1  reason=death  ticks=43  mastery=[15,15]
+[tick 00852] LOOT  M1←M2  mastery_diff=0  mult=1.2  looted=0.0  gained=0.0  winner_res→74.2
+[tick 00852] XFER  M1 → M0  amt=5  res:69.4→64.4  tgt_res→121.3
+[tick 00853] CTRL SHIFT  0 → 1  (M0:84.6  M1:97.6  M2:REC)
+[tick 00853] XFER  M1 → M0  amt=5  res:60.0→55.0  tgt_res→120.2
+[tick 00854] DRIFT mind 0 biome=0  -9 → -7
+[tick 00854] XFER  M1 → M0  amt=5  res:50.9→45.9  tgt_res→119.1
+[tick 00855] XFER  M1 → M0  amt=5  res:51.3→46.3  tgt_res→129.2
+[tick 00856] XFER  M1 → M0  amt=5  res:42.4→37.4  tgt_res→127.9
+[tick 00857] XFER  M1 → M0  amt=5  res:41.2→36.2  tgt_res→137.8
+[tick 00858] XFER  M1 → M0  amt=5  res:35.1→30.1  tgt_res→136.2
+[tick 00859] XFER  M1 → M0  amt=5  res:38.2→33.2  tgt_res→142.8
+[tick 00860] XFER  M1 → M0  amt=5  res:29.7→24.7  tgt_res→141.0
+[tick 00861] DRIFT mind 1 biome=5  -5 → -4
+[tick 00861] XFER  M1 → M0  amt=5  res:21.4→16.4  tgt_res→139.3
+[tick 00862] CTRL SHIFT  1 → 0  (M0:86.6  M1:86.0  M2:REC)
+[tick 00862] XFER  M1 → M0  amt=5  res:21.8→16.8  tgt_res→147.1
+[tick 00863] XFER  M1 → M0  amt=5  res:21.9→16.9  tgt_res→154.3
+[tick 00864] XFER  M1 → M0  amt=5  res:13.9→8.9  tgt_res→162.3
+[tick 00865] XFER  M1 → M0  amt=5  res:6.1→1.1  tgt_res→160.0
+[tick 00870] XFER  M1 → M0  amt=5  res:7.0→2.0  tgt_res→183.3
+[tick 00873] XFER  M1 → M0  amt=5  res:6.0→1.0  tgt_res→196.3
+[tick 00900] SNAP   ctrl=0  chosen=[7, 6, 6, 3, 2, 7][b7]  M0:83.3(186L,jkp=b[4, 7])  M1:47.3(157L,jkp=b[0, 7])  M2:REC(156L,jkp=b[8, 9])
+[tick 00902] REVIVE mind 2  strikes_left=1
+[tick 00902] DRIFT mind 0 biome=9  -7 → -4
+[tick 00902] CTRL SHIFT  0 → 2  (M0:88.3  M1:52.3  M2:100.0)
+[tick 00906] XFER  M2 → M1  amt=25  res:40.7→15.7  tgt_res→25.0
+[tick 00907] DRIFT mind 2 biome=7  -8 → -7
+[tick 00909] HEADSTART  mind 1  kept 3 patterns from prev fight
+[tick 00909] FIGHT START  M1 vs M2  agg=0.556  h=7.7 vs 100.0
+[tick 00909] CTRL SHIFT  2 → 0  (M0:59.8  M1:7.7  M2:100.0)
+[tick 00909] FDRIFT mind 1 pattern [0, 1, 0, 0]  -1 → +0
+[tick 00910] FDRIFT mind 2 pattern [1, 0, 1, 0]  +6 → +2
+[tick 00914] FDRIFT mind 2 pattern [0, 1, 1, 0]  +2 → -2
+[tick 00918] FDRIFT mind 1 pattern [1, 1, 0, 1]  +3 → -3
+[tick 00921] FDRIFT mind 2 pattern [1, 0, 1, 1]  +9 → -3
+[tick 00923] FDRIFT mind 2 pattern [0, 1, 0, 0]  -6 → +3
+[tick 00925] FDRIFT mind 2 pattern [0, 0, 0, 1]  -2 → -4
+[tick 00931] FDRIFT mind 2 pattern [0, 0, 0, 0]  +3 → -1
+[tick 00933] FDRIFT mind 2 pattern [1, 1, 1, 1]  -6 → -4
+[tick 00934] FDRIFT mind 2 pattern [0, 1, 0, 0]  +3 → +0
+[tick 00936] FDRIFT mind 1 pattern [0, 1, 0, 0]  +0 → -5
+[tick 00937] FDRIFT mind 1 pattern [1, 1, 1, 1]  +2 → +1
+[tick 00940] FDRIFT mind 2 pattern [0, 1, 1, 0]  -2 → -3
+[tick 00944] FDRIFT mind 2 pattern [1, 0, 1, 0]  +2 → +5
+[tick 00946] FIGHT END  M1 vs M2  winner=M2  reason=mastery  ticks=38  mastery=[15,16]
+[tick 00946] LOOT  M2←M1  mastery_diff=1  mult=1.4  looted=9.0  gained=12.6  winner_res→18.4
+[tick 00947] CTRL SHIFT  0 → 2  (M0:77.4  M1:37.7  M2:95.3)
+[tick 00950] SNAP   ctrl=2  chosen=[6, 0, 0, 2, 7, 3][b6]  M0:51.2(186L,jkp=b[4, 7])  M1:3.3(144L,jkp=b[0, 7])  M2:90.4(160L,jkp=b[8, 9])
+[tick 00951] CRIT   mind 1  strikes_left=1  learned=144
+[tick 00968] CRIT   mind 0  strikes_left=1  learned=187
+
+[tick 01000] !! NATURAL DISASTER !! all rule tables reshuffled
+  M0 new biomes: b0=+12  b1=-9  b2=-8  b3=-7  b4=-6  b5=-5  b6=+9  b7=-5  b8=-10  b9=-10  (jackpot=[0, 6])
+  M1 new biomes: b0=+11  b1=-9  b2=-5  b3=-7  b4=-9  b5=-10  b6=-8  b7=-8  b8=+10  b9=-7  (jackpot=[0, 8])
+  M2 new biomes: b0=-6  b1=+11  b2=-6  b3=+10  b4=-8  b5=-6  b6=-7  b7=-10  b8=-8  b9=-10  (jackpot=[1, 3])
+
+[tick 01000] SNAP   ctrl=2  chosen=[8, 9, 0, 3, 0, 1][b8]  M0:REC(187L,jkp=b[0, 6])  M1:REC(144L,jkp=b[0, 8])  M2:83.3(159L,jkp=b[1, 3])
+[tick 01001] REVIVE mind 1  strikes_left=1
+[tick 01001] CTRL SHIFT  2 → 1  (M0:REC  M1:100.0  M2:85.8)
+[tick 01018] REVIVE mind 0  strikes_left=1
+[tick 01018] HEADSTART  mind 0  kept 3 patterns from prev fight
+[tick 01018] FIGHT START  M1 vs M0  agg=0.620  h=21.3 vs 100.0
+[tick 01018] CTRL SHIFT  1 → 2  (M0:100.0  M1:21.3  M2:20.1)
+[tick 01018] XFER  M2 → M1  amt=25  res:42.2→17.2  tgt_res→25.0
+[tick 01022] FDRIFT mind 1 pattern [1, 0, 1, 0]  -1 → -3
+[tick 01023] CRIT   mind 2  strikes_left=0  learned=160
+[tick 01024] CTRL SHIFT  2 → -1  (M0:100.0  M1:31.7  M2:REC)
+[tick 01024] FDRIFT mind 0 pattern [0, 0, 0, 0]  -1 → +4
+[tick 01025] FDRIFT mind 0 pattern [1, 0, 1, 1]  -1 → +4
+[tick 01026] FDRIFT mind 1 pattern [0, 0, 0, 0]  +9 → -5
+[tick 01026] FDRIFT mind 0 pattern [0, 1, 0, 0]  -7 → +3
+[tick 01032] FDRIFT mind 1 pattern [1, 1, 1, 0]  -6 → +1
+[tick 01040] FDRIFT mind 1 pattern [0, 1, 0, 1]  +2 → -6
+[tick 01040] FDRIFT mind 0 pattern [1, 0, 1, 0]  -4 → +1
+[tick 01044] FDRIFT mind 0 pattern [1, 0, 1, 0]  +1 → -1
+[tick 01049] FDRIFT mind 1 pattern [1, 1, 0, 1]  +2 → -6
+[tick 01050] FDRIFT mind 0 pattern [0, 1, 0, 1]  -4 → +0
+[tick 01051] FDRIFT mind 1 pattern [1, 0, 1, 1]  -5 → +1
+[tick 01055] FIGHT END  M1 vs M0  winner=M1  reason=mastery  ticks=38  mastery=[16,14]
+[tick 01055] LOOT  M1←M0  mastery_diff=2  mult=1.6  looted=59.4  gained=95.0  winner_res→96.0
+[tick 01056] CTRL SHIFT  -1 → 0  (M0:99.3  M1:72.2  M2:REC)
+[tick 01071] CRIT   mind 1  strikes_left=0  learned=158
+[tick 01073] REVIVE mind 2  strikes_left=0
+[tick 01073] CTRL SHIFT  0 → 2  (M0:23.3  M1:REC  M2:100.0)
+[tick 01076] HEADSTART  mind 2  kept 3 patterns from prev fight
+[tick 01076] FIGHT START  M0 vs M2  agg=0.503  h=5.8 vs 93.1
+[tick 01076] CTRL SHIFT  2 → -1  (M0:5.8  M1:REC  M2:93.1)
+[tick 01078] FDRIFT mind 0 pattern [1, 1, 1, 1]  +0 → +5
+[tick 01080] FDRIFT mind 0 pattern [0, 0, 0, 0]  +7 → -1
+[tick 01082] FDRIFT mind 2 pattern [0, 1, 0, 1]  -3 → +3
+[tick 01086] FDRIFT mind 2 pattern [0, 1, 0, 1]  +3 → -2
+[tick 01091] FDRIFT mind 2 pattern [0, 1, 0, 0]  +7 → +5
+[tick 01094] FDRIFT mind 0 pattern [0, 1, 0, 1]  -2 → -1
+[tick 01094] FDRIFT mind 2 pattern [0, 0, 0, 0]  -6 → -4
+[tick 01095] FDRIFT mind 0 pattern [0, 1, 0, 1]  -1 → +6
+[tick 01097] FDRIFT mind 0 pattern [1, 0, 1, 1]  -4 → +1
+[tick 01097] FDRIFT mind 2 pattern [1, 1, 1, 1]  +3 → -2
+[tick 01098] FDRIFT mind 2 pattern [1, 1, 1, 1]  -2 → +3
+[tick 01099] FDRIFT mind 2 pattern [0, 1, 0, 1]  -2 → +6
+[tick 01101] FDRIFT mind 0 pattern [1, 1, 0, 1]  -2 → +0
+[tick 01104] FDRIFT mind 0 pattern [0, 1, 0, 0]  -4 → +2
+[tick 01106] FDRIFT mind 0 pattern [1, 1, 1, 0]  +2 → -3
+[tick 01106] FDRIFT mind 2 pattern [0, 0, 0, 0]  -4 → +0
+[tick 01111] FDRIFT mind 2 pattern [1, 0, 0, 0]  -6 → +6
+[tick 01112] FDRIFT mind 0 pattern [0, 0, 0, 1]  +0 → +2
+[tick 01118] FDRIFT mind 0 pattern [1, 1, 0, 1]  +0 → +2
+[tick 01119] FDRIFT mind 2 pattern [1, 0, 1, 0]  -5 → -2
+[tick 01121] REVIVE mind 1  strikes_left=0
+[tick 01121] CTRL SHIFT  -1 → 1  (M0:88.1  M1:100.0  M2:100.0)
+[tick 01121] FDRIFT mind 2 pattern [1, 1, 1, 0]  -6 → -4
+[tick 01121] XFER  M1 → M0  amt=25  res:36.4→11.4  tgt_res→34.8
+[tick 01123] FIGHT END  M0 vs M2  winner=none  reason=timeout  ticks=48  mastery=[14,15]
+[tick 01124] CTRL SHIFT  1 → 2  (M0:95.6  M1:96.6  M2:100.0)
+[tick 01124] XFER  M1 → M0  amt=25  res:26.2→1.2  tgt_res→61.5
+[tick 01125] CTRL SHIFT  2 → 1  (M0:87.9  M1:99.1  M2:93.2)
+[tick 01128] CTRL SHIFT  1 → 0  (M0:81.8  M1:79.3  M2:73.1)
+[tick 01139] DEATH  mind 1  deaths=1  learned=162
+[tick 01139] SPAWN  mind 1  fresh instance  jackpot_biomes=[5, 6]
+[tick 01140] CTRL SHIFT  0 → 1  (M0:51.3  M1:100.0  M2:23.7)
+[tick 01150] SNAP   ctrl=1  chosen=[9, 0, 4, 6, 7, 2][b9]  M0:39.5(151L,jkp=b[0, 6])  M1:73.5(5L,jkp=b[5, 6])  M2:4.1(139L,jkp=b[1, 3])
+[tick 01151] DEATH  mind 2  deaths=1  learned=139
+[tick 01151] SPAWN  mind 2  fresh instance  jackpot_biomes=[6, 9]
+[tick 01152] CTRL SHIFT  1 → 2  (M0:28.1  M1:64.3  M2:100.0)
+[tick 01154] FIGHT START  M0 vs M2  agg=0.520  h=11.8 vs 89.2
+[tick 01154] CTRL SHIFT  2 → 1  (M0:11.8  M1:51.9  M2:89.2)
+[tick 01156] FDRIFT mind 2 pattern [1, 1, 0, 0]  -1 → +6
+[tick 01156] XFER  M1 → M0  amt=5  res:7.1→2.1  tgt_res→5.0
+[tick 01157] XFER  M1 → M0  amt=5  res:9.7→4.7  tgt_res→7.3
+[tick 01158] FDRIFT mind 0 pattern [0, 1, 1, 1]  -1 → +2
+[tick 01159] FDRIFT mind 2 pattern [0, 1, 0, 1]  +3 → +5
+[tick 01160] XFER  M1 → M0  amt=5  res:5.9→0.9  tgt_res→5.0
+[tick 01164] XFER  M1 → M0  amt=5  res:6.4→1.4  tgt_res→9.2
+[tick 01168] FDRIFT mind 0 pattern [1, 1, 1, 1]  -5 → +1
+[tick 01168] XFER  M1 → M0  amt=5  res:6.8→1.8  tgt_res→5.0
+[tick 01169] XFER  M1 → M0  amt=5  res:5.3→0.3  tgt_res→7.3
+[tick 01172] FDRIFT mind 2 pattern [1, 0, 0, 1]  -3 → -1
+[tick 01172] XFER  M1 → M0  amt=5  res:8.7→3.7  tgt_res→14.1
+[tick 01173] FDRIFT mind 0 pattern [1, 1, 1, 1]  +1 → -5
+[tick 01176] FDRIFT mind 0 pattern [1, 0, 1, 0]  +1 → -1
+[tick 01177] FDRIFT mind 0 pattern [0, 0, 1, 1]  +8 → +1
+[tick 01177] XFER  M1 → M0  amt=5  res:6.0→1.0  tgt_res→8.1
+[tick 01178] XFER  M1 → M0  amt=5  res:8.6→3.6  tgt_res→19.0
+[tick 01179] XFER  M1 → M0  amt=5  res:11.2→6.2  tgt_res→29.7
+[tick 01180] FDRIFT mind 0 pattern [0, 0, 1, 0]  +9 → -3
+[tick 01180] XFER  M1 → M0  amt=5  res:12.7→7.7  tgt_res→31.3
+[tick 01181] FIGHT END  M0 vs M2  winner=M0  reason=mastery  ticks=28  mastery=[16,14]
+[tick 01181] LOOT  M0←M2  mastery_diff=2  mult=1.6  looted=26.3  gained=42.1  winner_res→73.4
+[tick 01182] CTRL SHIFT  1 → 2  (M0:60.7  M1:70.3  M2:96.5)
+[tick 01185] XFER  M2 → M0  amt=5  res:10.4→5.4  tgt_res→56.2
+[tick 01186] XFER  M2 → M0  amt=5  res:12.9→7.9  tgt_res→57.1
+[tick 01187] XFER  M2 → M0  amt=5  res:5.2→0.2  tgt_res→57.8
+[tick 01190] XFER  M2 → M0  amt=5  res:8.9→3.9  tgt_res→60.9
+[tick 01191] XFER  M2 → M0  amt=5  res:8.4→3.4  tgt_res→61.6
+[tick 01192] XFER  M2 → M0  amt=5  res:7.9→2.9  tgt_res→62.2
+[tick 01193] HEADSTART  mind 0  kept 3 patterns from prev fight
+[tick 01193] FIGHT START  M0 vs M2  agg=0.503  h=4.8 vs 85.2
+[tick 01193] CTRL SHIFT  2 → 1  (M0:4.8  M1:32.7  M2:85.2)
+[tick 01199] XFER  M1 → M0  amt=10  res:13.0→3.0  tgt_res→51.5
+[tick 01200] SNAP   ctrl=1  chosen=[6, 8, 3, 2, 2, 6][b6]  M0:16.7(161L,jkp=b[0, 6])  M1:25.2(46L,jkp=b[5, 6])  M2:95.6(12L,jkp=b[6, 9])
+[tick 01201] XFER  M1 → M0  amt=10  res:14.8→4.8  tgt_res→53.5
+[tick 01204] XFER  M1 → M0  amt=10  res:11.4→1.4  tgt_res→59.9
+[tick 01207] FDRIFT mind 2 pattern [0, 1, 0, 1]  +3 → +4
+[tick 01210] XFER  M1 → M0  amt=10  res:10.3→0.3  tgt_res→53.8
+[tick 01216] FDRIFT mind 0 pattern [0, 1, 1, 1]  -3 → -2
+[tick 01217] FDRIFT mind 2 pattern [1, 0, 1, 0]  -1 → +0
+[tick 01219] FDRIFT mind 0 pattern [0, 1, 1, 0]  +5 → -5
+[tick 01220] XFER  M1 → M0  amt=10  res:14.1→4.1  tgt_res→44.6
+[tick 01223] XFER  M1 → M0  amt=10  res:12.3→2.3  tgt_res→48.0
+[tick 01225] XFER  M1 → M0  amt=10  res:16.3→6.3  tgt_res→50.2
+[tick 01227] XFER  M1 → M0  amt=10  res:16.0→6.0  tgt_res→55.1
+[tick 01232] FDRIFT mind 0 pattern [1, 1, 0, 0]  -5 → +4
+[tick 01232] XFER  M1 → M0  amt=10  res:13.2→3.2  tgt_res→45.6
+[tick 01233] DRIFT mind 1 biome=1  -5 → -2
+[tick 01235] FDRIFT mind 0 pattern [0, 0, 0, 1]  +6 → -4
+[tick 01235] XFER  M1 → M0  amt=10  res:12.6→2.6  tgt_res→51.8
+[tick 01237] FDRIFT mind 2 pattern [0, 0, 1, 1]  +2 → +0
+[tick 01239] XFER  M1 → M0  amt=10  res:12.2→2.2  tgt_res→50.0
+[tick 01240] FDRIFT mind 0 pattern [1, 0, 0, 0]  +5 → -1
+[tick 01240] FIGHT END  M0 vs M2  winner=none  reason=timeout  ticks=48  mastery=[15,15]
+[tick 01240] XFER  M2 → M0  amt=5  res:9.4→4.4  tgt_res→53.9
+[tick 01241] CTRL SHIFT  1 → 2  (M0:83.4  M1:49.9  M2:94.5)
+[tick 01243] XFER  M2 → M0  amt=5  res:11.3→6.3  tgt_res→55.8
+[tick 01244] XFER  M2 → M0  amt=5  res:18.5→13.5  tgt_res→65.7
+[tick 01245] XFER  M1 → M0  amt=10  res:13.5→3.5  tgt_res→80.4
+[tick 01245] XFER  M2 → M0  amt=5  res:24.4→19.4  tgt_res→85.4
+[tick 01246] XFER  M2 → M0  amt=5  res:18.9→13.9  tgt_res→85.3
+[tick 01247] XFER  M2 → M0  amt=5  res:10.9→5.9  tgt_res→85.3
+[tick 01248] XFER  M2 → M0  amt=5  res:12.4→7.4  tgt_res→92.5
+[tick 01249] XFER  M1 → M0  amt=10  res:11.2→1.2  tgt_res→106.3
+[tick 01249] XFER  M2 → M0  amt=5  res:17.9→12.9  tgt_res→111.3
+[tick 01250] SNAP   ctrl=2  chosen=[9, 5, 4, 5, 4, 0][b9]  M0:86.0(143L,jkp=b[0, 6])  M1:50.2(84L,jkp=b[5, 6])  M2:96.9(19L,jkp=b[6, 9])
+[tick 01250] XFER  M2 → M0  amt=5  res:18.3→13.3  tgt_res→110.5
+[tick 01251] XFER  M2 → M0  amt=5  res:21.4→16.4  tgt_res→109.6
+[tick 01252] XFER  M2 → M0  amt=5  res:13.5→8.5  tgt_res→108.9
+[tick 01253] XFER  M2 → M0  amt=5  res:5.7→0.7  tgt_res→108.1
+[tick 01255] XFER  M2 → M0  amt=5  res:9.4→4.4  tgt_res→111.2
+[tick 01259] CTRL SHIFT  2 → 0  (M0:77.9  M1:23.4  M2:76.1)
+[tick 01263] CRIT   mind 1  strikes_left=2  learned=93
+[tick 01280] CRIT   mind 2  strikes_left=2  learned=42
+[tick 01300] SNAP   ctrl=0  chosen=[4, 8, 4, 4, 2, 0][b4]  M0:26.6(143L,jkp=b[0, 6])  M1:REC(93L,jkp=b[5, 6])  M2:REC(42L,jkp=b[6, 9])
+[tick 01313] REVIVE mind 1  strikes_left=2
+[tick 01313] CTRL SHIFT  0 → 1  (M0:53.8  M1:100.0  M2:REC)
+[tick 01330] REVIVE mind 2  strikes_left=2
+[tick 01330] CTRL SHIFT  1 → 2  (M0:42.5  M1:79.5  M2:100.0)
+[tick 01330] XFER  M2 → M0  amt=10  res:22.0→12.0  tgt_res→39.3
+[tick 01331] XFER  M2 → M0  amt=10  res:24.0→14.0  tgt_res→53.7
+[tick 01332] XFER  M1 → M0  amt=15  res:16.2→1.2  tgt_res→71.7
+[tick 01332] XFER  M2 → M0  amt=10  res:23.9→13.9  tgt_res→81.7
+[tick 01333] XFER  M2 → M0  amt=10  res:13.5→3.5  tgt_res→86.8
+[tick 01335] XFER  M2 → M1  amt=5  res:8.5→3.5  tgt_res→17.0
+[tick 01336] XFER  M1 → M0  amt=15  res:21.0→6.0  tgt_res→100.4
+[tick 01336] XFER  M2 → M0  amt=10  res:11.1→1.1  tgt_res→110.4
+[tick 01338] XFER  M2 → M0  amt=10  res:14.5→4.5  tgt_res→119.0
+[tick 01339] CTRL SHIFT  2 → 1  (M0:60.9  M1:100.0  M2:100.0)
+[tick 01340] XFER  M2 → M0  amt=10  res:15.7→5.7  tgt_res→124.2
+[tick 01341] XFER  M1 → M0  amt=15  res:21.6→6.6  tgt_res→143.0
+[tick 01341] XFER  M2 → M0  amt=10  res:17.8→7.8  tgt_res→153.0
+[tick 01342] XFER  M1 → M0  amt=15  res:15.6→0.6  tgt_res→169.1
+[tick 01342] XFER  M2 → M0  amt=10  res:20.0→10.0  tgt_res→179.1
+[tick 01343] XFER  M2 → M0  amt=10  res:19.0→9.0  tgt_res→181.2
+[tick 01344] CTRL SHIFT  1 → 2  (M0:64.0  M1:92.2  M2:100.0)
+[tick 01344] XFER  M2 → M1  amt=5  res:8.7→3.7  tgt_res→5.0
+[tick 01346] XFER  M2 → M0  amt=10  res:14.7→4.7  tgt_res→175.5
+[tick 01347] XFER  M2 → M0  amt=10  res:17.9→7.9  tgt_res→186.8
+[tick 01348] XFER  M1 → M0  amt=15  res:17.1→2.1  tgt_res→200.8
+[tick 01348] XFER  M2 → M0  amt=10  res:18.0→8.0  tgt_res→210.8
+[tick 01349] CTRL SHIFT  2 → 1  (M0:76.5  M1:100.0  M2:100.0)
+[tick 01350] SNAP   ctrl=1  chosen=[7, 1, 1, 9, 9, 0][b7]  M0:74.8(142L,jkp=b[0, 6])  M1:92.8(118L,jkp=b[5, 6])  M2:91.6(56L,jkp=b[6, 9])
+[tick 01353] XFER  M1 → M0  amt=15  res:17.1→2.1  tgt_res→208.2
+[tick 01355] CTRL SHIFT  1 → 2  (M0:87.3  M1:91.6  M2:95.1)
+[tick 01355] XFER  M2 → M1  amt=10  res:28.6→18.6  tgt_res→10.0
+[tick 01356] XFER  M2 → M1  amt=10  res:15.5→5.5  tgt_res→17.2
+[tick 01362] XFER  M2 → M1  amt=10  res:12.4→2.4  tgt_res→10.4
+[tick 01363] XFER  M2 → M1  amt=10  res:10.0→0.0  tgt_res→23.2
+[tick 01364] XFER  M1 → M0  amt=20  res:20.0→0.0  tgt_res→162.2
+[tick 01366] XFER  M2 → M1  amt=10  res:14.2→4.2  tgt_res→16.6
+[tick 01367] XFER  M1 → M0  amt=20  res:23.6→3.6  tgt_res→187.7
+[tick 01367] XFER  M2 → M1  amt=10  res:13.8→3.8  tgt_res→13.6
+[tick 01368] XFER  M2 → M1  amt=10  res:11.5→1.5  tgt_res→20.7
+[tick 01372] XFER  M2 → M0  amt=15  res:16.2→1.2  tgt_res→172.4
+[tick 01373] XFER  M2 → M1  amt=10  res:13.2→3.2  tgt_res→29.6
+[tick 01374] XFER  M1 → M0  amt=20  res:33.2→13.2  tgt_res→195.5
+[tick 01374] XFER  M2 → M1  amt=10  res:13.4→3.4  tgt_res→23.2
+[tick 01375] XFER  M1 → M0  amt=20  res:20.0→0.0  tgt_res→207.2
+[tick 01382] XFER  M2 → M1  amt=10  res:20.2→10.2  tgt_res→14.9
+[tick 01384] XFER  M2 → M1  amt=10  res:11.2→1.2  tgt_res→19.1
+[tick 01390] CRIT   mind 0  strikes_left=0  learned=141
+[tick 01392] XFER  M2 → M1  amt=15  res:18.7→3.7  tgt_res→15.0
+[tick 01394] XFER  M2 → M1  amt=15  res:19.6→4.6  tgt_res→32.6
+[tick 01396] XFER  M2 → M1  amt=15  res:24.8→9.8  tgt_res→54.6
+[tick 01400] SNAP   ctrl=2  chosen=[6, 4, 7, 3, 3, 8][b6]  M0:REC(141L,jkp=b[0, 6])  M1:17.1(161L,jkp=b[5, 6])  M2:87.7(99L,jkp=b[6, 9])
+[tick 01400] XFER  M2 → M1  amt=15  res:18.3→3.3  tgt_res→61.6
+[tick 01402] XFER  M2 → M1  amt=15  res:24.4→9.4  tgt_res→80.9
+[tick 01404] XFER  M2 → M1  amt=15  res:17.7→2.7  tgt_res→94.2
+[tick 01405] XFER  M2 → M1  amt=15  res:17.1→2.1  tgt_res→114.0
+[tick 01408] XFER  M2 → M1  amt=15  res:21.3→6.3  tgt_res→119.7
+[tick 01410] XFER  M2 → M1  amt=15  res:25.9→10.9  tgt_res→131.9
+[tick 01411] XFER  M2 → M1  amt=15  res:20.9→5.9  tgt_res→140.5
+[tick 01412] XFER  M2 → M1  amt=15  res:20.0→5.0  tgt_res→155.3
+[tick 01414] XFER  M2 → M1  amt=15  res:19.9→4.9  tgt_res→156.2
+[tick 01421] XFER  M2 → M1  amt=15  res:23.3→8.3  tgt_res→139.3
+[tick 01422] XFER  M2 → M1  amt=15  res:18.2→3.2  tgt_res→156.7
+[tick 01423] XFER  M2 → M1  amt=15  res:16.4→1.4  tgt_res→172.6
+[tick 01426] XFER  M2 → M1  amt=15  res:21.6→6.6  tgt_res→175.1
+[tick 01431] XFER  M2 → M1  amt=15  res:20.2→5.2  tgt_res→153.6
+[tick 01434] XFER  M2 → M1  amt=15  res:24.7→9.7  tgt_res→153.4
+[tick 01440] REVIVE mind 0  strikes_left=0
+[tick 01440] CTRL SHIFT  2 → 0  (M0:100.0  M1:19.4  M2:94.8)
+[tick 01440] XFER  M1 → M2  amt=5  res:127.4→122.4  tgt_res→10.4
+[tick 01441] XFER  M1 → M2  amt=5  res:125.3→120.3  tgt_res→26.9
+[tick 01441] XFER  M2 → M1  amt=15  res:26.9→11.9  tgt_res→135.3
+[tick 01446] XFER  M2 → M1  amt=15  res:20.4→5.4  tgt_res→127.5
+[tick 01447] XFER  M2 → M1  amt=15  res:17.5→2.5  tgt_res→143.3
+[tick 01448] XFER  M2 → M1  amt=15  res:16.9→1.9  tgt_res→159.5
+[tick 01450] XFER  M1 → M2  amt=5  res:145.2→140.2  tgt_res→5.0
+[tick 01451] XFER  M1 → M2  amt=5  res:140.9→135.9  tgt_res→20.2
+[tick 01451] XFER  M2 → M1  amt=15  res:20.2→5.2  tgt_res→150.9
+[tick 01452] XFER  M1 → M2  amt=5  res:143.9→138.9  tgt_res→7.5
+[tick 01453] XFER  M1 → M2  amt=5  res:138.3→133.3  tgt_res→22.2
+[tick 01453] XFER  M2 → M1  amt=15  res:22.2→7.2  tgt_res→148.3
+[tick 01454] XFER  M1 → M2  amt=5  res:141.3→136.3  tgt_res→9.5
+[tick 01455] XFER  M1 → M2  amt=5  res:129.7→124.7  tgt_res→11.7
+[tick 01456] XFER  M1 → M2  amt=5  res:126.9→121.9  tgt_res→24.2
+[tick 01456] XFER  M2 → M1  amt=15  res:24.2→9.2  tgt_res→136.9
+[tick 01457] XFER  M1 → M2  amt=5  res:130.2→125.2  tgt_res→11.4
+[tick 01458] XFER  M1 → M2  amt=5  res:119.0→114.0  tgt_res→13.6
+[tick 01459] XFER  M1 → M2  amt=5  res:114.1→109.1  tgt_res→27.3
+[tick 01459] XFER  M2 → M1  amt=15  res:27.3→12.3  tgt_res→124.1
+[tick 01460] XFER  M1 → M2  amt=5  res:127.9→122.9  tgt_res→31.3
+[tick 01460] XFER  M2 → M1  amt=15  res:31.3→16.3  tgt_res→137.9
+[tick 01461] XFER  M1 → M2  amt=5  res:131.3→126.3  tgt_res→20.8
+[tick 01461] XFER  M2 → M1  amt=15  res:20.8→5.8  tgt_res→141.3
+[tick 01462] XFER  M1 → M2  amt=5  res:134.5→129.5  tgt_res→10.7
+[tick 01463] XFER  M1 → M2  amt=5  res:123.2→118.2  tgt_res→12.8
+[tick 01464] XFER  M1 → M2  amt=5  res:112.1→107.1  tgt_res→14.9
+[tick 01465] XFER  M1 → M2  amt=5  res:110.7→105.7  tgt_res→29.9
+[tick 01465] XFER  M2 → M1  amt=15  res:29.9→14.9  tgt_res→120.7
+[tick 01466] XFER  M1 → M2  amt=5  res:114.6→109.6  tgt_res→17.0
+[tick 01466] XFER  M2 → M1  amt=15  res:17.0→2.0  tgt_res→124.6
+[tick 01467] XFER  M1 → M2  amt=5  res:126.5→121.5  tgt_res→16.8
+[tick 01467] XFER  M2 → M1  amt=15  res:16.8→1.8  tgt_res→136.5
+[tick 01468] XFER  M1 → M2  amt=5  res:129.9→124.9  tgt_res→5.0
+[tick 01469] XFER  M1 → M2  amt=5  res:118.7→113.7  tgt_res→7.3
+[tick 01470] XFER  M1 → M2  amt=5  res:117.9→112.9  tgt_res→25.2
+[tick 01470] XFER  M2 → M1  amt=15  res:25.2→10.2  tgt_res→127.9
+[tick 01471] XFER  M1 → M2  amt=5  res:121.5→116.5  tgt_res→12.4
+[tick 01472] XFER  M1 → M2  amt=5  res:110.5→105.5  tgt_res→14.5
+[tick 01473] XFER  M1 → M2  amt=5  res:106.5→101.5  tgt_res→25.8
+[tick 01473] XFER  M2 → M1  amt=15  res:25.8→10.8  tgt_res→116.5
+[tick 01474] XFER  M1 → M2  amt=5  res:110.5→105.5  tgt_res→13.0
+[tick 01475] XFER  M1 → M2  amt=5  res:106.4→101.4  tgt_res→15.1
+[tick 01475] XFER  M2 → M1  amt=15  res:15.1→0.1  tgt_res→116.4
+[tick 01476] XFER  M1 → M2  amt=5  res:110.4→105.4  tgt_res→5.0
+[tick 01477] XFER  M1 → M2  amt=5  res:108.1→103.1  tgt_res→20.3
+[tick 01477] XFER  M2 → M1  amt=15  res:20.3→5.3  tgt_res→118.1
+[tick 01478] XFER  M1 → M2  amt=5  res:122.2→117.2  tgt_res→18.0
+[tick 01478] XFER  M2 → M1  amt=15  res:18.0→3.0  tgt_res→132.2
+[tick 01479] XFER  M1 → M2  amt=5  res:132.8→127.8  tgt_res→16.7
+[tick 01480] XFER  M1 → M2  amt=5  res:121.5→116.5  tgt_res→18.7
+[tick 01481] XFER  M1 → M2  amt=5  res:110.5→105.5  tgt_res→20.6
+[tick 01481] XFER  M2 → M1  amt=20  res:20.6→0.6  tgt_res→125.5
+[tick 01482] XFER  M1 → M2  amt=5  res:119.3→114.3  tgt_res→5.0
+[tick 01483] XFER  M1 → M2  amt=5  res:108.3→103.3  tgt_res→7.3
+[tick 01484] XFER  M1 → M2  amt=5  res:97.7→92.7  tgt_res→9.6
+[tick 01485] XFER  M1 → M2  amt=5  res:95.9→90.9  tgt_res→24.9
+[tick 01485] XFER  M2 → M1  amt=20  res:24.9→4.9  tgt_res→110.9
+[tick 01486] XFER  M1 → M2  amt=5  res:105.1→100.1  tgt_res→7.2
+[tick 01487] XFER  M1 → M2  amt=5  res:94.6→89.6  tgt_res→9.5
+[tick 01488] XFER  M1 → M2  amt=5  res:84.4→79.4  tgt_res→11.7
+[tick 01489] XFER  M1 → M2  amt=5  res:74.5→69.5  tgt_res→13.9
+[tick 01490] XFER  M1 → M2  amt=10  res:64.9→54.9  tgt_res→21.0
+[tick 01490] XFER  M2 → M1  amt=20  res:21.0→1.0  tgt_res→74.9
+[tick 01491] XFER  M1 → M2  amt=10  res:70.2→60.2  tgt_res→10.0
+[tick 01492] XFER  M1 → M2  amt=10  res:55.9→45.9  tgt_res→17.2
+[tick 01493] XFER  M1 → M2  amt=10  res:49.8→39.8  tgt_res→33.5
+[tick 01493] XFER  M2 → M1  amt=20  res:33.5→13.5  tgt_res→59.8
+[tick 01494] XFER  M1 → M2  amt=10  res:55.5→45.5  tgt_res→20.6
+[tick 01494] XFER  M2 → M1  amt=20  res:20.6→0.6  tgt_res→65.5
+[tick 01495] XFER  M1 → M2  amt=10  res:61.0→51.0  tgt_res→10.0
+[tick 01496] XFER  M1 → M2  amt=10  res:47.0→37.0  tgt_res→17.2
+[tick 01497] XFER  M1 → M2  amt=10  res:39.8→29.8  tgt_res→37.6
+[tick 01497] XFER  M2 → M1  amt=20  res:37.6→17.6  tgt_res→49.8
+[tick 01498] XFER  M1 → M2  amt=10  res:45.8→35.8  tgt_res→24.5
+[tick 01498] XFER  M2 → M1  amt=20  res:24.5→4.5  tgt_res→55.8
+[tick 01499] XFER  M1 → M2  amt=10  res:59.1→49.1  tgt_res→23.8
+[tick 01499] XFER  M2 → M1  amt=20  res:23.8→3.8  tgt_res→69.1
+[tick 01500] SNAP   ctrl=0  chosen=[0, 2, 0, 3, 9, 5][b0]  M0:91.3(157L,jkp=b[0, 6])  M1:13.8(195L,jkp=b[5, 6])  M2:27.9(154L,jkp=b[6, 9])
+[tick 01500] XFER  M1 → M2  amt=10  res:64.5→54.5  tgt_res→11.2
+[tick 01501] XFER  M1 → M2  amt=10  res:56.9→46.9  tgt_res→27.6
+[tick 01501] XFER  M2 → M1  amt=25  res:27.6→2.6  tgt_res→71.9
+[tick 01502] XFER  M1 → M2  amt=10  res:67.2→57.2  tgt_res→10.0
+[tick 01503] XFER  M1 → M2  amt=10  res:62.0→52.0  tgt_res→27.4
+[tick 01503] XFER  M2 → M1  amt=25  res:27.4→2.4  tgt_res→77.0
+[tick 01504] XFER  M1 → M2  amt=10  res:72.2→62.2  tgt_res→10.0
+[tick 01505] XFER  M1 → M2  amt=10  res:57.8→47.8  tgt_res→17.2
+[tick 01506] XFER  M1 → M2  amt=10  res:43.9→33.9  tgt_res→24.2
+[tick 01507] XFER  M1 → M2  amt=10  res:30.4→20.4  tgt_res→31.0
+[tick 01507] XFER  M2 → M1  amt=25  res:31.0→6.0  tgt_res→45.4
+[tick 01508] XFER  M1 → M2  amt=10  res:47.1→37.1  tgt_res→13.3
+[tick 01509] XFER  M1 → M2  amt=10  res:40.5→30.5  tgt_res→29.8
+[tick 01509] XFER  M2 → M1  amt=25  res:29.8→4.8  tgt_res→55.5
+[tick 01510] XFER  M1 → M2  amt=15  res:51.3→36.3  tgt_res→17.1
+[tick 01511] XFER  M1 → M2  amt=15  res:39.3→24.3  tgt_res→38.4
+[tick 01511] XFER  M2 → M1  amt=25  res:38.4→13.4  tgt_res→49.3
+[tick 01512] XFER  M1 → M2  amt=15  res:45.3→30.3  tgt_res→25.5
+[tick 01512] XFER  M2 → M1  amt=25  res:25.5→0.5  tgt_res→55.3
+[tick 01513] XFER  M1 → M2  amt=15  res:56.8→41.8  tgt_res→22.5
+[tick 01514] XFER  M1 → M2  amt=15  res:46.1→31.1  tgt_res→44.5
+[tick 01514] XFER  M2 → M1  amt=25  res:44.5→19.5  tgt_res→56.1
+[tick 01515] XFER  M1 → M2  amt=15  res:51.9→36.9  tgt_res→31.4
+[tick 01515] XFER  M2 → M1  amt=25  res:31.4→6.4  tgt_res→61.9
+[tick 01516] XFER  M1 → M2  amt=15  res:63.6→48.6  tgt_res→30.0
+[tick 01516] XFER  M2 → M1  amt=25  res:30.0→5.0  tgt_res→73.6
+[tick 01517] XFER  M1 → M2  amt=15  res:68.9→53.9  tgt_res→17.3
+[tick 01518] XFER  M1 → M2  amt=15  res:58.9→43.9  tgt_res→39.6
+[tick 01518] XFER  M2 → M1  amt=25  res:39.6→14.6  tgt_res→68.9
+[tick 01519] XFER  M1 → M2  amt=15  res:64.4→49.4  tgt_res→26.6
+[tick 01519] XFER  M2 → M1  amt=25  res:26.6→1.6  tgt_res→74.4
+[tick 01520] XFER  M1 → M2  amt=15  res:69.6→54.6  tgt_res→15.0
+[tick 01521] XFER  M1 → M2  amt=15  res:50.5→35.5  tgt_res→27.0
+[tick 01522] XFER  M1 → M2  amt=15  res:37.5→22.5  tgt_res→50.9
+[tick 01523] CRIT   mind 1  strikes_left=1  learned=196
+[tick 01532] CRIT   mind 2  strikes_left=1  learned=179
+[tick 01550] SNAP   ctrl=0  chosen=[0, 2, 0, 3, 9, 3][b0]  M0:99.7(196L,jkp=b[0, 6])  M1:REC(196L,jkp=b[5, 6])  M2:REC(179L,jkp=b[6, 9])
+[tick 01573] REVIVE mind 1  strikes_left=1
+[tick 01573] CTRL SHIFT  0 → 1  (M0:94.3  M1:100.0  M2:REC)
+[tick 01576] CTRL SHIFT  1 → 0  (M0:100.0  M1:100.0  M2:REC)
+[tick 01579] CTRL SHIFT  0 → 1  (M0:91.0  M1:91.0  M2:REC)
+[tick 01582] REVIVE mind 2  strikes_left=1
+[tick 01582] CTRL SHIFT  1 → 2  (M0:91.2  M1:98.5  M2:100.0)
+[tick 01583] CTRL SHIFT  2 → 1  (M0:93.7  M1:100.0  M2:100.0)
+[tick 01584] XFER  M1 → M2  amt=20  res:54.2→34.2  tgt_res→73.0
+[tick 01594] CTRL SHIFT  1 → 0  (M0:100.0  M1:100.0  M2:100.0)
+[tick 01596] XFER  M1 → M2  amt=20  res:50.3→30.3  tgt_res→104.0
+[tick 01599] XFER  M1 → M2  amt=20  res:25.7→5.7  tgt_res→117.3
+[tick 01600] SNAP   ctrl=0  chosen=[7, 3, 2, 9, 9, 7][b7]  M0:92.5(197L,jkp=b[0, 6])  M1:74.5(196L,jkp=b[5, 6])  M2:73.0(195L,jkp=b[6, 9])
+[tick 01601] DRIFT mind 1 biome=6  +8 → +6
+[tick 01625] FIGHT START  M1 vs M0  agg=0.530  h=1.1 vs 96.2
+[tick 01625] CTRL SHIFT  0 → 2  (M0:96.2  M1:1.1  M2:28.5)
+[tick 01625] FDRIFT mind 0 pattern [1, 0, 1, 0]  -7 → +6
+[tick 01631] FDRIFT mind 0 pattern [1, 0, 0, 1]  -5 → +1
+[tick 01635] FDRIFT mind 1 pattern [0, 0, 1, 0]  +1 → -1
+[tick 01639] FDRIFT mind 1 pattern [1, 1, 0, 1]  +8 → -6
+[tick 01645] FDRIFT mind 1 pattern [1, 1, 0, 0]  -2 → +2
+[tick 01646] FDRIFT mind 1 pattern [1, 0, 1, 0]  -7 → -6
+[tick 01647] FDRIFT mind 0 pattern [1, 0, 1, 1]  -1 → +5
+[tick 01650] SNAP   ctrl=2  chosen=[6, 5, 5, 4, 5, 9][b6]  M0:100.0(175L,jkp=b[0, 6])  M1:20.6(172L,jkp=b[5])  M2:69.8(197L,jkp=b[6, 9])
+[tick 01650] FDRIFT mind 1 pattern [0, 0, 1, 1]  -2 → +1
+[tick 01650] FDRIFT mind 0 pattern [1, 1, 0, 1]  +6 → +1
+[tick 01655] FDRIFT mind 1 pattern [0, 1, 0, 0]  -3 → +2
+[tick 01656] FDRIFT mind 1 pattern [1, 1, 1, 1]  +2 → +0
+[tick 01656] FIGHT END  M1 vs M0  winner=M1  reason=mastery  ticks=32  mastery=[16,13]
+[tick 01656] LOOT  M1←M0  mastery_diff=3  mult=1.8  looted=89.7  gained=161.5  winner_res→165.8
+[tick 01656] XFER  M1 → M2  amt=25  res:158.3→133.3  tgt_res→125.8
+[tick 01657] CTRL SHIFT  2 → 0  (M0:97.2  M1:21.1  M2:61.8)
+[tick 01657] XFER  M1 → M2  amt=25  res:126.8→101.8  tgt_res→144.5
+[tick 01658] XFER  M1 → M2  amt=25  res:96.3→71.3  tgt_res→162.7
+[tick 01659] XFER  M1 → M2  amt=25  res:70.4→45.4  tgt_res→191.4
+[tick 01660] CRIT   mind 1  strikes_left=0  learned=165
+[tick 01691] CRIT   mind 2  strikes_left=0  learned=197
+[tick 01700] SNAP   ctrl=0  chosen=[0, 1, 9, 3, 9, 6][b0]  M0:98.0(166L,jkp=b[0, 6])  M1:REC(165L,jkp=b[5])  M2:REC(197L,jkp=b[6, 9])
+[tick 01710] REVIVE mind 1  strikes_left=0
+[tick 01711] CTRL SHIFT  0 → 1  (M0:89.7  M1:94.9  M2:REC)
+[tick 01713] XFER  M1 → M0  amt=25  res:35.0→10.0  tgt_res→162.0
+[tick 01716] XFER  M1 → M0  amt=25  res:27.8→2.8  tgt_res→174.4
+[tick 01729] XFER  M1 → M0  amt=25  res:28.0→3.0  tgt_res→151.7
+[tick 01734] XFER  M1 → M0  amt=25  res:29.4→4.4  tgt_res→168.9
+[tick 01741] REVIVE mind 2  strikes_left=0
+[tick 01741] XFER  M2 → M0  amt=20  res:121.7→101.7  tgt_res→149.1
+[tick 01742] XFER  M2 → M0  amt=20  res:98.6→78.6  tgt_res→162.1
+[tick 01743] XFER  M2 → M0  amt=20  res:86.6→66.6  tgt_res→185.9
+[tick 01744] XFER  M2 → M0  amt=20  res:74.9→54.9  tgt_res→208.1
+[tick 01745] XFER  M2 → M0  amt=20  res:53.2→33.2  tgt_res→219.3
+[tick 01746] XFER  M2 → M0  amt=20  res:44.5→24.5  tgt_res→238.4
+[tick 01747] XFER  M2 → M0  amt=20  res:35.1→15.1  tgt_res→257.9
+[tick 01750] SNAP   ctrl=1  chosen=[6, 5, 5, 4, 8, 8][b6]  M0:76.2(164L,jkp=b[0, 6])  M1:100.0(165L,jkp=b[5])  M2:100.0(196L,jkp=b[6, 9])
+[tick 01750] XFER  M2 → M0  amt=20  res:25.1→5.1  tgt_res→259.3
+[tick 01774] XFER  M2 → M0  amt=25  res:27.3→2.3  tgt_res→149.4
+[tick 01796] XFER  M1 → M0  amt=25  res:31.8→6.8  tgt_res→105.8
+[tick 01800] SNAP   ctrl=1  chosen=[5, 3, 1, 0, 7, 7][b5]  M0:8.2(164L,jkp=b[0, 6])  M1:100.0(167L,jkp=b[5])  M2:44.3(199L,jkp=b[6, 9])
+[tick 01801] XFER  M1 → M0  amt=25  res:28.8→3.8  tgt_res→118.5
+[tick 01808] XFER  M1 → M0  amt=25  res:27.9→2.9  tgt_res→125.9
+[tick 01814] DEATH  mind 0  deaths=1  learned=164
+[tick 01814] SPAWN  mind 0  fresh instance  jackpot_biomes=[0, 8]
+[tick 01815] CTRL SHIFT  1 → 0  (M0:100.0  M1:94.8  M2:24.0)
+[tick 01816] CTRL SHIFT  0 → 1  (M0:91.0  M1:93.2  M2:18.7)
+[tick 01822] HEADSTART  mind 1  kept 3 patterns from prev fight
+[tick 01822] FIGHT START  M0 vs M1  agg=0.533  h=46.7 vs 100.0
+[tick 01822] CTRL SHIFT  1 → 2  (M0:46.7  M1:100.0  M2:17.7)
+[tick 01824] FDRIFT mind 0 pattern [0, 1, 1, 1]  +7 → +4
+[tick 01828] FDRIFT mind 1 pattern [1, 0, 1, 1]  -4 → -6
+[tick 01829] FDRIFT mind 1 pattern [1, 0, 0, 1]  -5 → -4
+[tick 01838] FDRIFT mind 0 pattern [0, 1, 0, 0]  +8 → -1
+[tick 01839] FDRIFT mind 0 pattern [0, 0, 1, 0]  -1 → -5
+[tick 01843] FDRIFT mind 1 pattern [0, 1, 1, 1]  -5 → +4
+[tick 01846] FDRIFT mind 1 pattern [0, 1, 0, 0]  +2 → -4
+[tick 01847] FDRIFT mind 0 pattern [1, 0, 1, 0]  +2 → -3
+[tick 01850] SNAP   ctrl=2  chosen=[6, 2, 6, 8, 9, 9][b6]  M0:68.2(7L,jkp=b[0, 8])  M1:98.5(159L,jkp=b[5])  M2:34.4(198L,jkp=b[6, 9])
+[tick 01851] FDRIFT mind 1 pattern [1, 1, 0, 0]  -5 → +3
+[tick 01853] FDRIFT mind 1 pattern [1, 0, 0, 0]  +5 → +0
+[tick 01855] FDRIFT mind 1 pattern [0, 0, 0, 0]  +7 → +1
+[tick 01857] FDRIFT mind 0 pattern [1, 1, 0, 1]  +1 → +2
+[tick 01857] FDRIFT mind 1 pattern [0, 1, 0, 0]  -4 → +2
+[tick 01860] FDRIFT mind 0 pattern [0, 0, 1, 0]  -5 → +3
+[tick 01860] FIGHT END  M0 vs M1  winner=M0  reason=mastery  ticks=39  mastery=[16,15]
+[tick 01860] LOOT  M0←M1  mastery_diff=1  mult=1.4  looted=30.7  gained=43.0  winner_res→44.4
+[tick 01860] XFER  M0 → M2  amt=5  res:40.6→35.6  tgt_res→79.1
+[tick 01861] CTRL SHIFT  2 → 1  (M0:80.1  M1:98.6  M2:36.6)
+[tick 01861] XFER  M0 → M2  amt=5  res:32.0→27.0  tgt_res→79.3
+[tick 01862] XFER  M0 → M2  amt=5  res:23.7→18.7  tgt_res→79.4
+[tick 01863] XFER  M0 → M2  amt=5  res:15.6→10.6  tgt_res→90.0
+[tick 01864] XFER  M0 → M2  amt=5  res:7.8→2.8  tgt_res→89.8
+[tick 01872] HEADSTART  mind 0  kept 3 patterns from prev fight
+[tick 01872] FIGHT START  M0 vs M1  agg=0.570  h=13.5 vs 91.1
+[tick 01872] CTRL SHIFT  1 → 2  (M0:13.5  M1:91.1  M2:19.6)
+[tick 01874] FDRIFT mind 1 pattern [0, 0, 1, 0]  -5 → -4
+[tick 01879] FDRIFT mind 1 pattern [0, 1, 1, 1]  +3 → -1
+[tick 01881] FDRIFT mind 0 pattern [1, 1, 0, 0]  -4 → -1
+[tick 01883] FDRIFT mind 0 pattern [0, 0, 0, 1]  -6 → -1
+[tick 01884] FDRIFT mind 0 pattern [1, 0, 0, 1]  +5 → -3
+[tick 01886] FDRIFT mind 0 pattern [0, 1, 1, 1]  +1 → +2
+[tick 01889] FDRIFT mind 0 pattern [1, 1, 0, 1]  -4 → +5
+[tick 01889] FDRIFT mind 1 pattern [0, 0, 1, 0]  -4 → -2
+[tick 01894] FDRIFT mind 1 pattern [0, 0, 0, 0]  -2 → +2
+[tick 01900] SNAP   ctrl=2  chosen=[8, 8, 5, 1, 0, 3][b8]  M0:8.8(18L,jkp=b[0, 8])  M1:78.1(148L,jkp=b[5])  M2:73.7(198L,jkp=b[6, 9])
+[tick 01900] FDRIFT mind 1 pattern [1, 0, 0, 0]  +5 → +4
+[tick 01902] FDRIFT mind 0 pattern [1, 0, 0, 0]  +0 → -4
+[tick 01903] FDRIFT mind 0 pattern [1, 1, 1, 1]  -3 → -5
+[tick 01912] FIGHT END  M0 vs M1  winner=M0  reason=mastery  ticks=41  mastery=[16,14]
+[tick 01912] LOOT  M0←M1  mastery_diff=2  mult=1.6  looted=0.7  gained=1.1  winner_res→6.1
+[tick 01913] CTRL SHIFT  2 → 1  (M0:6.2  M1:97.1  M2:75.6)
+[tick 01915] HEADSTART  mind 0  kept 3 patterns from prev fight
+[tick 01915] FIGHT START  M0 vs M1  agg=0.580  h=1.2 vs 99.6
+[tick 01915] CTRL SHIFT  1 → 2  (M0:1.2  M1:99.6  M2:80.6)
+[tick 01916] FIGHT CRIT  mind 0  strikes_left=2
+[tick 01916] FIGHT END  M0 vs M1  winner=M1  reason=death  ticks=2  mastery=[5,2]
+[tick 01916] LOOT  M1←M0  mastery_diff=0  mult=1.2  looted=0.0  gained=0.0  winner_res→8.6
+[tick 01917] CTRL SHIFT  2 → 1  (M0:REC  M1:100.0  M2:85.6)
+[tick 01936] CTRL SHIFT  1 → 2  (M0:REC  M1:95.2  M2:100.0)
+[tick 01938] CTRL SHIFT  2 → 1  (M0:REC  M1:100.0  M2:100.0)
+
+=== SIMULATION STOP at tick 1940 ===

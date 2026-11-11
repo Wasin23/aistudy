@@ -1,0 +1,10 @@
+{
+  "id": "memory-zilliz",
+  "name": "Memory (Zilliz)",
+  "description": "Zilliz/Milvus vector memory — zilliz_recall and zilliz_store agent tools via semantic search.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

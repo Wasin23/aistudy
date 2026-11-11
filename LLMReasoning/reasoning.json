@@ -1,0 +1,27 @@
+{
+  "context": "game theory",
+  "lens": {
+    "conditions": "The context assumes that individuals or entities are rational actors making decisions to maximize their own utility, often in competitive or cooperative scenarios where the outcomes depend on the choices of others. It also presumes that these actors have access to information about the payoffs associated with different strategies and that their interactions can be modeled mathematically.",
+    "ceases_when": "The context would no longer apply if the actors involved do not behave rationally, if there is a complete lack of interdependence in decision-making, or if the outcomes cannot be quantified or modeled due to the absence of clear payoffs or strategies."
+  },
+  "bluff": {
+    "process": "Bluffing arises from the strategic decision to misrepresent one's own position or strength to influence the beliefs and actions of others, leveraging the interdependence of choices to maximize one's own utility by inducing opponents to make suboptimal decisions.",
+    "self_termination": "Bluffing would cease if actors no longer perceive any benefit from deception, either due to a breakdown in trust, a shift in the competitive landscape where honesty becomes more advantageous, or if the costs of maintaining a bluff outweigh the potential gains."
+  },
+  "vaccine": {
+    "process": "The decision to develop or adopt a vaccine is driven by the rational calculation of public health benefits versus individual or collective costs, where actors weigh the potential utility of immunity against the risks and costs associated with vaccination, influenced by the actions and decisions of others in the population.",
+    "self_termination": "The pursuit of vaccination would stop if the perceived benefits of vaccination diminish significantly, such as through the eradication of the disease, a shift in public perception that devalues vaccination, or if the costs of vaccination become prohibitively high compared to the perceived risks."
+  },
+  "alibi": {
+    "process": "Creating an alibi involves strategically constructing a narrative or evidence to support one's innocence, driven by the need to maximize personal utility by avoiding negative consequences, while anticipating the reactions and decisions of others who may seek to verify or challenge that narrative.",
+    "self_termination": "The use of an alibi would cease if the actor no longer faces consequences for their actions, such as a change in the legal or social environment that diminishes the need for self-protection, or if the actor's situation changes such that the truth becomes more beneficial than deception."
+  },
+  "relational_map": {
+    "shared": "All three concepts involve strategic decision-making where individuals or entities manipulate perceptions and information to maximize their utility in the face of interdependent choices.",
+    "pairwise": {
+      "bluff_vaccine": "Both involve strategic manipulation of information; bluffing can influence perceptions about the necessity or effectiveness of a vaccine, while the decision to vaccinate can be influenced by the perceived credibility of claims made by others.",
+      "vaccine_alibi": "Both can be seen as protective strategies; a vaccine protects against disease while an alibi protects against blame or punishment, with both relying on the rational assessment of risks and benefits in a social context.",
+      "bluff_alibi": "Both involve deception as a strategy; bluffing misleads opponents about one's strength, while an alibi misleads others about one's actions, with both relying on the anticipation of others' responses to maintain the deception."
+    }
+  }
+}

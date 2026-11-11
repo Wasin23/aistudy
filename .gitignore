@@ -1,0 +1,26 @@
+# --- Secrets / environment variables ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Python virtual environments ---
+.venv/
+venv/
+
+# --- Python caches ---
+__pycache__/
+*.pyc
+
+# --- Large files (GitHub rejects files over 100 MB) ---
+baby-gpt/checkpoints/
+baby-gpt/checkpoints_ai_theory/
+*.pt
+*.glb
+
+# --- Editor settings (tasks.json contains API keys) ---
+.vscode/
+
+# --- Someone else's repo (github.com/FredFang1216/MARs) ---
+MARs/

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Strategy Inc Tracker</title>
+  <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0c0c0c;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      min-height: 100vh;
+      padding: 36px 44px;
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid #222;
+      padding-bottom: 18px;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+    h1 { font-size: 16px; font-weight: normal; letter-spacing: 5px; color: #fff; text-transform: uppercase; }
+    .ticker { font-size: 11px; color: #555; letter-spacing: 3px; margin-top: 4px; }
+    .meta { text-align: right; font-size: 11px; color: #444; letter-spacing: 1px; flex-shrink: 0; }
+    #status { display: block; margin-top: 4px; font-size: 10px; letter-spacing: 2px; }
+    .btn {
+      display: inline-block; margin-top: 8px;
+      background: none; border: 1px solid #222; color: #555;
+      font-family: inherit; font-size: 10px; letter-spacing: 2px;
+      padding: 8px 16px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { border-color: #777; color: #ccc; }
+
+    /* SECTIONS */
+    .section-title {
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: #333; padding: 24px 0 12px;
+      border-top: 1px solid #181818; margin-top: 1px;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #181818;
+    }
+    .card { background: #0c0c0c; padding: 20px 18px; }
+    .card.wide  { grid-column: span 3; }
+    .card.span2 { grid-column: span 2; }
+
+    .label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+    .value { font-size: 22px; color: #fff; letter-spacing: 0.5px; line-height: 1.2; }
+    .sub   { font-size: 13px; color: #fff; margin-top: 6px; }
+
+    .up   { color: #c8c8c8; }
+    .down { color: #666; }
+
+    .chart-wrap { background: #0c0c0c; margin-bottom: 4px; }
+    .chart-toolbar { display: flex; gap: 6px; margin-bottom: 10px; align-items: center; }
+    .chart-btn { background: none; border: 1px solid #222; color: #555; font-family: inherit;
+      font-size: 10px; letter-spacing: 1px; padding: 5px 10px; cursor: pointer; }
+    .chart-btn.active { border-color: #fff; color: #fff; }
+    .chart-container { width: 100%; }
+
+    .card-info { margin-top: 10px; border-top: 1px solid #1c1c1c; padding-top: 7px; }
+    .card-info > summary { font-size: 10px; color: #444; cursor: pointer; letter-spacing: 0.5px; list-style: none; user-select: none; }
+    .card-info > summary::-webkit-details-marker { display: none; }
+    .card-info > summary::before { content: '▸ explain'; }
+    .card-info[open] > summary::before { content: '▾ explain'; }
+    .card-info .desc { font-size: 11px; color: #777; margin-top: 6px; line-height: 1.55; }
+    .neutral { color: #888; }
+
+    /* RSI color coding (still greyscale) */
+    .overbought { color: #aaa; }
+    .oversold   { color: #777; }
+
+    /* PERF TABLE */
+    .perf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .perf-table th {
+      text-align: left; padding: 8px 12px; font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase; color: #444;
+      font-weight: normal; border-bottom: 1px solid #181818;
+    }
+    .perf-table td { padding: 12px 12px; font-size: 15px; border-bottom: 1px solid #141414; }
+
+    /* PURCHASES */
+    .purchases-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .purchases-table th {
+      text-align: left; padding: 8px 12px; font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase; color: #444;
+      font-weight: normal; border-bottom: 1px solid #181818;
+    }
+    .purchases-table td { padding: 10px 12px; color: #888; border-bottom: 1px solid #141414; }
+    .purchases-table tr:active td { color: #fff; }
+
+    .dim { color: #333; font-size: 12px; padding: 14px 0; }
+    .dim a { color: #444; text-decoration: none; }
+
+    #counter { font-size: 10px; color: #2a2a2a; letter-spacing: 2px; margin-top: 28px; padding-top: 14px; border-top: 1px solid #181818; padding-bottom: 40px; }
+
+    /* SIMULATOR */
+    .sim-controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #181818;
+      margin-bottom: 1px;
+    }
+    .sim-field { background: #0c0c0c; padding: 20px 18px; }
+    .sim-input-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .sim-num {
+      background: none;
+      border: none;
+      border-bottom: 1px solid #2a2a2a;
+      color: #fff;
+      font-family: inherit;
+      font-size: 22px;
+      padding: 4px 0;
+      width: 100%;
+      outline: none;
+      -moz-appearance: textfield;
+    }
+    .sim-num::-webkit-outer-spin-button,
+    .sim-num::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .btc-steppers { display: flex; gap: 4px; flex-wrap: wrap; }
+    .btc-step { background: none; border: 1px solid #222; color: #555; font-family: inherit;
+      font-size: 10px; letter-spacing: 0.5px; padding: 5px 8px; cursor: pointer; flex: 1; min-width: 0; }
+    .btc-step:active { border-color: #888; color: #ccc; }
+    .sim-num:focus { border-bottom-color: #888; }
+    input[type="range"] {
+      width: 100%; accent-color: #666; cursor: pointer;
+      background: transparent; height: 18px;
+    }
+    .yr-btns { display: flex; gap: 4px; margin-top: 4px; }
+    .yr-btn {
+      flex: 1; background: none; border: 1px solid #222; color: #555;
+      font-family: inherit; font-size: 11px; padding: 10px 4px;
+      cursor: pointer; letter-spacing: 1px; -webkit-tap-highlight-color: transparent;
+    }
+    .yr-btn.active { border-color: #fff; color: #fff; }
+    .yr-btn:active  { border-color: #aaa; color: #aaa; }
+    .sim-result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #181818;
+    }
+
+    /* TABLET */
+    @media (max-width: 768px) {
+      body { padding: 24px 20px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .card.wide  { grid-column: span 2; }
+      .card.span2 { grid-column: span 2; }
+      .value { font-size: 20px; }
+      .sim-controls { grid-template-columns: repeat(2, 1fr); }
+      .sim-result-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* PHONE */
+    @media (max-width: 500px) {
+      body { padding: 16px 14px; }
+      h1 { font-size: 13px; letter-spacing: 3px; }
+      .ticker { font-size: 10px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .card.wide  { grid-column: span 2; }
+      .card.span2 { grid-column: span 2; }
+      .card { padding: 16px 14px; }
+      .label { font-size: 10px; letter-spacing: 1px; }
+      .value { font-size: 18px; }
+      .sub   { font-size: 11px; }
+      .perf-table td { font-size: 13px; padding: 10px 8px; }
+      .purchases-table { font-size: 11px; }
+      .purchases-table td, .purchases-table th { padding: 8px 8px; }
+      header { flex-direction: column; align-items: flex-start; }
+      .meta { text-align: left; }
+
+      /* SIMULATOR — 1-column full-width on mobile */
+      .sim-controls { grid-template-columns: 1fr; }
+      .sim-result-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .sim-field { padding: 20px 16px; }
+      .sim-num { font-size: 32px; padding: 6px 0; }
+      input[type="range"] { height: 28px; }
+      .btc-steppers { gap: 6px; }
+      .btc-step { padding: 12px 6px; font-size: 12px; }
+      .yr-btns { flex-wrap: wrap; gap: 6px; }
+      .yr-btn { flex: none; width: calc(25% - 5px); padding: 14px 2px; font-size: 12px; }
+    }
+
+    /* very small phones */
+    @media (max-width: 360px) {
+      .grid { grid-template-columns: 1fr; }
+      .card.wide, .card.span2 { grid-column: span 1; }
+    }
+
+    /* ATM HISTORY TABLE */
+    .atm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .atm-table th {
+      text-align: left; padding: 8px 12px; font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase; color: #444;
+      font-weight: normal; border-bottom: 1px solid #181818;
+    }
+    .atm-table td { padding: 10px 12px; color: #888; border-bottom: 1px solid #141414; }
+    .atm-table tr:active td { color: #fff; }
+    .atm-table .hi { color: #ccc; }
+    @media (max-width: 500px) {
+      .atm-table { font-size: 11px; }
+      .atm-table td, .atm-table th { padding: 8px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Strategy Inc</h1>
+    <div class="ticker">MSTR &mdash; BITCOIN TREASURY TRACKER</div>
+  </div>
+  <div class="meta">
+    <span id="timestamp">—</span>
+    <span id="status">LOADING</span>
+    <button class="btn" onclick="refreshAll()">REFRESH</button>
+  </div>
+</header>
+
+<!-- SIMULATOR -->
+<div class="section-title">Scenario Simulator</div>
+<div class="sim-controls">
+  <div class="sim-field">
+    <div class="label">BTC Price Target</div>
+    <div class="sim-input-wrap">
+      <input type="number" class="sim-num" id="sim-btc" value="200000" min="10000" max="50000000" step="100000">
+      <div class="btc-steppers">
+        <button class="btc-step" data-delta="-100000">−100k</button>
+        <button class="btc-step" data-delta="-500000">−500k</button>
+        <button class="btc-step" data-delta="100000">+100k</button>
+        <button class="btc-step" data-delta="500000">+500k</button>
+        <button class="btc-step" data-delta="1000000">+1M</button>
+        <button class="btc-step" data-delta="5000000">+5M</button>
+      </div>
+      <input type="range" id="sim-btc-r" min="10000" max="50000000" step="100000" value="200000">
+    </div>
+  </div>
+  <div class="sim-field">
+    <div class="label">mNAV Multiple</div>
+    <div class="sim-input-wrap">
+      <input type="number" class="sim-num" id="sim-mnav" value="1.5" min="0.5" max="5" step="0.1">
+      <input type="range" id="sim-mnav-r" min="0.5" max="5" step="0.1" value="1.5">
+    </div>
+  </div>
+  <div class="sim-field">
+    <div class="label">BTC Yield / Year</div>
+    <div class="sim-input-wrap">
+      <div style="display:flex;align-items:baseline;gap:4px">
+        <input type="number" class="sim-num" id="sim-yield" value="10" min="0" max="50" step="1" style="width:auto;flex:1">
+        <span style="font-size:22px;color:#fff">%</span>
+      </div>
+      <input type="range" id="sim-yield-r" min="0" max="50" step="1" value="10">
+    </div>
+  </div>
+  <div class="sim-field">
+    <div class="label">Time Horizon</div>
+    <div class="yr-btns" id="yr-btns">
+      <button class="yr-btn" data-yr="1">1Y</button>
+      <button class="yr-btn" data-yr="3">3Y</button>
+      <button class="yr-btn active" data-yr="5">5Y</button>
+      <button class="yr-btn" data-yr="10">10Y</button>
+      <button class="yr-btn" data-yr="20">20Y</button>
+      <button class="yr-btn" data-yr="50">50Y</button>
+      <button class="yr-btn" data-yr="100">100Y</button>
+      <button class="yr-btn" data-yr="114">2140</button>
+    </div>
+  </div>
+</div>
+<div class="sim-result-grid">
+  <div class="card">
+    <div class="label">Implied MSTR Price</div>
+    <div class="value" id="sim-price">—</div>
+    <div class="sub" id="sim-upside">awaiting data...</div>
+  </div>
+  <div class="card">
+    <div class="label">Upside / Downside</div>
+    <div class="value" id="sim-upside-val">—</div>
+    <div class="sub" id="sim-upside-x">—</div>
+  </div>
+  <div class="card">
+    <div class="label">Future Equity NAV / Share</div>
+    <div class="value" id="sim-nav-share">—</div>
+    <div class="sub" id="sim-btc-val-share">BTC value —</div>
+  </div>
+</div>
+
+<!-- KEY SIGNALS -->
+<div class="section-title">Key Signals</div>
+<div class="grid">
+  <div class="card"><div class="label">RSI (14d)</div><div class="value" id="rsi">—</div><div class="sub" id="rsi-label">—</div></div>
+  <div class="card"><div class="label">50d Moving Avg</div><div class="value" id="ma50">—</div><div class="sub" id="ma50-pct">—</div></div>
+  <div class="card"><div class="label">200d Moving Avg</div><div class="value" id="ma200">—</div><div class="sub" id="ma200-pct">—</div></div>
+
+  <div class="card"><div class="label">BTC Beta (30d)</div><div class="value" id="beta-btc">—</div><div class="sub">MSTR move per 1% BTC</div>
+    <details class="card-info"><summary></summary><div class="desc">How many percent MSTR tends to move for each 1% Bitcoin moves. A beta of 2× means MSTR typically moves 2% when BTC moves 1%. Calculated from the last 30 days of daily returns.</div></details></div>
+  <div class="card"><div class="label">Corr to BTC (30d)</div><div class="value" id="corr">—</div><div class="sub" id="r-sq">R² —</div>
+    <details class="card-info"><summary></summary><div class="desc">Correlation coefficient: how closely MSTR's daily moves track Bitcoin's. 1.0 = perfect lockstep, 0 = no relationship. R² shows what fraction of MSTR's price variance is explained by BTC movements alone.</div></details></div>
+  <div class="card"><div class="label">Realized Vol MSTR</div><div class="value" id="rvol-mstr">—</div><div class="sub" id="rvol-btc">BTC —</div>
+    <details class="card-info"><summary></summary><div class="desc">How much MSTR's price actually swung day-to-day over the last 30 days, annualized. Shows historical volatility — not a forecast. Compare to Bitcoin's realized vol below to see MSTR's leverage effect.</div></details></div>
+
+  <div class="card"><div class="label">Implied Vol (ATM)</div><div class="value" id="iv">—</div><div class="sub">options market expectation</div>
+    <details class="card-info"><summary></summary><div class="desc">What options traders are pricing in as expected future volatility, derived from at-the-money option prices. Higher IV = market expects bigger price swings ahead. ATM here means "at-the-money" options (strike ≈ current price), not the stock-issuance program.</div></details></div>
+  <div class="card"><div class="label">Put / Call Ratio</div><div class="value" id="pcr">—</div><div class="sub" id="pcr-label">—</div>
+    <details class="card-info"><summary></summary><div class="desc">Ratio of put options (bets on price falling) to call options (bets on price rising). Above 1 = more bearish positioning in the options market. Below 1 = more bullish. Extreme readings can signal crowded trades.</div></details></div>
+  <div class="card"><div class="label">Total Obligations</div><div class="value" id="debt">—</div><div class="sub" id="leverage">debt + preferred equity</div>
+    <details class="card-info"><summary></summary><div class="desc">Sum of all convertible notes (debt) plus preferred stock (STRK, STRD, STRC). This is the total amount Strategy would need to repay or redeem if forced to wind down — the floor Bitcoin holdings must exceed.</div></details></div>
+
+  <div class="card wide"><div class="label">BTC Danger Floor</div><div class="value" id="floor">—</div><div class="sub">BTC price at which holdings = total debt</div>
+    <details class="card-info"><summary></summary><div class="desc">The Bitcoin price at which Strategy's holdings value exactly equals total obligations. Below this price, the company is technically insolvent — BTC holdings can't cover what they owe. Based on current holdings count and total obligations.</div></details></div>
+</div>
+
+<!-- MSTR PRICE CHART -->
+<div class="section-title">MSTR Price</div>
+<div class="chart-wrap">
+  <div class="chart-toolbar">
+    <button class="chart-btn active" id="mstr-line-btn">Line</button>
+    <button class="chart-btn" id="mstr-candle-btn">Candles</button>
+    <span style="flex:1"></span>
+    <button class="chart-btn chart-range-btn" data-range="1M">1M</button>
+    <button class="chart-btn chart-range-btn" data-range="3M">3M</button>
+    <button class="chart-btn chart-range-btn" data-range="6M">6M</button>
+    <button class="chart-btn chart-range-btn active" data-range="1Y">1Y</button>
+    <button class="chart-btn chart-range-btn" data-range="YTD">YTD</button>
+    <button class="chart-btn chart-range-btn" data-range="3Y">3Y</button>
+    <button class="chart-btn chart-range-btn" data-range="5Y">5Y</button>
+  </div>
+  <div class="chart-container" id="mstr-chart" style="height:320px"></div>
+</div>
+
+<!-- CORE -->
+<div class="section-title">Core</div>
+<div class="grid">
+  <div class="card"><div class="label">MSTR Price</div><div class="value" id="mstr-price">—</div><div class="sub" id="mstr-change">—</div></div>
+  <div class="card"><div class="label">Bitcoin Price</div><div class="value" id="btc-price">—</div></div>
+  <div class="card"><div class="label">Market Cap</div><div class="value" id="market-cap">—</div></div>
+
+  <div class="card"><div class="label">BTC Holdings</div><div class="value" id="btc-holdings">—</div><div class="sub">Q1 2026 filings</div></div>
+  <div class="card"><div class="label">BTC Holdings Value</div><div class="value" id="btc-value">—</div></div>
+  <div class="card"><div class="label">mNAV Multiple</div><div class="value" id="mnav">—</div><div class="sub">market cap &divide; (BTC value &minus; debt)</div>
+    <details class="card-info"><summary></summary><div class="desc">Market-to-Net-Asset-Value. MSTR's market cap divided by the net value of its Bitcoin (holdings minus total debt). A 2× mNAV means investors pay twice the liquidation value — the premium represents belief in Strategy's ability to keep accumulating BTC accretively.</div></details></div>
+
+  <div class="card"><div class="label">BTC per Share</div><div class="value" id="btc-per-share">—</div><div class="sub">diluted</div></div>
+  <div class="card"><div class="label">Avg Cost Basis</div><div class="value" id="avg-cost">—</div><div class="sub">est. from public filings</div></div>
+  <div class="card"><div class="label">Unrealized P&amp;L</div><div class="value" id="pnl">—</div><div class="sub" id="pnl-pct">—</div></div>
+
+  <div class="card wide"><div class="label">Shares Outstanding</div><div class="value" id="shares">—</div><div class="sub" id="diluted-shares">diluted —</div></div>
+</div>
+
+<!-- DERIVED -->
+<div class="section-title">Derived</div>
+<div class="grid">
+  <div class="card"><div class="label">% of BTC Supply</div><div class="value" id="pct-supply">—</div><div class="sub">of 21M total</div></div>
+  <div class="card"><div class="label">NAV Premium</div><div class="value" id="nav-prem">—</div><div class="sub">market cap minus equity NAV</div>
+    <details class="card-info"><summary></summary><div class="desc">How much more MSTR's market cap is than its net asset value (BTC holdings minus debt). Positive = investors are paying a premium for the strategy itself, not just the Bitcoin. A large premium means the stock is expensive relative to its underlying assets.</div></details></div>
+  <div class="card"><div class="label">mNAV = 1× at</div><div class="value" id="breakeven">—</div><div class="sub">BTC price for fair value</div>
+    <details class="card-info"><summary></summary><div class="desc">The Bitcoin price at which MSTR's market cap would equal its net BTC asset value — a 1× mNAV means zero premium, or "fair value." If BTC rose to this level, you'd be paying exactly for the Bitcoin held minus debt, with no extra premium for the strategy.</div></details></div>
+
+  <div class="card"><div class="label">BTC Yield YTD</div><div class="value" id="btc-yield">—</div><div class="sub">Q1 2026 10-Q</div>
+    <details class="card-info"><summary></summary><div class="desc">Strategy's self-reported metric tracking Bitcoin per diluted share growth. NOT a cash dividend — it measures whether share issuances to buy BTC are accretive (each share backs more BTC) or dilutive (each share backs less). Positive = shareholders own more BTC per share than at year start.</div></details></div>
+  <div class="card span2" id="perf-cell">
+    <div class="label">MSTR vs BTC Performance</div>
+    <div id="perf-content"><span class="dim">loading...</span></div>
+  </div>
+</div>
+
+<!-- BITCOIN -->
+<div class="section-title">Bitcoin</div>
+<div class="grid">
+  <div class="card"><div class="label">24h Change</div><div class="value" id="btc-24h">—</div></div>
+  <div class="card"><div class="label">7d Change</div><div class="value" id="btc-7d">—</div></div>
+  <div class="card"><div class="label">30d Change</div><div class="value" id="btc-30d">—</div></div>
+
+  <div class="card"><div class="label">All-Time High</div><div class="value" id="btc-ath">—</div></div>
+  <div class="card"><div class="label">% from ATH</div><div class="value" id="btc-ath-pct">—</div></div>
+  <div class="card"><div class="label">24h Volume</div><div class="value" id="btc-vol">—</div></div>
+
+  <div class="card"><div class="label">BTC Dominance</div><div class="value" id="btc-dom">—</div>
+    <details class="card-info"><summary></summary><div class="desc">Bitcoin's market cap as a percentage of the total cryptocurrency market. Rising dominance = investors rotating into BTC over altcoins. Falling dominance = capital moving into altcoins (often called "alt season"). High dominance historically favors MSTR since it's a pure BTC play.</div></details></div>
+  <div class="card"><div class="label">Circulating Supply</div><div class="value" id="btc-circ">—</div></div>
+  <div class="card"><div class="label">BTC Market Cap</div><div class="value" id="btc-mcap">—</div></div>
+</div>
+
+<!-- STRATEGY STOCK -->
+<div class="section-title">Strategy Stock</div>
+<div class="grid">
+  <div class="card"><div class="label">52w High</div><div class="value" id="w52h">—</div></div>
+  <div class="card"><div class="label">52w Low</div><div class="value" id="w52l">—</div></div>
+  <div class="card"><div class="label">Volume</div><div class="value" id="vol">—</div></div>
+
+  <div class="card"><div class="label">Avg Volume</div><div class="value" id="avgvol">—</div></div>
+  <div class="card"><div class="label">Short Interest</div><div class="value" id="short">—</div>
+    <details class="card-info"><summary></summary><div class="desc">Number of shares currently sold short — borrowed and sold, betting the price will fall. High short interest can fuel short squeezes: if the price rises, shorts must buy back shares to cover losses, accelerating the rally.</div></details></div>
+  <div class="card"><div class="label">Short Ratio</div><div class="value" id="shortratio">—</div><div class="sub">days to cover</div>
+    <details class="card-info"><summary></summary><div class="desc">Short interest divided by average daily volume. Shows how many trading days it would take all short sellers to buy back their shares at normal volume. Higher = more pressure on shorts if price rises; a "short squeeze" is more powerful.</div></details></div>
+
+  <div class="card"><div class="label">Beta (Market)</div><div class="value" id="beta-mkt">—</div>
+    <details class="card-info"><summary></summary><div class="desc">How much MSTR tends to move relative to the S&P 500. A beta of 3× means MSTR typically moves 3% for every 1% the broader market moves. Higher beta = amplified moves in both directions.</div></details></div>
+  <div class="card"><div class="label">Institutional Own.</div><div class="value" id="inst">—</div>
+    <details class="card-info"><summary></summary><div class="desc">Percentage of shares held by institutional investors (mutual funds, ETFs, pension funds, hedge funds). High institutional ownership generally means more stable, longer-horizon shareholders versus retail traders.</div></details></div>
+  <div class="card"><div class="label">Earnings Date</div><div class="value" id="earnings">—</div></div>
+
+  <div class="card"><div class="label">Analyst High</div><div class="value" id="t-high">—</div></div>
+  <div class="card"><div class="label">Analyst Mean</div><div class="value" id="t-mean">—</div></div>
+  <div class="card"><div class="label">Analyst Low</div><div class="value" id="t-low">—</div></div>
+</div>
+
+<!-- STRC ATM -->
+<div class="section-title">STRC Preferred Stock &mdash; ATM Activity</div>
+<div class="grid">
+  <div class="card"><div class="label">STRC Price</div><div class="value" id="strc-price">—</div><div class="sub" id="strc-change">—</div></div>
+  <div class="card"><div class="label">Premium to Par</div><div class="value" id="strc-premium">—</div><div class="sub">$100 par value</div>
+    <details class="card-info"><summary></summary><div class="desc">STRC has a $100 par value — what you'd receive per share in a liquidation. A positive premium means the market price exceeds $100, so investors pay more than the guaranteed floor. Premium reflects yield demand and confidence in Strategy's ability to pay dividends.</div></details></div>
+  <div class="card"><div class="label">Dividend Yield</div><div class="value" id="strc-yield">—</div><div class="sub">Variable Rate Series A Perpetual Stretch</div>
+    <details class="card-info"><summary></summary><div class="desc">Annual dividend as a percentage of the current share price. Variable rate means the dividend percentage resets periodically (started 11.0% in Jan 2026, 11.5% by Mar 2026). As the stock price changes, the yield changes even if the dollar dividend stays the same.</div></details></div>
+
+  <div class="card"><div class="label">STRC Market Cap</div><div class="value" id="strc-mcap">—</div></div>
+  <div class="card"><div class="label">STRC Volume</div><div class="value" id="strc-vol">—</div></div>
+  <div class="card"><div class="label">Avg Volume</div><div class="value" id="strc-avgvol">—</div></div>
+</div>
+
+<div class="section-title" style="font-size:9px;letter-spacing:3px;padding-top:16px">ATM Issuance Pace &mdash; from SEC 8-K Filings</div>
+<div class="grid">
+  <div class="card">
+    <div class="label">Avg Daily BTC (historical)</div>
+    <div class="value" id="est-daily-btc">—</div>
+    <div class="sub" id="est-periods">from — filing periods</div>
+    <details class="card-info"><summary></summary><div class="desc">Average Bitcoin purchased per day across all ATM weeks reported in SEC 8-K filings. Based on actual disclosed purchase data — not estimated. Each "filing period" covers roughly one week of BTC buying activity.</div></details>
+  </div>
+  <div class="card">
+    <div class="label">Implied Daily BTC (current $)</div>
+    <div class="value" id="est-implied-daily">—</div>
+    <div class="sub">same $ spend at today's BTC price</div>
+    <details class="card-info"><summary></summary><div class="desc">If Strategy deployed the same average dollar amount per week as historically, how much BTC would that buy at today's price? As BTC gets more expensive, this number falls — the same capital buys fewer coins. Compare to historical avg to see the price impact.</div></details>
+  </div>
+  <div class="card">
+    <div class="label">Annual BTC Projection</div>
+    <div class="value" id="est-annual">—</div>
+    <div class="sub">historical avg × 52 weeks</div>
+    <details class="card-info"><summary></summary><div class="desc">Historical average BTC purchased per week × 52. Based on actual SEC 8-K disclosed purchase data. Assumes the same weekly coin count pace continues going forward.</div></details>
+  </div>
+
+  <div class="card"><div class="label">Avg Weekly Capital</div><div class="value" id="est-weekly-cap">—</div><div class="sub">STRC + MSTR combined</div>
+    <details class="card-info"><summary></summary><div class="desc">Average dollars raised and deployed per ATM week, summing both STRC preferred stock sales and MSTR common stock sales. ATM (At-The-Market) means shares are sold gradually into the open market, not in a single block offering.</div></details></div>
+  <div class="card wide" id="atm-history-cell">
+    <div class="label">8-K Filing History</div>
+    <div class="chart-wrap" style="margin-bottom:18px">
+      <div class="chart-container" id="btc-purchases-chart" style="height:200px"></div>
+    </div>
+    <div id="atm-history"><span class="dim">loading SEC filings...</span></div>
+  </div>
+</div>
+
+<!-- PURCHASES -->
+<div class="section-title">Purchase History</div>
+<div id="purchases"><div class="dim">loading...</div></div>
+
+<div id="counter">auto-refresh in <span id="tick">30</span>s</div>
+
+<script>
+  function fmt(n, d=0) {
+    if (n == null) return '—';
+    return n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:d});
+  }
+  function usd(n, d=0) { return n == null ? '—' : '$' + fmt(n, d); }
+  function big(n) {
+    if (n == null) return '—';
+    const a = Math.abs(n), s = n < 0 ? '-' : '';
+    if (a >= 1e12) return s + '$' + fmt(a/1e12, 2) + 'T';
+    if (a >= 1e9)  return s + '$' + fmt(a/1e9,  2) + 'B';
+    if (a >= 1e6)  return s + '$' + fmt(a/1e6,  2) + 'M';
+    return s + usd(a);
+  }
+  function pct(n, d=2) { return n == null ? '—' : (n >= 0 ? '+' : '') + n.toFixed(d) + '%'; }
+  function cls(n)      { return n == null ? '' : n >= 0 ? 'up' : 'down'; }
+  function set(id, v)  { const e = document.getElementById(id); if (e) e.textContent = v; }
+  function setC(id, c) { const e = document.getElementById(id); if (e) e.className = c; }
+
+  // ── SIMULATOR ──────────────────────────────────────────────
+  const live = { btcPerShare: null, obligationsPerShare: null, mstrPrice: null };
+  let simYears = 5;
+
+  function syncPair(numId, rangeId) {
+    const n = document.getElementById(numId);
+    const r = document.getElementById(rangeId);
+    if (!n || !r) return;
+    n.addEventListener('input', () => { r.value = n.value; runSim(); });
+    r.addEventListener('input', () => { n.value = r.value; runSim(); });
+  }
+  syncPair('sim-btc',   'sim-btc-r');
+  syncPair('sim-mnav',  'sim-mnav-r');
+  syncPair('sim-yield', 'sim-yield-r');
+
+  document.querySelector('.btc-steppers').addEventListener('click', e => {
+    const btn = e.target.closest('.btc-step');
+    if (!btn) return;
+    const n = document.getElementById('sim-btc');
+    const r = document.getElementById('sim-btc-r');
+    const val = Math.min(50000000, Math.max(10000, (parseFloat(n.value) || 0) + parseInt(btn.dataset.delta)));
+    n.value = val;
+    r.value = val;
+    runSim();
+  });
+
+  document.getElementById('yr-btns').addEventListener('click', e => {
+    const btn = e.target.closest('.yr-btn');
+    if (!btn) return;
+    document.querySelectorAll('.yr-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    simYears = parseInt(btn.dataset.yr);
+    runSim();
+  });
+
+  function runSim() {
+    if (!live.btcPerShare || !live.mstrPrice) return;
+
+    const btcTarget  = parseFloat(document.getElementById('sim-btc').value)   || 0;
+    const mnavTarget = parseFloat(document.getElementById('sim-mnav').value)  || 0;
+    const yld        = parseFloat(document.getElementById('sim-yield').value) || 0;
+
+    // BTC per share grows at yld% per year (accretion from continued BTC buying)
+    const futBtcPerShare     = live.btcPerShare * Math.pow(1 + yld / 100, simYears);
+    const futBtcValPerShare  = futBtcPerShare * btcTarget;
+    const futEquityPerShare  = futBtcValPerShare - live.obligationsPerShare;
+    const futMstrPrice       = futEquityPerShare * mnavTarget;
+    const upsidePct          = (futMstrPrice / live.mstrPrice - 1) * 100;
+    const upsideX            = futMstrPrice / live.mstrPrice;
+
+    set('sim-price', usd(futMstrPrice, 2));
+
+    const upEl = document.getElementById('sim-upside');
+    if (upEl) { upEl.textContent = pct(upsidePct) + ' from $' + fmt(live.mstrPrice, 2); upEl.className = 'sub ' + cls(upsidePct); }
+
+    const upValEl = document.getElementById('sim-upside-val');
+    if (upValEl) { upValEl.textContent = pct(upsidePct); upValEl.className = 'value ' + cls(upsidePct); }
+
+    const upXEl = document.getElementById('sim-upside-x');
+    if (upXEl) { upXEl.textContent = upsideX.toFixed(2) + '× current price'; upXEl.className = 'sub ' + cls(upsidePct); }
+
+    set('sim-nav-share', usd(futEquityPerShare, 2));
+    set('sim-btc-val-share', 'BTC value $' + fmt(futBtcValPerShare, 2));
+  }
+  // ── END SIMULATOR ──────────────────────────────────────────
+
+  async function fetchData() {
+    set('status', 'FETCHING...');
+    try {
+      const d = await fetch('/api/data').then(r => r.json());
+      if (d.error) throw new Error(d.error);
+
+      set('timestamp', new Date().toLocaleString([], {hour:'2-digit', minute:'2-digit', second:'2-digit', month:'short', day:'numeric'}));
+
+      // Core
+      set('mstr-price', usd(d.mstr_price, 2));
+      const ch = document.getElementById('mstr-change');
+      if (ch) { ch.textContent = pct(d.mstr_change_pct) + ' today'; ch.className = 'sub ' + cls(d.mstr_change_pct); }
+      set('btc-price', usd(d.btc_price));
+      set('market-cap', big(d.market_cap));
+      set('btc-holdings', fmt(d.btc_holdings) + ' BTC');
+      set('btc-value', big(d.btc_value_usd));
+      set('mnav', d.mnav != null ? d.mnav.toFixed(2) + '×' : '—');
+      set('btc-per-share', d.btc_per_share != null ? d.btc_per_share.toFixed(6) + ' BTC' : '—');
+
+      // Feed simulator
+      live.btcPerShare         = d.btc_per_share;
+      live.obligationsPerShare = d.diluted_shares ? d.total_obligations / d.diluted_shares : 0;
+      live.mstrPrice           = d.mstr_price;
+      runSim();
+      set('avg-cost', usd(d.avg_cost_basis) + ' / BTC');
+      const pnlEl = document.getElementById('pnl');
+      if (pnlEl) { pnlEl.textContent = big(d.unrealized_pnl); pnlEl.className = 'value ' + cls(d.unrealized_pnl); }
+      const pnlPctEl = document.getElementById('pnl-pct');
+      if (pnlPctEl) { pnlPctEl.textContent = pct(d.unrealized_pnl_pct); pnlPctEl.className = 'sub ' + cls(d.unrealized_pnl_pct); }
+      set('shares', fmt(d.shares_outstanding) + ' basic');
+      set('diluted-shares', 'diluted ' + (d.diluted_shares ? fmt(d.diluted_shares) : '—'));
+
+      // Derived
+      set('pct-supply', d.pct_of_supply != null ? d.pct_of_supply.toFixed(3) + '%' : '—');
+      const navEl = document.getElementById('nav-prem');
+      if (navEl) { navEl.textContent = big(d.nav_premium_usd); navEl.className = 'value ' + cls(d.nav_premium_usd); }
+      set('breakeven', usd(d.breakeven_btc_price));
+      set('btc-yield', d.btc_yield_ytd != null ? '+' + d.btc_yield_ytd.toFixed(1) + '%' : '—');
+
+      // Bitcoin
+      ['btc-24h','btc-7d','btc-30d'].forEach((id, i) => {
+        const val = [d.btc_change_24h, d.btc_change_7d, d.btc_change_30d][i];
+        const el = document.getElementById(id);
+        if (el) { el.textContent = pct(val); el.className = 'value ' + cls(val); }
+      });
+      set('btc-ath', usd(d.btc_ath));
+      const athEl = document.getElementById('btc-ath-pct');
+      if (athEl) { athEl.textContent = pct(d.btc_ath_change_pct); athEl.className = 'value ' + cls(d.btc_ath_change_pct); }
+      set('btc-vol', big(d.btc_volume_24h));
+      set('btc-dom', d.btc_dominance != null ? d.btc_dominance.toFixed(1) + '%' : '—');
+      set('btc-circ', d.btc_circulating_supply != null ? fmt(Math.round(d.btc_circulating_supply)) + ' BTC' : '—');
+      set('btc-mcap', big(d.btc_market_cap));
+
+      // Strategy Stock
+      set('w52h', usd(d.week_52_high, 2));
+      set('w52l', usd(d.week_52_low, 2));
+      set('vol', fmt(d.volume));
+      set('avgvol', fmt(d.avg_volume));
+      set('short', fmt(d.short_interest));
+      set('shortratio', d.short_ratio != null ? d.short_ratio.toFixed(1) + 'd' : '—');
+      set('beta-mkt', d.beta != null ? d.beta.toFixed(2) : '—');
+      set('inst', d.institutional_ownership != null ? (d.institutional_ownership * 100).toFixed(1) + '%' : '—');
+      set('earnings', d.earnings_date || '—');
+      set('t-high', usd(d.target_high, 2));
+      set('t-mean', usd(d.target_mean, 2));
+      set('t-low', usd(d.target_low, 2));
+
+      set('status', 'LIVE');
+    } catch (e) { set('status', 'ERROR'); console.error(e); }
+  }
+
+  async function fetchSignals() {
+    try {
+      const d = await fetch('/api/signals').then(r => r.json());
+      if (d.error) return;
+
+      // RSI
+      const rsiEl = document.getElementById('rsi');
+      if (rsiEl) {
+        rsiEl.textContent = d.rsi_14 != null ? d.rsi_14.toFixed(1) : '—';
+        rsiEl.className = 'value ' + (d.rsi_14 > 70 ? 'overbought' : d.rsi_14 < 30 ? 'oversold' : '');
+      }
+      const rsiLbl = ['oversold (<30)', 'neutral', 'overbought (>70)'];
+      set('rsi-label', d.rsi_14 > 70 ? 'overbought' : d.rsi_14 < 30 ? 'oversold' : 'neutral');
+
+      // MAs
+      set('ma50', usd(d.ma_50, 2));
+      const m50p = document.getElementById('ma50-pct');
+      if (m50p) { m50p.textContent = pct(d.pct_from_50ma) + ' from price'; m50p.className = 'sub ' + cls(d.pct_from_50ma); }
+      set('ma200', usd(d.ma_200, 2));
+      const m200p = document.getElementById('ma200-pct');
+      if (m200p) { m200p.textContent = pct(d.pct_from_200ma) + ' from price'; m200p.className = 'sub ' + cls(d.pct_from_200ma); }
+
+      // Beta / Corr / Vol
+      set('beta-btc', d.beta_to_btc != null ? d.beta_to_btc.toFixed(2) + '×' : '—');
+      set('corr', d.corr_to_btc != null ? d.corr_to_btc.toFixed(3) : '—');
+      set('r-sq', 'R² ' + (d.r_sq_to_btc != null ? (d.r_sq_to_btc * 100).toFixed(1) + '% explained by BTC' : '—'));
+      set('rvol-mstr', d.rvol_mstr_30d != null ? d.rvol_mstr_30d.toFixed(1) + '%' : '—');
+      set('rvol-btc', 'BTC ' + (d.rvol_btc_30d != null ? d.rvol_btc_30d.toFixed(1) + '%' : '—') + ' annualized');
+
+      // Options
+      set('iv', d.iv_atm != null ? d.iv_atm.toFixed(1) + '%' : '—');
+      set('pcr', d.put_call_ratio != null ? d.put_call_ratio.toFixed(2) : '—');
+      set('pcr-label', d.put_call_ratio != null ? (d.put_call_ratio > 1 ? 'bearish lean' : d.put_call_ratio < 0.7 ? 'bullish lean' : 'neutral') : '—');
+
+      // Leverage
+      set('debt', big(d.total_obligations));
+      set('leverage', d.leverage_ratio != null ? d.leverage_ratio.toFixed(1) + '% of BTC value' : '—');
+      set('floor', d.danger_floor != null ? usd(d.danger_floor) + ' / BTC' : '—');
+    } catch (e) { console.error(e); }
+  }
+
+  async function fetchPerformance() {
+    try {
+      const d = await fetch('/api/performance').then(r => r.json());
+      if (d.error) return;
+      const periods = [['30d','30 Days'],['90d','90 Days'],['365d','1 Year']];
+      let html = '<table class="perf-table"><thead><tr><th>Period</th><th>MSTR</th><th>BTC</th><th>Diff</th></tr></thead><tbody>';
+      for (const [k, label] of periods) {
+        const p = d[k];
+        if (!p) { html += `<tr><td style="color:#fff">${label}</td><td>—</td><td>—</td><td>—</td></tr>`; continue; }
+        html += `<tr>
+          <td style="color:#fff">${label}</td>
+          <td class="${cls(p.mstr)}">${pct(p.mstr)}</td>
+          <td class="${cls(p.btc)}">${pct(p.btc)}</td>
+          <td class="${cls(p.diff)}">${pct(p.diff)}</td>
+        </tr>`;
+      }
+      html += '</tbody></table>';
+      const el = document.getElementById('perf-content');
+      if (el) el.innerHTML = html;
+    } catch (e) {}
+  }
+
+  async function fetchStrc() {
+    try {
+      const d = await fetch('/api/strc').then(r => r.json());
+      if (d.error) return;
+
+      const s = d.strc || {};
+      set('strc-price', usd(s.price, 2));
+      const chEl = document.getElementById('strc-change');
+      if (chEl) { chEl.textContent = pct(s.change_pct) + ' today'; chEl.className = 'sub ' + cls(s.change_pct); }
+      set('strc-premium', s.premium_to_par != null ? (s.premium_to_par >= 0 ? '+' : '') + s.premium_to_par.toFixed(2) + '%' : '—');
+      set('strc-yield', s.dividend_yield_pct != null ? s.dividend_yield_pct.toFixed(2) + '%' : (s.dividend_rate != null ? '$' + s.dividend_rate.toFixed(2) + '/yr' : '—'));
+      set('strc-mcap', big(s.market_cap));
+      set('strc-vol', fmt(s.volume));
+      set('strc-avgvol', fmt(s.avg_volume));
+
+      const e = d.estimates || {};
+      set('est-daily-btc', e.avg_daily_btc != null ? fmt(e.avg_daily_btc, 1) + ' BTC/day' : '—');
+      set('est-periods', e.n_periods != null ? 'from ' + e.n_periods + ' filing periods' : '—');
+      set('est-implied-daily', e.implied_daily_btc_at_current_price != null ? fmt(e.implied_daily_btc_at_current_price, 1) + ' BTC/day' : '—');
+      set('est-annual', e.annual_btc_at_current_pace != null ? fmt(e.annual_btc_at_current_pace) + ' BTC/yr' : '—');
+      set('est-weekly-cap', e.avg_weekly_capital_usd != null ? big(e.avg_weekly_capital_usd) + '/wk' : '—');
+
+      const history = d.history || [];
+      updateBtcPurchasesChart(history);
+      const histEl = document.getElementById('atm-history');
+      if (!history.length) {
+        histEl.innerHTML = '<div class="dim">no 8-K BTC purchase data found — <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1050446&type=8-K" target="_blank">SEC EDGAR</a></div>';
+        return;
+      }
+      let html = '<div style="overflow-x:auto"><table class="atm-table"><thead><tr>' +
+        '<th>Filed</th><th>Period</th><th>STRC Raised</th><th>MSTR Raised</th><th>BTC Purchased</th><th>Avg BTC $</th><th>Total Holdings</th>' +
+        '</tr></thead><tbody>';
+      for (const h of history) {
+        const period = (h.period_start && h.period_end) ? h.period_start.replace(/,?\s*\d{4}/, '').trim() + ' – ' + h.period_end : '—';
+        html += `<tr>
+          <td class="hi">${h.date || '—'}</td>
+          <td>${period}</td>
+          <td>${h.strc_notional != null ? big(h.strc_notional) : (h.strc_net_proceeds != null ? big(h.strc_net_proceeds) : '—')}</td>
+          <td>${h.mstr_proceeds != null ? big(h.mstr_proceeds) : '—'}</td>
+          <td class="hi">${h.btc_purchased != null ? fmt(h.btc_purchased) + ' BTC' : '—'}</td>
+          <td>${h.btc_avg_price != null ? usd(h.btc_avg_price) : '—'}</td>
+          <td>${h.snapshot_total_btc != null ? fmt(h.snapshot_total_btc) + ' BTC' : '—'}</td>
+        </tr>`;
+      }
+      html += '</tbody></table></div>';
+      histEl.innerHTML = html;
+    } catch (e) { console.error('strc fetch error', e); }
+  }
+
+  async function fetchPurchases() {
+    try {
+      const d = await fetch('/api/purchases').then(r => r.json());
+      const el = document.getElementById('purchases');
+      const list = d.purchases;
+      if (!list || !list.length) {
+        el.innerHTML = '<div class="dim">unavailable — <a href="https://www.strategy.com/purchases" target="_blank">strategy.com/purchases</a></div>';
+        return;
+      }
+      const known = 'date' in list[0] || 'btc_purchased' in list[0];
+      if (known) {
+        let html = '<div style="overflow-x:auto"><table class="purchases-table"><thead><tr><th>Date</th><th>BTC</th><th>Total BTC</th><th>Price/BTC</th><th>Cost</th></tr></thead><tbody>';
+        for (const p of list) {
+          html += `<tr><td>${p.date||'—'}</td><td>${p.btc_purchased != null ? fmt(p.btc_purchased) : '—'}</td><td>${p.total_btc != null ? fmt(p.total_btc) : '—'}</td><td>${p.price_per_btc != null ? usd(p.price_per_btc) : '—'}</td><td>${p.total_cost != null ? big(p.total_cost) : '—'}</td></tr>`;
+        }
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      } else {
+        let html = '<div style="overflow-x:auto"><table class="purchases-table"><tbody>';
+        for (const row of list) html += '<tr>' + Object.values(row).map(v=>`<td>${v}</td>`).join('') + '</tr>';
+        html += '</tbody></table></div>';
+        el.innerHTML = html;
+      }
+    } catch (e) {
+      document.getElementById('purchases').innerHTML = '<div class="dim">unavailable — <a href="https://www.strategy.com/purchases" target="_blank">strategy.com/purchases</a></div>';
+    }
+  }
+
+  async function refreshAll() {
+    resetTick();
+    fetchData();
+    fetchSignals();
+    fetchPerformance();
+    fetchStrc();
+  }
+
+  let secs = 30;
+  function resetTick() { secs = 30; }
+  setInterval(() => {
+    secs--;
+    const el = document.getElementById('tick');
+    if (el) el.textContent = secs;
+    if (secs <= 0) { fetchData(); resetTick(); }
+  }, 1000);
+
+  // ── CHARTS ──────────────────────────────────────────────────
+  const CHART_OPTS = {
+    layout: { background: { color: '#0c0c0c' }, textColor: '#666' },
+    grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } },
+    timeScale: { borderColor: '#1a1a1a', fixLeftEdge: true, fixRightEdge: true },
+    rightPriceScale: { borderColor: '#1a1a1a' },
+    crosshair: { vertLine: { color: '#333' }, horzLine: { color: '#333' } },
+    handleScroll: true,
+    handleScale: true,
+  };
+
+  let mstrChart = null, mstrSeries = null, mstrMode = 'line';
+  let mstrOhlcData = [], mstrLineData = [];
+
+  let activeRange = '1Y';
+
+  function dateOffset(days) {
+    const d = new Date(); d.setDate(d.getDate() - days);
+    return d.toISOString().slice(0, 10);
+  }
+
+  function applyRange(range) {
+    if (!mstrChart) return;
+    activeRange = range;
+    document.querySelectorAll('.chart-range-btn').forEach(b => b.classList.toggle('active', b.dataset.range === range));
+    const today = new Date().toISOString().slice(0, 10);
+    let from;
+    if (range === '1M')  from = dateOffset(30);
+    else if (range === '3M')  from = dateOffset(90);
+    else if (range === '6M')  from = dateOffset(180);
+    else if (range === '1Y')  from = dateOffset(365);
+    else if (range === 'YTD') from = new Date().getFullYear() + '-01-01';
+    else if (range === '3Y')  from = dateOffset(365 * 3);
+    else if (range === '5Y')  from = dateOffset(365 * 5);
+    mstrChart.timeScale().setVisibleRange({ from, to: today });
+  }
+
+  function initMstrChart() {
+    const el = document.getElementById('mstr-chart');
+    if (!el || typeof LightweightCharts === 'undefined') return;
+    mstrChart = LightweightCharts.createChart(el, { ...CHART_OPTS, width: el.clientWidth, height: el.clientHeight });
+    renderMstrSeries();
+    document.getElementById('mstr-line-btn').addEventListener('click', () => setMstrMode('line'));
+    document.getElementById('mstr-candle-btn').addEventListener('click', () => setMstrMode('candle'));
+    document.querySelectorAll('.chart-range-btn').forEach(b =>
+      b.addEventListener('click', () => applyRange(b.dataset.range))
+    );
+    new ResizeObserver(() => mstrChart && mstrChart.applyOptions({ width: el.clientWidth })).observe(el);
+  }
+
+  function setMstrMode(mode) {
+    mstrMode = mode;
+    document.getElementById('mstr-line-btn').classList.toggle('active', mode === 'line');
+    document.getElementById('mstr-candle-btn').classList.toggle('active', mode === 'candle');
+    renderMstrSeries();
+  }
+
+  function renderMstrSeries() {
+    if (!mstrChart) return;
+    mstrChart.removeSeries && mstrSeries && mstrChart.removeSeries(mstrSeries);
+    if (mstrMode === 'candle') {
+      mstrSeries = mstrChart.addCandlestickSeries({
+        upColor: '#c8c8c8', downColor: '#555',
+        borderUpColor: '#c8c8c8', borderDownColor: '#555',
+        wickUpColor: '#888', wickDownColor: '#555',
+      });
+      if (mstrOhlcData.length) mstrSeries.setData(mstrOhlcData);
+    } else {
+      mstrSeries = mstrChart.addLineSeries({ color: '#c8c8c8', lineWidth: 1.5, priceLineVisible: false });
+      if (mstrLineData.length) mstrSeries.setData(mstrLineData);
+    }
+    mstrChart.timeScale().fitContent();
+  }
+
+  let btcPurchasesChart = null;
+
+  function initBtcPurchasesChart() {
+    const el = document.getElementById('btc-purchases-chart');
+    if (!el || typeof LightweightCharts === 'undefined') return;
+    btcPurchasesChart = LightweightCharts.createChart(el, { ...CHART_OPTS, width: el.clientWidth, height: el.clientHeight });
+    new ResizeObserver(() => btcPurchasesChart && btcPurchasesChart.applyOptions({ width: el.clientWidth })).observe(el);
+  }
+
+  function updateBtcPurchasesChart(history) {
+    if (!btcPurchasesChart) return;
+    const data = history
+      .filter(h => h.btc_purchased && h.date)
+      .map(h => ({ time: h.date, value: h.btc_purchased }))
+      .sort((a, b) => a.time < b.time ? -1 : 1);
+    if (!data.length) return;
+    const series = btcPurchasesChart.addHistogramSeries({
+      color: '#c8c8c8',
+      priceFormat: { type: 'volume' },
+      priceScaleId: '',
+    });
+    series.setData(data);
+    btcPurchasesChart.priceScale('').applyOptions({ scaleMargins: { top: 0.1, bottom: 0 } });
+    btcPurchasesChart.timeScale().fitContent();
+  }
+
+  async function fetchCharts() {
+    try {
+      const d = await fetch('/api/chart_data').then(r => r.json());
+      mstrOhlcData = d.mstr_ohlc || [];
+      mstrLineData = d.mstr_line || [];
+      if (!mstrChart) initMstrChart(); else renderMstrSeries();
+      applyRange(activeRange);
+    } catch (e) {}
+  }
+
+  initMstrChart();
+  initBtcPurchasesChart();
+  fetchCharts();
+
+  // Initial load
+  fetchData();
+  fetchSignals();
+  fetchPerformance();
+  fetchPurchases();
+  fetchStrc();
+
+  // Signals/perf/strc refresh every 5 min
+  setInterval(() => { fetchSignals(); fetchPerformance(); fetchStrc(); }, 300000);
+</script>
+</body>
+</html>

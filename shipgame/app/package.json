@@ -1,0 +1,16 @@
+{
+  "name": "shipgame",
+  "productName": "ShipGame",
+  "version": "1.0.0",
+  "description": "ShipGame desktop app",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . ShipGame --platform=win32 --arch=x64 --out=dist --overwrite --asar"
+  },
+  "devDependencies": {
+    "@electron/packager": "18.3.6",
+    "electron": "33.2.1"
+  }
+}

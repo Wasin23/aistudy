@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>mind-arch</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { background: #0d0d0d; color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 12px; }
+
+header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 16px; border-bottom: 1px solid #222; background: #111;
+  height: 41px; flex-shrink: 0;
+}
+header h1 { font-size: 13px; letter-spacing: 2px; color: #666; }
+button {
+  padding: 4px 11px; border: 1px solid #383838; background: #181818;
+  color: #aaa; cursor: pointer; font-family: inherit; font-size: 11px; border-radius: 3px;
+}
+button:hover { border-color: #777; color: #fff; }
+#hdr-right { margin-left: auto; display: flex; gap: 20px; font-size: 11px; color: #555; }
+#hdr-right span { color: #888; }
+
+/* ── main grid fills exactly the remaining viewport ── */
+main {
+  display: grid;
+  grid-template-columns: 380px 1fr 1fr 1fr 230px;
+  height: calc(100vh - 41px);
+  overflow: hidden;
+}
+
+/* ── left panel ── */
+.left {
+  display: flex; flex-direction: column;
+  border-right: 1px solid #1a1a1a;
+  overflow: hidden;
+}
+.left-scroll {
+  flex: 1; overflow-y: auto;
+  padding: 12px; display: flex; flex-direction: column; gap: 12px;
+}
+
+/* mind rows */
+.mind-row { border: 1px solid #1e1e1e; border-radius: 4px; padding: 8px 10px; background: #111; flex-shrink: 0; }
+.mind-head { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 10px; }
+.ctrl-label { display:none; font-size:9px; letter-spacing:2px; text-align:center; padding:0 0 4px; font-weight:bold; }
+.ctrl-label.on { display:block; }
+.mind-name  { font-size:14px; font-weight:bold; letter-spacing:2px; }
+.mind-slot  { font-size:9px; color:#333; letter-spacing:1px; }
+.mind-meta  { margin-left: auto; color: #444; font-size: 10px; }
+.death-cnt  { color: #663; font-size: 10px; }
+
+.bar-wrap { width:100%; height:13px; background:#1a1a1a; border-radius:2px; overflow:hidden; position:relative; }
+.bar-fill { height:100%; transition:width .08s, background .3s; }
+.bar-val  { position:absolute; right:5px; top:50%; transform:translateY(-50%); font-size:10px; color:#fff; font-weight:bold; }
+
+.strikes { display:flex; gap:3px; align-items:center; }
+.pip     { width:7px; height:7px; border-radius:50%; display:inline-block; flex-shrink:0; }
+.pip-on  { background:#cc0; box-shadow:0 0 3px #660; }
+.pip-off { background:#222; border:1px solid #444; }
+
+.mind-row.recovering { opacity:0.45; filter:grayscale(0.7); }
+.mind-col.recovering { opacity:0.45; filter:grayscale(0.7); }
+
+.m0{color:#4f4} .bar-m0{background:#2a7a2a}
+.m1{color:#4af} .bar-m1{background:#1a5a7a}
+.m2{color:#fa6} .bar-m2{background:#7a4a1a}
+.bar-panic{background:#7a1a1a!important} .bar-low{background:#7a6000!important}
+
+.mind-row.fighting { border-color:#6a1a1a; box-shadow:0 0 8px #5a0000; }
+.mind-col.fighting .col-hdr { background:#1a0808; border-bottom-color:#4a1a1a; }
+.fight-mc { font-size:9px; color:#f55; margin-left:4px; }
+
+/* mini bars (drive + feelings) */
+.mini-row  { display:flex; align-items:center; gap:5px; margin-top:3px; }
+.mini-lbl  { font-size:9px; color:#333; letter-spacing:1px; flex-shrink:0; width:46px; }
+.mini-wrap { flex:1; height:4px; background:#1a1a1a; border-radius:2px; overflow:hidden; }
+.mini-fill { height:100%; transition:width .12s; }
+.fill-drive  { background:#555; }
+.fill-agg    { background:#7a1a1a; }
+.fill-surv   { background:#2a5a2a; }
+.fill-combat { background:#6a1a1a; }
+.mini-val  { font-size:9px; color:#333; flex-shrink:0; width:26px; text-align:right; }
+
+.mind-footer { display:flex; gap:6px; margin-top:4px; align-items:center; }
+.integral-lbl { font-size:9px; color:#2a4a2a; }
+.signal-lbl   { font-size:9px; color:#1a3a4a; margin-left:auto; display:flex; gap:1px; align-items:center; }
+.sbit { width:9px; height:9px; border-radius:1px; display:inline-flex; align-items:center; justify-content:center; font-size:6px; }
+.sbit.s0{background:#1a1a1a;color:#333} .sbit.s1{background:#0a2a3a;color:#3af}
+
+/* banners */
+.banners { display:flex; flex-direction:column; gap:4px; flex-shrink:0; padding:0 12px 4px; }
+.banner { display:none; border-radius:3px; padding:5px 9px; font-size:10px; letter-spacing:1px; }
+.banner.on { display:block; }
+#b-disaster { background:#1a0a00; border:1px solid #a30; color:#f84; animation:flashbg .3s infinite alternate; }
+@keyframes flashbg { from{background:#1a0a00} to{background:#2a1400} }
+#b-crit   { background:#1a1400; border:1px solid #760; color:#fc0; }
+#b-death  { background:#1a001a; border:1px solid #606; color:#f4f; }
+#b-drift  { background:#00141f; border:1px solid #057; color:#4cf; }
+#b-fight  { background:#1a0000; border:1px solid #900; color:#f44; animation:flashfight .6s infinite alternate; }
+#b-xfer   { background:#001a10; border:1px solid #0a5a30; color:#4fa; }
+@keyframes flashfight { from{background:#1a0000} to{background:#260000} }
+
+/* bottom stats in left panel */
+.left-bottom { flex-shrink:0; padding:8px 12px; display:flex; flex-direction:column; gap:8px; border-top:1px solid #1a1a1a; }
+.row2  { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.box   { background:#111; border:1px solid #1e1e1e; border-radius:3px; padding:7px; }
+.lbl   { font-size:10px; color:#555; letter-spacing:1px; margin-bottom:3px; }
+.bits  { display:flex; gap:3px; flex-wrap:wrap; }
+.bit   { width:18px; height:18px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:bold; }
+.b0{background:#1a1a1a;color:#444;border:1px solid #222}
+.b1{background:#1e3a1e;color:#4f4;border:1px solid #2a5a2a}
+.b2{background:#2a1e3a;color:#a4f;border:1px solid #4a2a7a}
+.c0{background:#111;color:#334;border:1px solid #222}
+.c1{background:#1a2e3a;color:#4af;border:1px solid #2a5a7a}
+.c2{background:#200a30;color:#d4f;border:1px solid #5a2a9a}
+.stats3 { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.sbox  { background:#111; border:1px solid #1e1e1e; border-radius:3px; padding:6px 8px; }
+.sval  { font-size:14px; font-weight:bold; margin-top:2px; }
+.pos{color:#4f4} .neg{color:#f44} .neu{color:#777}
+
+/* ── mind columns ── */
+.mind-col {
+  display: flex; flex-direction: column;
+  border-right: 1px solid #1a1a1a;
+  height: 100%; overflow: hidden;
+}
+.col-hdr {
+  padding: 7px 10px; border-bottom: 1px solid #1a1a1a;
+  font-size: 10px; font-weight: bold; letter-spacing: 1px;
+  flex-shrink: 0; background: #0e0e0e;
+}
+
+/* collapsible sections */
+.col-drop { flex-shrink: 0; border-bottom: 1px solid #1a1a1a; }
+.col-drop summary {
+  padding: 4px 10px; font-size: 9px; letter-spacing: 1px;
+  cursor: pointer; list-style: none; display: flex; align-items: center; gap: 5px;
+  user-select: none; background: #0c0c0c;
+}
+.col-drop summary::-webkit-details-marker { display: none; }
+.col-drop summary::before { content:"▶"; font-size:7px; color:#444; transition:transform .15s; display:inline-block; }
+.col-drop[open] summary::before { transform: rotate(90deg); }
+.drop-body { overflow-y: auto; }
+
+.int-drop summary  { color: #555; }
+.int-drop .drop-body { max-height: 110px; background: #0a0a0a; }
+.xfer-drop summary { color: #1a5a30; background: #0a0e0b; }
+.xfer-drop .drop-body { max-height: 70px; background: #080c09; }
+
+/* learned rules section — fills remaining space */
+.learned-section {
+  flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 60px;
+}
+.learned-hdr {
+  padding: 4px 10px; font-size: 9px; color: #444; letter-spacing: 1px;
+  border-bottom: 1px solid #111; flex-shrink: 0; background: #0c0c0c;
+}
+.plist { flex: 1; overflow-y: auto; }
+.section-empty { padding: 5px 10px; color: #2a2a2a; font-size: 10px; }
+
+/* fight memory — fixed height at the bottom of the column */
+.fight-section {
+  flex-shrink: 0; max-height: 130px; display: flex; flex-direction: column;
+  border-top: 1px solid #1a1a1a;
+}
+.fight-section .plist { overflow-y: auto; }
+
+/* rule rows */
+.lr  { display:grid; grid-template-columns:1fr 44px 32px; padding:2px 8px; border-bottom:1px solid #111; align-items:center; gap:4px; }
+.lb  { display:flex; gap:2px; }
+.lbt { width:10px; height:10px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:7px; }
+.lbt.v0{background:#1a1a1a;color:#444} .lbt.v1{background:#1e3a1e;color:#4f4} .lbt.v2{background:#2a1e3a;color:#a4f}
+.lavg{text-align:right;font-size:10px} .lcnt{text-align:right;color:#444;font-size:9px}
+
+/* intuition rows */
+.mr    { display:grid; grid-template-columns:1fr 42px 28px; padding:2px 8px; border-bottom:1px solid #111; align-items:center; gap:4px; }
+.mfeat { color:#446; font-size:9px; }
+.mavg  { text-align:right; font-size:10px; }
+.mcnt  { text-align:right; color:#444; font-size:9px; }
+
+/* transfer rows */
+.xr { display:grid; grid-template-columns:28px 1fr 34px; padding:2px 8px; border-bottom:1px solid #0a0e0b; align-items:center; gap:4px; font-size:10px; }
+.xt { color:#555; font-size:9px; }
+
+/* ── feed panel ── */
+.right { display: flex; flex-direction: column; background: #0a0a0a; height: 100%; overflow: hidden; }
+.ph    { padding: 8px 10px; border-bottom: 1px solid #1a1a1a; color: #555; font-size: 10px; letter-spacing: 1px; flex-shrink: 0; }
+#feed  { flex: 1; overflow-y: auto; }
+
+/* feed rows */
+.fr { display:grid; grid-template-columns:26px 8px 1fr 1fr 36px; padding:2px 6px; gap:3px; align-items:center; border-bottom:1px solid #0f0f0f; font-size:10px; }
+.fr.panic    { background:#1a0000; }
+.fr.crit     { background:#1a1200; border-bottom:1px solid #540; }
+.fr.death    { background:#150015; border-bottom:1px solid #400040; }
+.fr.disaster { background:#1a0800; border-bottom:1px solid #a30; }
+.fr.drift    { background:#00101a; }
+.fr.xfer     { background:#001a0d; border-bottom:1px solid #0a3a20; }
+.fr.pass     { opacity:.3; }
+.fr.fight    { display:grid; grid-template-columns:26px 14px 1fr 1fr 1fr 54px; background:#1a0000; border-bottom:1px solid #600; font-size:10px; }
+.fr.xfer     { display:grid; grid-template-columns:26px 8px 1fr 36px; background:#001a10; border-bottom:1px solid #0a3a20; font-size:10px; }
+.fight-end   { display:grid; grid-template-columns:26px 14px 1fr; background:#280000; border-bottom:2px solid #900; font-size:10px; padding:3px 6px; gap:3px; align-items:center; }
+
+.fdot  { width:6px; height:6px; border-radius:50%; }
+.fdot.m0{background:#4f4} .fdot.m1{background:#4af} .fdot.m2{background:#fa6}
+.ftick { color:#444; font-size:9px; }
+.fbits { display:flex; gap:1px; }
+.fbit  { width:10px; height:10px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:7px; }
+.fbit.v0{background:#1a1a1a;color:#444} .fbit.v1{background:#1e3a1e;color:#4f4} .fbit.v2{background:#2a1e3a;color:#a4f}
+.fbit.c0{background:#111;color:#334}    .fbit.c1{background:#1a2e3a;color:#4af} .fbit.c2{background:#200a30;color:#d4f}
+.fbit.fb0{background:#1a1a1a;color:#444} .fbit.fb1{background:#3a0808;color:#f55}
+.fdelta { text-align:right; }
+.fdelta.p{color:#4f4} .fdelta.n{color:#f44}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>mind-arch</h1>
+  <button onclick="startSim()">START</button>
+  <button onclick="stopSim()">STOP</button>
+  <button onclick="restartSim()">RESTART</button>
+  <div id="hdr-right">
+    <div>tick <span id="hdr-tick">—</span></div>
+    <div>next disaster <span id="hdr-disaster">1000</span></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── left panel ── -->
+  <div class="left">
+    <div class="left-scroll">
+
+      <div id="mind-0" class="mind-row">
+        <div class="ctrl-label m0" id="ctrl-0">▼ CONTROL</div>
+        <div class="mind-head">
+          <span class="mind-name m0" id="mname-0">—</span>
+          <span class="mind-slot">M0</span>
+          <span class="mind-meta" id="lc-0">0/81</span>
+          <span class="fight-mc" id="flc-0" style="display:none">⚔0/16</span>
+          <span class="death-cnt" id="dc-0">†0</span>
+          <span class="strikes" id="str-0"><span class="pip pip-on"></span><span class="pip pip-on"></span><span class="pip pip-on"></span></span>
+        </div>
+        <div class="bar-wrap"><div class="bar-fill bar-m0" id="bar-0" style="width:100%"></div><div class="bar-val" id="bv-0">100.0</div></div>
+        <div class="mini-row"><span class="mini-lbl">AGGRESS</span><div class="mini-wrap"><div class="mini-fill fill-agg" id="agg-0" style="width:0%"></div></div><span class="mini-val" id="agv-0">0.000</span></div>
+        <div class="mini-row"><span class="mini-lbl">DRIVE</span><div class="mini-wrap"><div class="mini-fill fill-drive" id="drv-0" style="width:50%"></div></div><span class="mini-val" id="dvv-0">0.50</span></div>
+        <div class="mini-row"><span class="mini-lbl">SURVIVE</span><div class="mini-wrap"><div class="mini-fill fill-surv" id="fsurv-0" style="width:50%"></div></div><span class="mini-val" id="fsvv-0">0.50</span></div>
+        <div class="mini-row"><span class="mini-lbl">COMBAT</span><div class="mini-wrap"><div class="mini-fill fill-combat" id="fcomb-0" style="width:50%"></div></div><span class="mini-val" id="fcvv-0">0.50</span></div>
+        <div class="mind-footer"><span class="integral-lbl" id="intg-0">∫ 0</span><span id="res-num-0" style="font-size:9px;color:#5a4a00;margin-left:6px">res:0</span><span id="jcat-0" style="font-size:9px;color:#2a4a2a;margin-left:6px"></span><span class="signal-lbl" id="sig-0"></span></div>
+      </div>
+
+      <div id="mind-1" class="mind-row">
+        <div class="ctrl-label m1" id="ctrl-1">▼ CONTROL</div>
+        <div class="mind-head">
+          <span class="mind-name m1" id="mname-1">—</span>
+          <span class="mind-slot">M1</span>
+          <span class="mind-meta" id="lc-1">0/81</span>
+          <span class="fight-mc" id="flc-1" style="display:none">⚔0/16</span>
+          <span class="death-cnt" id="dc-1">†0</span>
+          <span class="strikes" id="str-1"><span class="pip pip-on"></span><span class="pip pip-on"></span><span class="pip pip-on"></span></span>
+        </div>
+        <div class="bar-wrap"><div class="bar-fill bar-m1" id="bar-1" style="width:100%"></div><div class="bar-val" id="bv-1">100.0</div></div>
+        <div class="mini-row"><span class="mini-lbl">AGGRESS</span><div class="mini-wrap"><div class="mini-fill fill-agg" id="agg-1" style="width:0%"></div></div><span class="mini-val" id="agv-1">0.000</span></div>
+        <div class="mini-row"><span class="mini-lbl">DRIVE</span><div class="mini-wrap"><div class="mini-fill fill-drive" id="drv-1" style="width:50%"></div></div><span class="mini-val" id="dvv-1">0.50</span></div>
+        <div class="mini-row"><span class="mini-lbl">SURVIVE</span><div class="mini-wrap"><div class="mini-fill fill-surv" id="fsurv-1" style="width:50%"></div></div><span class="mini-val" id="fsvv-1">0.50</span></div>
+        <div class="mini-row"><span class="mini-lbl">COMBAT</span><div class="mini-wrap"><div class="mini-fill fill-combat" id="fcomb-1" style="width:50%"></div></div><span class="mini-val" id="fcvv-1">0.50</span></div>
+        <div class="mind-footer"><span class="integral-lbl" id="intg-1">∫ 0</span><span id="res-num-1" style="font-size:9px;color:#5a4a00;margin-left:6px">res:0</span><span id="jcat-1" style="font-size:9px;color:#2a4a2a;margin-left:6px"></span><span class="signal-lbl" id="sig-1"></span></div>
+      </div>
+
+      <div id="mind-2" class="mind-row">
+        <div class="ctrl-label m2" id="ctrl-2">▼ CONTROL</div>
+        <div class="mind-head">
+          <span class="mind-name m2" id="mname-2">—</span>
+          <span class="mind-slot">M2</span>
+          <span class="mind-meta" id="lc-2">0/81</span>
+          <span class="fight-mc" id="flc-2" style="display:none">⚔0/16</span>
+          <span class="death-cnt" id="dc-2">†0</span>
+          <span class="strikes" id="str-2"><span class="pip pip-on"></span><span class="pip pip-on"></span><span class="pip pip-on"></span></span>
+        </div>
+        <div class="bar-wrap"><div class="bar-fill bar-m2" id="bar-2" style="width:100%"></div><div class="bar-val" id="bv-2">100.0</div></div>
+        <div class="mini-row"><span class="mini-lbl">AGGRESS</span><div class="mini-wrap"><div class="mini-fill fill-agg" id="agg-2" style="width:0%"></div></div><span class="mini-val" id="agv-2">0.000</span></div>
+        <div class="mini-row"><span class="mini-lbl">DRIVE</span><div class="mini-wrap"><div class="mini-fill fill-drive" id="drv-2" style="width:50%"></div></div><span class="mini-val" id="dvv-2">0.50</span></div>
+        <div class="mini-row"><span class="mini-lbl">SURVIVE</span><div class="mini-wrap"><div class="mini-fill fill-surv" id="fsurv-2" style="width:50%"></div></div><span class="mini-val" id="fsvv-2">0.50</span></div>
+        <div class="mini-row"><span class="mini-lbl">COMBAT</span><div class="mini-wrap"><div class="mini-fill fill-combat" id="fcomb-2" style="width:50%"></div></div><span class="mini-val" id="fcvv-2">0.50</span></div>
+        <div class="mind-footer"><span class="integral-lbl" id="intg-2">∫ 0</span><span id="res-num-2" style="font-size:9px;color:#5a4a00;margin-left:6px">res:0</span><span id="jcat-2" style="font-size:9px;color:#2a4a2a;margin-left:6px"></span><span class="signal-lbl" id="sig-2"></span></div>
+      </div>
+
+    </div><!-- /left-scroll -->
+
+    <div class="banners">
+      <div id="b-disaster" class="banner">!! NATURAL DISASTER — all rules reshuffled !!</div>
+      <div id="b-fight"    class="banner"></div>
+      <div id="b-xfer"     class="banner"></div>
+      <div id="b-crit"     class="banner"></div>
+      <div id="b-death"    class="banner"></div>
+      <div id="b-drift"    class="banner"></div>
+    </div>
+
+    <div class="left-bottom">
+      <div class="row2">
+        <div class="box"><div class="lbl">INCOMING</div><div class="bits" id="incoming-bits"></div></div>
+        <div class="box"><div class="lbl" id="chosen-lbl">CHOSEN</div><div class="bits" id="chosen-bits"></div></div>
+      </div>
+      <div class="stats3">
+        <div class="sbox"><div class="lbl">CONTROLLER</div><div class="sval" id="s-ctrl">—</div></div>
+        <div class="sbox"><div class="lbl">MOMENTUM ×</div><div class="sval neu" id="s-mult">—</div></div>
+        <div class="sbox"><div class="lbl">Δ HEALTH</div><div class="sval" id="s-delta">—</div></div>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- ── mind 0 column ── -->
+  <div class="mind-col" id="mcol-0">
+    <div class="col-hdr m0" id="chdr-0">—</div>
+    <details class="col-drop int-drop" open>
+      <summary>INTUITION</summary>
+      <div class="drop-body" id="meta-0"></div>
+    </details>
+    <details class="col-drop xfer-drop">
+      <summary>TRANSFERS</summary>
+      <div class="drop-body" id="xfer-0"></div>
+    </details>
+    <div class="learned-section">
+      <div class="learned-hdr">LEARNED RULES</div>
+      <div class="plist" id="learned-0"></div>
+    </div>
+    <div class="fight-section" id="fsection-0" style="display:none">
+      <div class="learned-hdr" style="color:#955">⚔ FIGHT MEMORY</div>
+      <div class="plist" id="flearned-0"></div>
+    </div>
+  </div>
+
+  <!-- ── mind 1 column ── -->
+  <div class="mind-col" id="mcol-1">
+    <div class="col-hdr m1" id="chdr-1">—</div>
+    <details class="col-drop int-drop" open>
+      <summary>INTUITION</summary>
+      <div class="drop-body" id="meta-1"></div>
+    </details>
+    <details class="col-drop xfer-drop">
+      <summary>TRANSFERS</summary>
+      <div class="drop-body" id="xfer-1"></div>
+    </details>
+    <div class="learned-section">
+      <div class="learned-hdr">LEARNED RULES</div>
+      <div class="plist" id="learned-1"></div>
+    </div>
+    <div class="fight-section" id="fsection-1" style="display:none">
+      <div class="learned-hdr" style="color:#955">⚔ FIGHT MEMORY</div>
+      <div class="plist" id="flearned-1"></div>
+    </div>
+  </div>
+
+  <!-- ── mind 2 column ── -->
+  <div class="mind-col" id="mcol-2">
+    <div class="col-hdr m2" id="chdr-2">—</div>
+    <details class="col-drop int-drop" open>
+      <summary>INTUITION</summary>
+      <div class="drop-body" id="meta-2"></div>
+    </details>
+    <details class="col-drop xfer-drop">
+      <summary>TRANSFERS</summary>
+      <div class="drop-body" id="xfer-2"></div>
+    </details>
+    <div class="learned-section">
+      <div class="learned-hdr">LEARNED RULES</div>
+      <div class="plist" id="learned-2"></div>
+    </div>
+    <div class="fight-section" id="fsection-2" style="display:none">
+      <div class="learned-hdr" style="color:#955">⚔ FIGHT MEMORY</div>
+      <div class="plist" id="flearned-2"></div>
+    </div>
+  </div>
+
+  <!-- ── feed ── -->
+  <div class="right">
+    <div class="ph">TICK FEED</div>
+    <div id="feed"></div>
+  </div>
+
+</main>
+
+<script>
+const COLORS = ['m0','m1','m2'];
+const es = new EventSource("/stream");
+es.onmessage = e => {
+  const d = JSON.parse(e.data);
+  if (d.type === "tick")   handle(d);
+  if (d.type === "status") onStatus(d.running);
+};
+
+function handle(d) {
+  document.getElementById("hdr-tick").textContent = d.tick;
+  document.getElementById("hdr-disaster").textContent = 1000 - (d.tick % 1000) || 1000;
+
+  const fightFighters = d.fight ? d.fight.fighters : [];
+  const MC = [["bar-m0","#2a7a2a"],["bar-m1","#1a5a7a"],["bar-m2","#7a4a1a"]];
+
+  d.minds.forEach((m, i) => {
+    const rec      = m.recovering ?? false;
+    const fighting = fightFighters.includes(i);
+    document.getElementById(`mind-${i}`).classList.toggle("recovering", rec);
+    document.getElementById(`mind-${i}`).classList.toggle("fighting",   fighting);
+    document.getElementById(`mcol-${i}`).classList.toggle("recovering", rec);
+    document.getElementById(`mcol-${i}`).classList.toggle("fighting",   fighting);
+
+    // health bar
+    const bar = document.getElementById(`bar-${i}`);
+    const bv  = document.getElementById(`bv-${i}`);
+    if (rec) {
+      bar.style.width = "100%"; bar.style.background = "#2a2a2a";
+      bv.textContent = "↺" + m.recovery_ticks;
+    } else {
+      bar.style.width = m.health + "%";
+      bar.style.background = m.health > 50 ? MC[i][1] : m.health > 25 ? "#7a6000" : "#7a1a1a";
+      bv.textContent = m.health.toFixed(1);
+    }
+
+    document.getElementById(`mname-${i}`).textContent = m.name ?? "—";
+    document.getElementById(`chdr-${i}`).textContent  = m.name ?? "—";
+    document.getElementById(`lc-${i}`).textContent    = m.learned_count + "/81";
+    document.getElementById(`dc-${i}`).textContent    = "†" + (m.deaths ?? 0);
+
+    const flcEl = document.getElementById(`flc-${i}`);
+    const flc   = m.fight_learned_count ?? 0;
+    flcEl.style.display = flc > 0 ? "" : "none";
+    if (flc > 0) flcEl.textContent = "⚔" + flc + "/16";
+
+    const s = m.strikes ?? 3;
+    document.getElementById(`str-${i}`).innerHTML =
+      [0,1,2].map(j => `<span class="pip ${j<s?'pip-on':'pip-off'}"></span>`).join("");
+
+    // resources as plain number
+    const res = m.resources ?? 0;
+    const resEl = document.getElementById(`res-num-${i}`);
+    if (resEl) resEl.textContent = "res:" + res.toFixed(0);
+
+    // aggression bar (0–1.0; threshold is 0.50)
+    const agg = m.aggression ?? 0.0;
+    const aggFill = document.getElementById(`agg-${i}`);
+    aggFill.style.width = Math.min(100, agg * 100).toFixed(1) + "%";
+    const agR = Math.round(80 + agg * 175), agG = Math.round(20 - agg * 20);
+    aggFill.style.background = `rgb(${agR},${agG},15)`;
+    document.getElementById(`agv-${i}`).textContent = agg.toFixed(3);
+
+    // drive
+    const drv = m.drive ?? 0.5;
+    const dr  = document.getElementById(`drv-${i}`);
+    dr.style.width = (drv*100).toFixed(1)+"%";
+    const r=Math.round(40+drv*170), g=Math.round(90-drv*70), b2=Math.round(122-drv*100);
+    dr.style.background = `rgb(${r},${g},${b2})`;
+    document.getElementById(`dvv-${i}`).textContent = drv.toFixed(2);
+
+    // feelings
+    const fl   = m.feelings ?? {};
+    const surv = fl.survival ?? 0.5;
+    const comb = fl.combat   ?? 0.5;
+    document.getElementById(`fsurv-${i}`).style.width  = (surv*100).toFixed(1)+"%";
+    document.getElementById(`fsvv-${i}`).textContent   = surv.toFixed(2);
+    document.getElementById(`fcomb-${i}`).style.width  = (comb*100).toFixed(1)+"%";
+    document.getElementById(`fcvv-${i}`).textContent   = comb.toFixed(2);
+
+    // integral
+    const intg = m.health_integral ?? 0;
+    document.getElementById(`intg-${i}`).textContent =
+      "∫ " + (intg >= 1000 ? (intg/1000).toFixed(1)+"k" : intg);
+
+    // jackpot biomes
+    const jcatEl = document.getElementById(`jcat-${i}`);
+    if (jcatEl && m.jackpot_biomes) {
+      jcatEl.textContent = `jkp:b${m.jackpot_biomes.join(",")}`;
+    }
+
+    // current signal
+    const sigEl  = document.getElementById(`sig-${i}`);
+    const sigRaw = d.signals ? d.signals[String(i)] : null;
+    sigEl.innerHTML = sigRaw ? "~&nbsp;" + sigRaw.map(b=>`<span class="sbit s${b}">${b}</span>`).join("") : "";
+
+    // controller label
+    document.getElementById(`ctrl-${i}`).classList.toggle("on", i === d.controller);
+  });
+
+  // banners
+  const db = document.getElementById("b-disaster");
+  if (d.disaster) { db.className="banner on"; setTimeout(()=>db.className="banner",4000); }
+
+  const bf = document.getElementById("b-fight");
+  if (d.fight) {
+    const fe = d.fight;
+    if (fe.ended) {
+      const w = fe.winner!==null ? `M${fe.winner} WINS` : "DRAW";
+      const r = fe.reason==="mastery"?"by mastery":fe.reason==="death"?"by KO":"timeout";
+      const agg = fe.aggressor??fe.fighters[0], def = fe.fighters.find(f=>f!==agg)??fe.fighters[1];
+      bf.textContent = `⚔ ${w} ${r}  AGG:M${agg} DEF:M${def}  (${fe.fight_ticks}ex, ${fe.mastery[0]}/${fe.mastery[1]} of 16)`;
+      bf.className="banner on"; setTimeout(()=>bf.className="banner",4000);
+    } else if (fe.active) {
+      const agg = fe.aggressor??fe.fighters[0], def = fe.fighters.find(f=>f!==agg)??fe.fighters[1];
+      bf.textContent=`⚔ M${agg}[AGG] vs M${def}[DEF]  ex#${fe.fight_ticks}  mastery: ${fe.mastery[0]}/16 vs ${fe.mastery[1]}/16`;
+      bf.className="banner on";
+    } else { bf.className="banner"; }
+  }
+
+  if (d.xfer_events && d.xfer_events.length) {
+    const bx = document.getElementById("b-xfer");
+    bx.textContent = d.xfer_events.map(x=>`M${x.from}→M${x.to} (${x.amount}res)`).join("  ");
+    bx.className="banner on"; setTimeout(()=>bx.className="banner",2000);
+  }
+
+  const crits = d.minds.map((m,i)=>m.crit?i:-1).filter(i=>i>=0);
+  if (crits.length) {
+    const bc=document.getElementById("b-crit");
+    bc.textContent="!! CRIT: "+crits.map(i=>`M${i} (${d.minds[i].strikes??0} strikes left)`).join(", ");
+    bc.className="banner on"; setTimeout(()=>bc.className="banner",3000);
+  }
+
+  const deads = d.minds.map((m,i)=>m.died?i:-1).filter(i=>i>=0);
+  if (deads.length) {
+    const bd=document.getElementById("b-death");
+    bd.textContent="!! DIED: "+deads.map(i=>"M"+i).join(", ")+" — respawned";
+    bd.className="banner on"; setTimeout(()=>bd.className="banner",2000);
+  }
+
+  const drifts=(d.drifts||[]).filter(Boolean);
+  if (drifts.length) {
+    const bd=document.getElementById("b-drift");
+    const dr=drifts[0];
+    bd.textContent = `DRIFT: M${dr.mind} biome=${dr.biome}  ${dr.old}→${dr.new}`;
+    bd.className="banner on"; setTimeout(()=>bd.className="banner",2500);
+  }
+
+  // signal bits
+  renderBits("incoming-bits", d.incoming, false);
+  if (d.editable) {
+    renderBits("chosen-bits", d.chosen, true);
+    const biomeTag = d.chosen_biome !== undefined ? ` [b${d.chosen_biome}]` : "";
+    document.getElementById("chosen-lbl").textContent = "CHOSEN" + biomeTag;
+  } else {
+    renderBits("chosen-bits", d.incoming, false);
+    document.getElementById("chosen-lbl").textContent = "PASS-THROUGH";
+  }
+
+  if (d.controller >= 0) {
+    const ctrl=d.minds[d.controller];
+    const sc=document.getElementById("s-ctrl");
+    sc.textContent="MIND "+d.controller; sc.className="sval "+COLORS[d.controller];
+    document.getElementById("s-mult").textContent="×"+ctrl.multiplier.toFixed(3);
+    const sd=document.getElementById("s-delta");
+    const hc=ctrl.health_change||0;
+    sd.textContent=(hc>=0?"+":"")+hc.toFixed(2);
+    sd.className="sval "+(hc>0?"pos":hc<0?"neg":"neu");
+  }
+
+  renderLearned(d.learned);
+  renderMeta(d.meta);
+  renderTransfers(d.transfers);
+  addFeedRow(d);
+}
+
+function bitBg(v, chosen) {
+  const t = v / 9;
+  if (chosen) {
+    return `rgb(${Math.round(10+t*30)},${Math.round(40+t*110)},${Math.round(70+t*150)})`;
+  }
+  const l = Math.round(28 + t * 150);
+  return `rgb(${l},${l},${l})`;
+}
+function renderBits(id, bits, chosen) {
+  document.getElementById(id).innerHTML =
+    bits.map(b => {
+      const bg = bitBg(b, chosen);
+      const fg = (b / 9) > 0.45 ? "#fff" : "#777";
+      return `<div class="bit" style="background:${bg};color:${fg};border:1px solid #222">${b}</div>`;
+    }).join("");
+}
+
+function renderLearned(allRows) {
+  allRows.forEach((rows, i) => {
+    const normal = (rows||[]).filter(r=>r.ctx==="n"||!r.ctx);
+    const fight  = (rows||[]).filter(r=>r.ctx==="f");
+
+    const patHtml = (pat, isFight) => {
+      if (isFight) {
+        return pat.map(b=>`<div class="lbt" style="background:${b?'#3a0808':'#1a1a1a'};color:${b?'#f55':'#444'}">${b}</div>`).join("");
+      }
+      return pat.map(b => {
+        const bg = bitBg(b, false);
+        const fg = (b/9)>0.45?"#fff":"#666";
+        return `<div class="lbt" style="background:${bg};color:${fg}">${b}</div>`;
+      }).join("");
+    };
+
+    const el = document.getElementById(`learned-${i}`);
+    el.innerHTML = normal.length
+      ? normal.map(r => {
+          const c = r.avg>0?"pos":r.avg<0?"neg":"neu";
+          return `<div class="lr"><span class="lb">${patHtml(r.pattern,false)}</span><span class="lavg ${c}">${r.avg>=0?"+":""}${r.avg}</span><span class="lcnt">${r.count}×</span></div>`;
+        }).join("")
+      : '<div class="section-empty">no observations yet</div>';
+
+    const sec = document.getElementById(`fsection-${i}`);
+    const fel = document.getElementById(`flearned-${i}`);
+    if (fight.length) {
+      sec.style.display = "";
+      fel.innerHTML = fight.map(r => {
+        const c = r.avg>0?"pos":r.avg<0?"neg":"neu";
+        return `<div class="lr"><span class="lb">${patHtml(r.pattern,true)}</span><span class="lavg ${c}">${r.avg>=0?"+":""}${r.avg}</span><span class="lcnt">${r.count}×</span></div>`;
+      }).join("");
+    } else {
+      sec.style.display = "none";
+    }
+  });
+}
+
+function renderMeta(allRows) {
+  allRows.forEach((rows, i) => {
+    const el = document.getElementById(`meta-${i}`);
+    if (!rows||!rows.length) { el.innerHTML='<div class="section-empty">building...</div>'; return; }
+    el.innerHTML = rows.map(r => {
+      const c = r.avg>0?"pos":r.avg<0?"neg":"neu";
+      return `<div class="mr"><span class="mfeat">${r.feature}</span><span class="mavg ${c}">${r.avg>=0?"+":""}${r.avg}</span><span class="mcnt">${r.count}×</span></div>`;
+    }).join("");
+  });
+}
+
+function renderTransfers(allRows) {
+  if (!allRows) return;
+  allRows.forEach((rows, i) => {
+    const el = document.getElementById(`xfer-${i}`);
+    if (!rows||!rows.length) { el.innerHTML='<div class="section-empty">no data yet</div>'; return; }
+    el.innerHTML = rows.map(r => {
+      const c = r.avg>0?"pos":r.avg<0?"neg":"neu";
+      return `<div class="xr"><span class="xt">→M${r.target}</span><span class="lavg ${c}">${r.avg>=0?"+":""}${r.avg}</span><span class="lcnt">${r.count}×</span></div>`;
+    }).join("");
+  });
+}
+
+function addFeedRow(d) {
+  const feed = document.getElementById("feed");
+
+  // transfer events
+  (d.xfer_events||[]).forEach(x => {
+    const row = document.createElement("div");
+    row.className = "fr xfer";
+    row.innerHTML = `
+      <span class="ftick">${d.tick}</span>
+      <span class="fdot ${COLORS[x.from]}"></span>
+      <span style="color:#4fa;font-size:10px">M${x.from}→M${x.to}  +${x.amount}res</span>
+      <span style="color:#1a5a30;font-size:9px">xfer</span>`;
+    feed.insertBefore(row, feed.firstChild);
+  });
+
+  // fight rows
+  if (d.fight) {
+    const fe = d.fight;
+    if (fe.ended) {
+      const row = document.createElement("div");
+      row.className = "fight-end";
+      const w = fe.winner!==null?`M${fe.winner} WINS`:"DRAW";
+      row.innerHTML = `
+        <span class="ftick">${d.tick}</span>
+        <span style="color:#f44">⚔</span>
+        <span style="color:#f44;font-size:10px">${w} (${fe.reason}, ${fe.fight_ticks}ex, ${fe.mastery[0]}/${fe.mastery[1]}/16)</span>`;
+      feed.insertBefore(row, feed.firstChild);
+    } else if (fe.active && fe.patterns) {
+      const [fi,fj]=fe.fighters;
+      const agg=fe.aggressor??fi, def=fe.fighters.find(f=>f!==agg)??fj;
+      const row=document.createElement("div");
+      row.className="fr fight";
+      const patI=fe.patterns[0].map(b=>`<div class="fbit fb${b}">${b}</div>`).join("");
+      const patJ=fe.patterns[1].map(b=>`<div class="fbit fb${b}">${b}</div>`).join("");
+      const dI=fe.deltas[0], dJ=fe.deltas[1];
+      row.innerHTML=`
+        <span class="ftick">${d.tick}</span>
+        <span style="color:#f44">⚔</span>
+        <span class="fbits">${patI}</span>
+        <span class="fbits">${patJ}</span>
+        <span style="font-size:9px;color:#f44">M${agg}<span style="color:#f88;font-size:8px">A</span>/M${def}<span style="color:#888;font-size:8px">D</span></span>
+        <span class="fdelta" style="font-size:9px;color:#f44">${dI>=0?"+":""}${dI.toFixed(1)} ${dJ>=0?"+":""}${dJ.toFixed(1)}</span>`;
+      feed.insertBefore(row, feed.firstChild);
+    }
+  }
+
+  // normal tick row
+  const row = document.createElement("div");
+  let cls = "fr";
+  if (d.disaster)                           cls+=" disaster";
+  else if (d.minds.some(m=>m.died))         cls+=" death";
+  else if (d.minds.some(m=>m.crit))         cls+=" crit";
+  else if ((d.drifts||[]).some(Boolean))    cls+=" drift";
+  else if (d.controller>=0 && d.minds[d.controller]?.panic) cls+=" panic";
+  if (!d.editable) cls+=" pass";
+  row.className = cls;
+
+  const ctrlM = d.controller>=0 ? d.minds[d.controller] : d.minds[0];
+  const inB  = d.incoming.map(b=>`<div class="fbit v${b}">${b}</div>`).join("");
+  const chB  = d.chosen.map(b=>`<div class="fbit ${d.editable?"c":"v"}${b}">${b}</div>`).join("");
+  const hc   = ctrlM.health_change||0;
+  const dcls = hc>0?"p":hc<0?"n":"";
+  row.innerHTML=`
+    <span class="ftick">${d.tick}</span>
+    <span class="fdot ${d.controller>=0?COLORS[d.controller]:''}"></span>
+    <span class="fbits">${inB}</span>
+    <span class="fbits">${chB}</span>
+    <span class="fdelta ${dcls}">${d.editable?(hc>=0?"+":"")+hc.toFixed(1):"—"}</span>`;
+  feed.insertBefore(row, feed.firstChild);
+  while (feed.children.length > 300) feed.removeChild(feed.lastChild);
+}
+
+function onStatus(r) {}
+function startSim()   { fetch("/start",   {method:"POST"}); }
+function stopSim()    { fetch("/stop",    {method:"POST"}); }
+function restartSim() { fetch("/restart", {method:"POST"}); }
+</script>
+</body>
+</html>

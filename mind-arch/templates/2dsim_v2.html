@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2D Mind Sim v2</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #070708;
+    color: #bbb;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+#left {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    gap: 8px;
+    min-width: 300px;
+    max-width: 380px;
+    border-right: 1px solid #0f0f0f;
+    overflow: hidden;
+}
+#header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+#header h1  { font-size: 12px; color: #555; letter-spacing: 1px; }
+#header a   { color: #383838; text-decoration: none; font-size: 10px; }
+#header a:hover { color: #777; }
+#tick-info  { font-size: 10px; color: #383838; }
+canvas { display: block; border: 1px solid #141414; }
+#btn-start {
+    background: #0f1f0f;
+    color: #44bb44;
+    border: 1px solid #1a3a1a;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+#btn-start:hover { background: #162616; }
+#btn-start.running { background: #1f0f0f; color: #bb4444; border-color: #3a1a1a; }
+#right {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    gap: 8px;
+    flex-shrink: 0;
+}
+#minds-panel {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 0;
+}
+#minds-panel::-webkit-scrollbar { width: 3px; }
+#minds-panel::-webkit-scrollbar-thumb { background: #1a1a1a; }
+.mind-card {
+    padding: 8px 10px;
+    background: #0c0c0d;
+    border-radius: 3px;
+    border-left: 3px solid #222;
+    position: relative;
+    z-index: 0;
+}
+.mind-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.mind-name  { font-size: 12px; font-weight: bold; }
+.mind-pos   { font-size: 9px; color: #383838; }
+.bar-row    { display: flex; align-items: center; gap: 5px; margin: 2px 0; }
+.bar-label  { font-size: 9px; color: #444; width: 14px; }
+.bar-bg     { flex: 1; background: #141414; height: 5px; border-radius: 2px; }
+.bar-fill   { height: 5px; border-radius: 2px; }
+.mind-stat  { font-size: 9px; color: #555; margin-top: 3px; line-height: 1.6; }
+#log-area {
+    flex-shrink: 0;
+    height: 160px;
+    overflow-y: auto;
+    border-top: 1px solid #0f0f0f;
+    padding-top: 8px;
+}
+#log-area::-webkit-scrollbar { width: 3px; }
+#log-area::-webkit-scrollbar-thumb { background: #1a1a1a; }
+.log-line             { font-size: 9px; color: #2a2a2a; line-height: 1.6; }
+.log-line.ev-harvest  { color: #5a7a2a; }
+.log-line.ev-death    { color: #7a2a2a; }
+.log-line.ev-starve   { color: #6a3a1a; }
+.log-line.ev-snap     { color: #2a4a3a; }
+.log-line.ev-spawn    { color: #3a3a4a; }
+.log-line.ev-crit     { color: #aa5500; }
+.log-line.ev-move     { color: #222233; }
+#wm-panel {
+    flex-shrink: 0;
+    border-top: 1px solid #0f0f0f;
+    padding-top: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+}
+#wm-panel::-webkit-scrollbar { width: 3px; }
+#wm-panel::-webkit-scrollbar-thumb { background: #1a1a1a; }
+#assoc-panel {
+    flex-shrink: 0;
+    border-top: 1px solid #0f0f0f;
+    padding-top: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+}
+#assoc-panel::-webkit-scrollbar { width: 3px; }
+#assoc-panel::-webkit-scrollbar-thumb { background: #1a1a1a; }
+.assoc-header {
+    font-size: 8px;
+    color: #333;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+.assoc-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8px;
+    line-height: 1.7;
+}
+.assoc-bar-bg { width: 40px; background: #141414; height: 4px; border-radius: 2px; flex-shrink: 0; }
+.assoc-bar-fill { height: 4px; border-radius: 2px; }
+.assoc-val { width: 30px; flex-shrink: 0; color: #555; }
+.assoc-snap { color: #2a2a2a; letter-spacing: 1px; font-family: monospace; }
+.assoc-snap.pos { color: #3a5a2a; }
+.assoc-snap.neg { color: #5a2a2a; }
+</style>
+</head>
+<body>
+
+<div id="left">
+  <div id="header">
+    <h1>MIND SIM v2</h1>
+    <button id="btn-start" onclick="toggleSim()">START</button>
+    <a href="/2dsim">← v1</a>
+    <a href="/">← phase 2</a>
+  </div>
+  <div id="minds-panel"></div>
+  <div id="assoc-panel"></div>
+  <div id="wm-panel"></div>
+  <div id="log-area"></div>
+</div>
+
+<div id="right">
+  <canvas id="world"></canvas>
+  <div id="tick-info">waiting for server…</div>
+</div>
+
+<script>
+// ── Constants (display only) ───────────────────────────────────────────────────
+const GRID_W = 46, GRID_H = 46, CELL = 15;
+const HEALTH_TOP = 50, HEALTH_MID = 35, HEALTH_BOT = 15, HEALTH_MAX = 100;
+const SIGHT_LENGTH = 15, SIGHT_WIDTH = 1;
+
+const TERRAIN_COLORS = ['#0d0d0f', '#0a130a', '#160808'];  // plain, fertile, harsh
+const TERRAIN_LABELS = ['plain', 'fertile', 'harsh'];
+
+const FACE_VEC = { N:[0,-1], NE:[1,-1], E:[1,0], SE:[1,1], S:[0,1], SW:[-1,1], W:[-1,0], NW:[-1,-1] };
+
+// ── State ──────────────────────────────────────────────────────────────────────
+let world      = null;   // [y][x] terrain type, set on first tick
+let lastMinds  = [];
+let lastRes    = [];
+let lastBoar   = null;
+let recentLines = [];
+let simRunning = false;
+let tickNum    = 0;
+
+// ── Canvas ─────────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('world');
+const ctx    = canvas.getContext('2d');
+canvas.width  = GRID_W * CELL;
+canvas.height = GRID_H * CELL;
+
+const offC   = new OffscreenCanvas(GRID_W * CELL, GRID_H * CELL);
+const offCtx = offC.getContext('2d');
+let worldDirty = true;
+
+function redrawWorld() {
+    if (!world) return;
+    for (let y = 0; y < GRID_H; y++) {
+        for (let x = 0; x < GRID_W; x++) {
+            offCtx.fillStyle = TERRAIN_COLORS[world[y][x]];
+            offCtx.fillRect(x*CELL, y*CELL, CELL, CELL);
+        }
+    }
+    offCtx.strokeStyle = 'rgba(0,0,0,0.4)';
+    offCtx.lineWidth   = 0.3;
+    for (let x = 0; x <= GRID_W; x++) {
+        offCtx.beginPath(); offCtx.moveTo(x*CELL,0); offCtx.lineTo(x*CELL,GRID_H*CELL); offCtx.stroke();
+    }
+    for (let y = 0; y <= GRID_H; y++) {
+        offCtx.beginPath(); offCtx.moveTo(0,y*CELL); offCtx.lineTo(GRID_W*CELL,y*CELL); offCtx.stroke();
+    }
+    worldDirty = false;
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+function hexToRgba(hex, a) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+}
+
+const SIGHT_AXES = {
+    N:  {fwd: [ 0,-1], perp: [ 1, 0]},
+    NE: {fwd: [ 1,-1], perp: [ 1, 1]},
+    E:  {fwd: [ 1, 0], perp: [ 0, 1]},
+    SE: {fwd: [ 1, 1], perp: [ 1,-1]},
+    S:  {fwd: [ 0, 1], perp: [ 1, 0]},
+    SW: {fwd: [-1, 1], perp: [ 1, 1]},
+    W:  {fwd: [-1, 0], perp: [ 0, 1]},
+    NW: {fwd: [-1,-1], perp: [ 1,-1]},
+};
+
+function visibleCells(mx, my, facing) {
+    const ax     = SIGHT_AXES[facing];
+    const fwd    = ax.fwd, perp = ax.perp;
+    const isDiag = fwd[0] !== 0 && fwd[1] !== 0;
+    const scale  = isDiag ? 2 : 1;
+    const seen   = new Set();
+    seen.add(`${((mx%GRID_W)+GRID_W)%GRID_W},${((my%GRID_H)+GRID_H)%GRID_H}`);
+    const range = SIGHT_LENGTH + 2;
+    for (let rdy = -range; rdy <= range; rdy++) {
+        for (let rdx = -range; rdx <= range; rdx++) {
+            if (rdx === 0 && rdy === 0) continue;
+            const fwdDot  = rdx * fwd[0]  + rdy * fwd[1];
+            const perpDot = Math.abs(rdx * perp[0] + rdy * perp[1]);
+            if (fwdDot < 1 || fwdDot > SIGHT_LENGTH * scale) continue;
+            if (perpDot > SIGHT_WIDTH * scale) continue;
+            const x = ((mx + rdx) % GRID_W + GRID_W) % GRID_W;
+            const y = ((my + rdy) % GRID_H + GRID_H) % GRID_H;
+            seen.add(`${x},${y}`);
+        }
+    }
+    return [...seen].map(s => { const [x,y] = s.split(',').map(Number); return {x,y}; });
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────────
+function render() {
+    if (!world) return;
+    if (worldDirty) redrawWorld();
+    ctx.drawImage(offC, 0, 0);
+
+
+    // Vision cones
+    for (const m of lastMinds) {
+        ctx.fillStyle = hexToRgba(m.color, 0.07);
+        for (const c of visibleCells(m.x, m.y, m.facing)) {
+            ctx.fillRect(c.x*CELL, c.y*CELL, CELL, CELL);
+        }
+    }
+
+    // Resources
+    for (const r of lastRes) {
+        const cx = r.x*CELL + CELL/2;
+        const cy = r.y*CELL + CELL/2;
+        const prog = r.harvest_progress / 12;  // HARVEST_TICKS = 12
+        const glowR = CELL * (0.5 + prog * 0.3);
+        const gAlpha = 0.55 + prog * 0.3 + (r.flash > 0 ? 0.3 : 0);
+        const g = ctx.createRadialGradient(cx,cy,0,cx,cy,glowR);
+        g.addColorStop(0,   `rgba(255,210,30,${gAlpha})`);
+        g.addColorStop(0.4, `rgba(220,160,10,${gAlpha*0.5})`);
+        g.addColorStop(1,   'rgba(200,120,0,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(cx,cy,glowR,0,Math.PI*2); ctx.fill();
+
+        ctx.fillStyle = r.flash > 0 ? '#ffffff' : '#ffdd44';
+        ctx.beginPath(); ctx.arc(cx,cy,3.5,0,Math.PI*2); ctx.fill();
+
+        if (prog > 0) {
+            ctx.strokeStyle = '#ffaa00';
+            ctx.lineWidth   = 2;
+            ctx.beginPath();
+            ctx.arc(cx,cy,5.5,-Math.PI/2,-Math.PI/2+prog*Math.PI*2);
+            ctx.stroke();
+        }
+    }
+
+    // Boar
+    if (lastBoar) {
+        const cx = lastBoar.x*CELL + CELL/2;
+        const cy = lastBoar.y*CELL + CELL/2;
+        const chasing = lastBoar.state === 'chasing';
+        const eRatio  = lastBoar.energy / 200;
+        ctx.shadowColor = chasing ? '#ff2200' : '#884400';
+        ctx.shadowBlur  = chasing ? 10 : 4;
+        ctx.fillStyle   = chasing ? `rgba(220,50,0,${0.5 + eRatio*0.5})` : '#663300';
+        ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2); ctx.fill();
+        ctx.shadowBlur  = 0;
+        // energy bar below boar
+        const bw = CELL-2, bx = lastBoar.x*CELL+1, by = lastBoar.y*CELL + CELL/2 + 7;
+        ctx.fillStyle = '#111'; ctx.fillRect(bx, by, bw, 2);
+        ctx.fillStyle = chasing ? '#ff4400' : '#885500';
+        ctx.fillRect(bx, by, bw * eRatio, 2);
+    }
+
+    // Minds
+    for (const m of lastMinds) {
+        const cx = m.x*CELL + CELL/2;
+        const cy = m.y*CELL + CELL/2;
+        const r = 4;
+
+        if (m.harvest_flash > 0) {
+            ctx.strokeStyle = `rgba(255,220,30,${m.harvest_flash/10})`;
+            ctx.lineWidth   = 2;
+            ctx.beginPath(); ctx.arc(cx,cy,r+5,0,Math.PI*2); ctx.stroke();
+        }
+
+        const hRatio = m.health / HEALTH_MAX;
+        ctx.shadowColor = m.color;
+        ctx.shadowBlur  = 6;
+        ctx.globalAlpha = 0.4 + hRatio * 0.6;
+        ctx.fillStyle   = m.color;
+        ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 1.0;
+        ctx.shadowBlur  = 0;
+
+        const fv = FACE_VEC[m.facing];
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.beginPath(); ctx.arc(cx+fv[0]*(r-1), cy+fv[1]*(r-1), 2, 0, Math.PI*2); ctx.fill();
+
+        const bw = CELL-2, bx = m.x*CELL+1, by = m.y*CELL - r - 6;
+        ctx.fillStyle = '#111'; ctx.fillRect(bx, by, bw, 3);
+        // three stacked sections scaled to their share of total bar width
+        const topW = bw * 0.50, midW = bw * 0.35, botW = bw * 0.15;
+        ctx.fillStyle = '#44ee88'; ctx.fillRect(bx,           by, topW * clamp(m.health_top/HEALTH_TOP,0,1), 3);
+        ctx.fillStyle = '#ffaa22'; ctx.fillRect(bx + topW,    by, midW * clamp(m.health_mid/HEALTH_MID,0,1), 3);
+        ctx.fillStyle = '#ff4444'; ctx.fillRect(bx + topW + midW, by, botW * clamp(m.health_bot/HEALTH_BOT,0,1), 3);
+    }
+}
+
+// ── Panel ──────────────────────────────────────────────────────────────────────
+function updatePanel() {
+    const panel = document.getElementById('minds-panel');
+    panel.innerHTML = lastMinds.map(m => {
+        const topPct = clamp(m.health_top / HEALTH_TOP * 100, 0, 100);
+        const midPct = clamp(m.health_mid / HEALTH_MID * 100, 0, 100);
+        const botPct = clamp(m.health_bot / HEALTH_BOT * 100, 0, 100);
+        return `
+<div class="mind-card" style="border-left-color:${m.color}">
+  <div class="mind-head">
+    <span class="mind-name" style="color:${m.color}">M${m.id} ${m.name}</span>
+    <span class="mind-pos">(${m.x},${m.y}) ${m.facing}</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">TOP</span>
+    <div class="bar-bg"><div class="bar-fill" style="width:${topPct}%;background:#44ee8888"></div></div>
+    <span style="font-size:9px;color:#555;width:32px">${m.health_top.toFixed(0)}</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">MID</span>
+    <div class="bar-bg"><div class="bar-fill" style="width:${midPct}%;background:#ffaa2288"></div></div>
+    <span style="font-size:9px;color:#555;width:32px">${m.health_mid.toFixed(0)}</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">BOT</span>
+    <div class="bar-bg"><div class="bar-fill" style="width:${botPct}%;background:#ff444488"></div></div>
+    <span style="font-size:9px;color:#555;width:32px">${m.health_bot.toFixed(0)}</span>
+  </div>
+  <div class="mind-stat">energy: ${m.energy.toFixed(0)} &nbsp; str: ${m.strength.toFixed(2)}x</div>
+  <div class="mind-stat" style="color:#666;font-size:9px">
+    sight:${m.senses.sight}/50 &nbsp;
+    hear:${m.senses.hearing}/50 &nbsp;
+    touch:${m.senses.touch}/50 &nbsp;
+    smell:${m.senses.smell}/50 &nbsp;
+    taste:${m.senses.taste}/50
+  </div>
+  <div class="mind-stat" style="color:#888;font-size:9px">
+    dopa:${m.pns.dopamine.toFixed(2)} &nbsp;
+    sero:${m.pns.serotonin.toFixed(2)} &nbsp;
+    norepi:${m.pns.norepinephrine.toFixed(2)} &nbsp;
+    cort:${m.pns.cortisol.toFixed(2)} &nbsp;
+    endo:${m.pns.endorphin.toFixed(2)}
+  </div>
+  <div class="mind-stat" style="font-size:9px">
+    intensity:${m.pns.intensity.toFixed(2)} &nbsp;
+    <span style="color:${m.pns.mode==='fight_or_flight'?'#ff5050':'#44ddff'}">${m.pns.mode}</span>
+  </div>
+  <div class="mind-stat" style="font-size:9px;color:#666">
+    concepts:${m.cns.concepts} &nbsp; surprise:${m.cns.surprise.toFixed(3)} &nbsp;
+    wm:${m.wm.entries} <span style="color:${m.wm.planning?'#44ffaa':'#333'}">${m.wm.planning?'▶ cns_seek':'·'}</span>
+  </div>
+  <div class="mind-stat" style="font-size:9px">
+    action: <span style="color:#ffaa33">${m.motor.last_action}</span>
+    &nbsp; intensity:${m.motor.last_intensity.toFixed(2)}
+    &nbsp; src:${m.motor.last_source ?? '—'}
+  </div>
+  <div class="mind-stat">harvests:${m.harvests} &nbsp; deaths:${m.deaths}</div>
+</div>`;
+    }).join('');
+}
+
+const SNAP_DIMS  = ['touch','smell','taste','s.pln','s.frt','s.hsh','s.res','hear'];
+const SNAP_LVL   = ['lo','md','hi'];
+
+function updateAssoc() {
+    const el = document.getElementById('assoc-panel');
+    const m  = lastMinds[0];
+    if (!m || !m.pns.assoc_table || m.pns.assoc_table.length === 0) {
+        el.innerHTML = '<div class="assoc-header">LEARNED — none yet</div>';
+        return;
+    }
+    const rows = m.pns.assoc_table.map(({snap, val}) => {
+        const pct   = Math.round(val * 100);
+        const cls   = val > 0.55 ? 'pos' : val < 0.45 ? 'neg' : '';
+        const barClr = val > 0.55 ? '#3a7a3a' : val < 0.45 ? '#7a3a3a' : '#3a3a3a';
+        const label  = snap.map((v, i) => `${SNAP_DIMS[i]}:${SNAP_LVL[v]}`).join(' ');
+        return `<div class="assoc-row">
+  <div class="assoc-bar-bg"><div class="assoc-bar-fill" style="width:${pct}%;background:${barClr}"></div></div>
+  <span class="assoc-val">${val.toFixed(3)}</span>
+  <span class="assoc-snap ${cls}">${label}</span>
+</div>`;
+    }).join('');
+    el.innerHTML = `<div class="assoc-header">LEARNED (${m.pns.assoc_table.length}) — best→worst</div>${rows}`;
+}
+
+function updateWM() {
+    const el = document.getElementById('wm-panel');
+    const m  = lastMinds[0];
+    if (!m || !m.wm.table || m.wm.table.length === 0) {
+        el.innerHTML = '<div class="assoc-header">WORLD MODEL — no data yet</div>';
+        return;
+    }
+    const rows = m.wm.table.slice(0, 40).map(({snap, dir, val}) => {
+        const pct    = Math.round(val * 100);
+        const cls    = val > 0.55 ? 'pos' : val < 0.45 ? 'neg' : '';
+        const barClr = val > 0.55 ? '#2a5a4a' : val < 0.45 ? '#5a2a3a' : '#2a2a3a';
+        const label  = snap.map((v, i) => `${SNAP_DIMS[i]}:${SNAP_LVL[v]}`).join(' ');
+        return `<div class="assoc-row">
+  <div class="assoc-bar-bg"><div class="assoc-bar-fill" style="width:${pct}%;background:${barClr}"></div></div>
+  <span class="assoc-val">${val.toFixed(3)}</span>
+  <span style="font-size:8px;color:#4a6a5a;width:20px;flex-shrink:0">${dir}</span>
+  <span class="assoc-snap ${cls}">${label}</span>
+</div>`;
+    }).join('');
+    el.innerHTML = `<div class="assoc-header">WORLD MODEL (${m.wm.entries}) — state+dir→value, best first</div>${rows}`;
+}
+
+function updateLog(events) {
+    for (const ev of events) {
+        const line = `[tick ${String(tickNum).padStart(5,'0')}] ${ev}`;
+        recentLines.unshift(line);
+    }
+    if (recentLines.length > 100) recentLines.length = 100;
+    const logEl = document.getElementById('log-area');
+    logEl.innerHTML = recentLines.map(line => {
+        let cls = 'log-line';
+        if      (line.includes('HARVEST')) cls += ' ev-harvest';
+        else if (line.includes('DEATH'))   cls += ' ev-death';
+        else if (line.includes('STARVE'))  cls += ' ev-starve';
+        else if (line.includes('SNAP'))    cls += ' ev-snap';
+        else if (line.includes('SPAWN'))   cls += ' ev-spawn';
+        else if (line.includes('CRIT'))    cls += ' ev-crit';
+        else if (line.includes('MOVE'))    cls += ' ev-move';
+        return `<div class="${cls}">${line}</div>`;
+    }).join('');
+}
+
+// ── SSE ────────────────────────────────────────────────────────────────────────
+let es = null;
+
+function connectSSE() {
+    es = new EventSource('/2dsimv2/stream');
+    es.onmessage = (e) => {
+        const msg = JSON.parse(e.data);
+        if (msg.type === 'tick') {
+            tickNum   = msg.tick;
+            lastMinds = msg.minds;
+            lastRes   = msg.resources;
+            lastBoar  = msg.boar || null;
+            if (msg.world) {
+                world = msg.world;
+                worldDirty = true;
+            }
+            updatePanel();
+            updateAssoc();
+            updateWM();
+            updateLog(msg.events || []);
+            render();
+            document.getElementById('tick-info').textContent = `tick ${tickNum}`;
+        } else if (msg.type === 'status') {
+            simRunning = msg.running;
+            const btn = document.getElementById('btn-start');
+            btn.textContent = simRunning ? 'PAUSE' : 'START';
+            btn.classList.toggle('running', simRunning);
+        }
+    };
+    es.onerror = () => {
+        document.getElementById('tick-info').textContent = 'stream error — retrying…';
+    };
+}
+
+// ── Controls ───────────────────────────────────────────────────────────────────
+async function toggleSim() {
+    const url = simRunning ? '/2dsimv2/stop' : '/2dsimv2/start';
+    await fetch(url, { method: 'POST' });
+}
+
+// ── Legend ─────────────────────────────────────────────────────────────────────
+function buildLegend() {
+    const el = document.createElement('div');
+    el.style.cssText = 'display:flex;gap:6px;font-size:9px;color:#444;align-items:center';
+    for (let i = 0; i < TERRAIN_LABELS.length; i++) {
+        el.innerHTML += `<span><span style="display:inline-block;width:10px;height:10px;background:${TERRAIN_COLORS[i]};border:1px solid #222;vertical-align:middle;margin-right:3px;border-radius:1px"></span>${TERRAIN_LABELS[i]}</span>`;
+    }
+    el.innerHTML += `&nbsp;<span style="color:#886611">◆ food</span>&nbsp;<span style="color:#cc3300">● boar</span>`;
+    document.getElementById('right').appendChild(el);
+}
+
+buildLegend();
+connectSSE();
+
+// Keep canvas rendering alive even without server ticks
+function loop() {
+    render();
+    requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

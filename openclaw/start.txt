@@ -1,0 +1,3 @@
+RESETS LINUX: wsl --shutdown; Start-Sleep -Seconds 3; wsl echo "WSL OK"
+STARTS OPENCLAW: wsl start-openclaw
+STOPS OPENCLAW: wsl systemctl --user stop openclaw-gateway.service

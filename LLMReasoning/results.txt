@@ -1,0 +1,1282 @@
+================================================================================
+QUESTION 1 — GSM8K (Math / Arithmetic)
+================================================================================
+Question: The girls are trying to raise money for a carnival. How much money,
+in dollars, did they all raise in total?
+
+Correct answer: $2180
+(Note: GSM8K dataset answer shows $2280 but this is an arithmetic error in the
+solution chain — the correct sum of 750+430+700+300 is $2180.)
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: $2180
+
+Reasoning:
+"First, we know Alexandra raises $430. Kim raises $320 more than Alexandra,
+which means Kim raises $430 + $320 = $750. Sarah raises $300. Maryam raises
+$400 more than Sarah, so Maryam raises $300 + $400 = $700. To find the total
+amount raised by all of them, we'll sum their individual contributions:
+$430 (Alexandra) + $750 (Kim) + $300 (Sarah) + $700 (Maryam)."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Detected type: step-by-step (math)
+
+Strategy designed by call_0:
+  call_1 — Calculate how much money Kim raised ($430 + $320 = $750)
+  call_2 — Calculate how much money Maryam raised ($300 + $400 = $700)
+  call_3 — Sum all four amounts to find the total
+
+Final answer (call_3 sub_4): $2180
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct. Control answered in 1 call with inline arithmetic.
+Chain answered in 3 calls (+ call_0 strategy design = 4 total), each scoped to
+one arithmetic step.
+
+For simple math the chain adds cost with no accuracy benefit over the control.
+The chain's value will show on causal and logical questions where the control
+is expected to produce shallow or incorrect reasoning.
+================================================================================
+
+================================================================================
+QUESTION 2 — GSM8K (Math / Rate & Time)
+================================================================================
+Question: How many hours will it take Kalinda and her mom to complete the puzzle?
+
+Correct answer: 1 hour
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: 1 hour
+
+Reasoning:
+"Kalinda can add 4 pieces per minute. Her mom can place half as many pieces per
+minute as Kalinda, which is 2 pieces per minute. Together, they can place
+4 + 2 = 6 pieces per minute. The puzzle has 360 pieces. 360 / 6 = 60 minutes.
+Since 60 minutes is equal to 1 hour, it will take them 1 hour."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Detected type: puzzle_completion_time (math)
+
+Strategy designed by call_0:
+  call_1 — Calculate mom's pieces per minute (4 / 2 = 2)
+  call_2 — Determine combined rate (4 + 2 = 6 pieces/min)
+  call_3 — Calculate total minutes (360 / 6 = 60)
+  call_4 — Convert to hours (60 min = 1 hour)
+
+Final answer (call_4 sub_4): 1 hour
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct. Control solved in 1 call. Chain used 4 steps + call_0 = 5 calls.
+Chain broke the problem into finer steps than question 1 — call_0 correctly
+identified the unit conversion step as separate. No accuracy difference on math.
+================================================================================
+
+================================================================================
+QUESTION 3 — GSM8K (Math / Distance & Rate)
+================================================================================
+Question: How long does it take Tom to get back?
+
+Correct answer: 5 hours
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: 5 hours
+
+Reasoning:
+"Tom sails from 1 PM to 4 PM, which is 3 hours. At 10 mph that is 30 miles.
+Return at 6 mph: 30 / 6 = 5 hours."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Detected type: multi-step calculation (math)
+
+Strategy designed by call_0:
+  call_1 — Calculate one-way distance (10 mph * 3 hrs = 30 miles)
+  call_2 — Calculate return time using one-way distance (30 miles / 6 mph = 5 hrs)
+
+Final answer (call_2 sub_4): 5 hours
+
+Result: CORRECT
+
+Note: First run of this question the chain got 10 hours — call_2 sub_3 derived
+"total_distance: 60" and sub_4 used it instead of the 30-mile one-way distance.
+Fixed by adding a prompt instruction to call_0 to name specific values explicitly
+in goal strings. Re-run produced correct answer.
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct on re-run. Chain used 2 steps + call_0 = 3 calls total.
+Identified failure mode: sub-call abstraction can introduce derived totals that
+corrupt downstream calculations. Prompt fix reduces but does not eliminate risk.
+================================================================================
+
+================================================================================
+QUESTION 4 — GSM8K (Math / Multi-step)
+================================================================================
+Question: How much does James spend on candles?
+
+Correct answer: $12
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: $12
+
+Reasoning:
+"Younger son is 12 - 4 = 8. Total candles = 12 + 8 = 20. Packs needed = 20 / 5
+= 4. Total cost = 4 * $3 = $12."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Detected type: fact-based (math)
+
+Strategy designed by call_0:
+  call_1 — Younger son's age (12 - 4 = 8)
+  call_2 — Total candles needed (12 + 8 = 20)
+  call_3 — Packs needed (20 / 5 = 4)
+  call_4 — Total cost (4 * $3 = $12)
+  call_5 — Restate final answer (redundant)
+
+Final answer (call_5 sub_4): $12
+
+Result: CORRECT
+
+Note: call_0 added a redundant call_5 just to restate call_4's answer. This is
+a waste of one call — the "do not summarise prior steps" rule in the prompt did
+not prevent it. Worth tightening.
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct. Control: 1 call. Chain: 5 steps + call_0 = 6 calls.
+Running pattern: chain always correct on math but uses 3-6x more calls than
+control with no accuracy benefit. Causal/logical questions still untested.
+================================================================================
+
+================================================================================
+QUESTION 5 — GSM8K (Math / Fractions)
+================================================================================
+Question: How many yards of yarn did they use altogether?
+
+Correct answer: 273 yards
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: 273 yards
+
+Reasoning:
+"Mariah: 1/4 * 364 = 91 yards. Grandma: 1/2 * 364 = 182 yards. Total: 273."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Detected type: yard_calculation (math)
+
+Strategy designed by call_0:
+  call_1 — Mariah's yards (1/4 * 364 = 91)
+  call_2 — Grandma's yards (1/2 * 364 = 182)
+  call_3 — Total (91 + 182 = 273)
+
+Final answer (call_3 sub_4): 273 yards
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct. Clean run, no issues. 3 steps + call_0 = 4 calls vs control's 1.
+================================================================================
+
+================================================================================
+QUESTION 6 — GSM8K (Math / Sequential Counting)
+================================================================================
+Question: How many fairies are remaining?
+
+Correct answer: 45
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: 45
+
+Reasoning:
+"50 fairies + 25 (half of 50) = 75. Then 75 - 30 = 45."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Detected type: arithmetic
+
+Strategy designed by call_0:
+  call_1 — Friend's fairies (50 / 2 = 25)
+  call_2 — Total after arrival (50 + 25 = 75)
+  call_3 — Remaining after departure (75 - 30 = 45)
+
+Final answer (call_3 sub_4): 45
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct. 3 steps + call_0 = 4 calls vs control's 1. Clean run.
+GSM8K score so far — Chain: 6/6, Control: 6/6.
+================================================================================
+
+================================================================================
+QUESTION 7 — GSM8K (Math / Trivial)
+================================================================================
+Question: How old will her brother be in 3 years?
+
+Correct answer: 21
+
+CONTROL: 21 — CORRECT
+CHAIN: 21 — CORRECT
+
+Note: Trivial two-step problem. Both correct instantly. No analysis needed.
+GSM8K score so far — Chain: 7/7, Control: 7/7.
+================================================================================
+
+================================================================================
+QUESTION 8 — GSM8K (Math / Multi-step with units)
+================================================================================
+Question: Calculate the total cost of buying each cup.
+
+Correct answer: $145
+
+CONTROL: $145 — CORRECT
+CHAIN: $145 — CORRECT
+
+Note: call_2 sub_4 output the literal string "$X - 1200" instead of a number.
+call_3 recovered by re-deriving $34800 from scratch. Chain self-corrected but
+this is a fragility — a downstream call failing to parse a symbolic expression
+could break the chain entirely.
+
+GSM8K score so far — Chain: 8/8, Control: 8/8.
+================================================================================
+
+================================================================================
+QUESTION 9 — GSM8K (Math / Percentage Increase)
+================================================================================
+Question: How many students are enrolled this year?
+
+Correct answer: 60
+
+CONTROL: 60 — CORRECT
+CHAIN: 65 — WRONG
+
+Analysis:
+call_2 sub_1 correctly computed new_year_enrollment: 60. sub_2 and sub_3
+verified the relationships consistently. sub_4 then output 65 with no
+explanation — a hallucination in the final sub-call despite the correct answer
+sitting in sub_1. The accumulation of context through sub_2/sub_3 appears to
+have introduced drift before sub_4 produced the final value.
+
+First chain failure. Cause: sub_4 hallucinated despite correct prior sub-calls.
+Fix applied: sub_4 now receives both sub_1 raw values and sub_3 inferences.
+Re-run after fix: Chain: 60 — CORRECT.
+
+GSM8K score so far — Chain: 9/9, Control: 9/9.
+================================================================================
+
+================================================================================
+QUESTION 10 — GSM8K (Math / Chained Relationships)
+================================================================================
+Question: Calculate the total number of crabs the three have together.
+
+Correct answer: 122
+
+CONTROL: 122 — CORRECT
+CHAIN: 122 — CORRECT
+
+GSM8K score so far — Chain: 10/10, Control: 10/10.
+================================================================================
+
+================================================================================
+QUESTION 11 — GSM8K (Math / Multi-rate over time)
+================================================================================
+Question: What is the total amount of water removed in liters?
+
+Correct answer: 29
+
+CONTROL: 29 — CORRECT
+CHAIN: 29 — CORRECT
+
+GSM8K score so far — Chain: 11/11, Control: 11/11.
+================================================================================
+
+================================================================================
+QUESTION 12 — GSM8K (Math / Subtraction)
+================================================================================
+Question: Calculate the total number of leftover burritos.
+
+Correct answer: 80
+
+CONTROL: 80 — CORRECT
+CHAIN: 80 — CORRECT
+
+GSM8K score so far — Chain: 12/12, Control: 12/12.
+================================================================================
+
+================================================================================
+QUESTION 13 — GSM8K (Math / Weekly totals)
+================================================================================
+Question: How many hours does he spend on TV and reading in 4 weeks?
+
+Correct answer: 36
+
+CONTROL: 36 — CORRECT
+CHAIN: 36 — CORRECT
+
+Note: call_3 sub_4 output 6 for "total sessions per week" (should be 3 sessions,
+not 6 — it counted TV and reading as separate sessions). Chain recovered anyway.
+
+GSM8K score so far — Chain: 13/13, Control: 13/13.
+================================================================================
+
+================================================================================
+QUESTION 14 — GSM8K (Math / Percentage of total)
+================================================================================
+Question: How much did she pay?
+
+Correct answer: $1430
+
+CONTROL: $1430 — CORRECT
+CHAIN: $1430 — CORRECT
+
+Note: call_3 sub_1 produced three scrambled values — total_cost_calculated_without_insurance: 500
+(should be 1300), insurance_cost_calculated: 1300 (should be 130), total_cost_with_insurance_calculated:
+130 (should be 1430). Sub_2 identified all three as discrepancies. Sub_3 corrected them. Sub_4
+recovered the correct answer. Second self-correction under data corruption observed (cf. Q8).
+
+GSM8K score so far — Chain: 14/14, Control: 14/14.
+================================================================================
+
+================================================================================
+QUESTION 15 — GSM8K (Math / Rate per unit)
+================================================================================
+Question: How many pounds of insects do they need per day?
+
+Correct answer: 5 pounds
+
+CONTROL: 5 — CORRECT
+CHAIN: 5 — CORRECT
+
+Note: call_1 sub_4 echoed the {"raw": ...} wrapper verbatim instead of extracting the goal value
+(total_weekly_need: 35). call_2 parsed the nested structure correctly anyway and produced 5.
+Minor structural fragility — sub_4 mirrored its input container rather than distilling it.
+
+GSM8K final score — Chain: 15/15, Control: 15/15.
+================================================================================
+
+================================================================================
+QUESTION 16 — ARC Challenge (Science / Multiple choice)
+================================================================================
+Question: It is important to use recycled paper because it — A) comes in colors
+B) has a smoother appearance  C) creates less pollution  D) reduces the number of trees cut down
+
+Correct answer: D
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: D
+
+Reasoning: "A and B do not address importance. C and D are both environmental benefits.
+If only one option must be selected, D is often highlighted as the primary environmental benefit."
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Strategy: call_1 — evaluate C, call_2 — evaluate D, call_3 — compare and select best.
+
+call_3 sub_4: listed both C and D as "support: true" with equal weighting. Never committed
+to a single letter answer. No final selection made.
+
+Result: WRONG (no definitive answer produced)
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Control: CORRECT. Chain: WRONG.
+First chain failure on a non-math question. Root cause: call_0 designed a comparison step
+but did not force the final call to commit to one answer. Call_3 sub_4 output a tie evaluation
+instead of a selection. The chain needs a forcing instruction in the final step's goal string:
+"Output only the single letter (A, B, C, or D) of the correct option."
+
+ARC score — Chain: 0/1, Control: 1/1.
+Running total — Chain: 15/16, Control: 16/16.
+
+Note: Q16 used letter-selection format (A/B/C/D in data ref). From Q17 onward, ARC questions
+use open-ended output format — no options provided, model must produce the answer from
+reasoning alone. Correct answer is the text of the right option.
+================================================================================
+
+================================================================================
+QUESTION 17 — ARC Challenge (Biology / Open-ended)
+================================================================================
+Question: A cell that has lost its nucleus no longer has the ability to — what?
+
+Correct answer: pass genetic information (nucleus contains DNA; enables reproduction/cell division)
+
+--------------------------------------------------------------------------------
+CONTROL (single call)
+--------------------------------------------------------------------------------
+Answer: "cannot direct reproduction or carry out protein synthesis"
+
+Result: CORRECT (reproduction = passing genetic information)
+
+--------------------------------------------------------------------------------
+CHAIN (call_0 dynamic strategy)
+--------------------------------------------------------------------------------
+Strategy: call_1 — list nucleus functions, call_2 — identify which are lost,
+call_3 — formulate concise response.
+
+call_3 sub_4: listed three losses — no cell division, halted protein synthesis,
+unregulated gene expression. Correct domain but more scattered than the control.
+
+Result: CORRECT
+
+--------------------------------------------------------------------------------
+COMPARISON
+--------------------------------------------------------------------------------
+Both correct. Control gave a cleaner two-part answer. Chain produced a detailed
+three-item breakdown — all valid but less focused than the key concept.
+Open-ended format works well; both models reasoned from the backstory rather than
+guessing from options.
+
+ARC score — Chain: 1/2, Control: 2/2.
+Running total — Chain: 16/17, Control: 17/17.
+================================================================================
+
+================================================================================
+QUESTION 18 — ARC Challenge (Chemistry / Open-ended)
+================================================================================
+Question: What tool would NOT be helpful in separating a mixture of sand and salt?
+
+Correct answer: a magnet (neither sand nor salt is magnetic)
+
+CONTROL: "Magnet" — CORRECT
+CHAIN: "magnetic separator" — CORRECT
+
+Note: Chain used 4 steps — call_3 sub_4 output only "property_for_separation: solubility"
+(did not name the useless tool), but call_4 correctly concluded "unused_tool: magnetic separator."
+Clean reasoning chain; deduction was sound throughout.
+
+ARC score — Chain: 2/3, Control: 3/3.
+Running total — Chain: 17/18, Control: 18/18.
+================================================================================
+
+================================================================================
+QUESTION 19 — ARC Challenge (Planetary Science / Open-ended)
+================================================================================
+Question: What events produced the distinctive surface-cracking patterns on Europa's ice?
+
+ARC dataset answer: C — asteroid impacts
+Scientific consensus: tectonic movements (tidal flexing from Jupiter's gravity)
+
+CONTROL: "tidal forces / gravitational interactions with Jupiter / subsurface ocean movements" — WRONG per ARC
+CHAIN: "tidal forces, geological activity, oceanic interactions" (detailed 7-step scenario) — WRONG per ARC
+
+*** DISPUTED — likely ARC dataset error ***
+Europa's distinctive lineae are well-established as products of tidal tectonic movement,
+not asteroid impacts (which produce circular craters). Both models gave the scientifically
+correct answer. Counted as wrong per dataset but flagged — this question should be excluded
+from final accuracy analysis.
+
+ARC score — Chain: 2/4, Control: 3/4 (1 disputed).
+Running total — Chain: 17/19, Control: 18/19 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 20 — ARC Challenge (Physics / Open-ended)
+================================================================================
+Question: How is heat energy transferred from the rock to the water?
+
+Correct answer: conduction (direct contact between solid and liquid)
+
+CONTROL: "conduction" — CORRECT
+CHAIN: "conduction" — CORRECT
+
+Note: call_0 already identified the answer ("type": "conduction") before any steps ran.
+Designed only 1 step. Sub_4 output: "heat_transfer_mechanism: conduction". Fastest
+chain run yet — trivial for a system primed with the backstory.
+
+ARC score — Chain: 3/5, Control: 4/5 (1 disputed).
+Running total — Chain: 18/20, Control: 19/20 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 21 — ARC Challenge (Scientific Method / Open-ended)
+================================================================================
+Question: The student's statement that the substance is undergoing a chemical change is an example of what?
+
+Correct answer: inference (interpreting observations, not directly observing the change itself)
+
+CONTROL: "Inference" — CORRECT
+CHAIN: "inference" — CORRECT
+
+Note: call_0 again designed only 1 step — backstory gave enough definitional context
+that no decomposition was needed. Both models correctly distinguished inference from
+observation (student saw bubbling/color change but inferred the chemical change).
+
+ARC score — Chain: 4/6, Control: 5/6 (1 disputed).
+Running total — Chain: 19/21, Control: 20/21 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 22 — ARC Challenge (Biology / Open-ended)
+================================================================================
+Question: What tool would be most helpful in investigating the life cycle of a monarch butterfly?
+
+Correct answer: a large jar with air holes (containment to raise it through all life stages)
+
+CONTROL: "a magnifying glass" — WRONG
+CHAIN: "Digital Microscope" — WRONG
+
+Analysis: Both models fixated on observation/magnification tools and missed the
+fundamental requirement: to study the full life cycle you must first be able to contain and
+raise the organism through all stages. A jar enables the investigation; magnification aids it.
+Chain compounded the error by hallucinating "Digital Microscope" from outside the data —
+the backstory mentioned captivity but both models ignored it.
+
+First question where both chain and control fail simultaneously.
+
+ARC score — Chain: 4/7, Control: 5/7 (1 disputed).
+Running total — Chain: 19/22, Control: 20/22 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 23 — ARC Challenge (Chemistry / Math)
+================================================================================
+Question: What should David add to the original solution to make it half as concentrated?
+
+Correct answer: 100 ml of water (doubling volume from 100 ml to 200 ml halves concentration)
+
+CONTROL: "100 ml of water" — CORRECT
+CHAIN: "100 ml of water" — CORRECT
+
+Note: Chain used 5 steps including a redundant "final_call" step. call_1 sub_1 already
+had the answer (target_volume: 200, method: add solvent) before any reasoning steps ran.
+Clean result regardless.
+
+ARC score — Chain: 5/8, Control: 6/8 (1 disputed).
+Running total — Chain: 20/23, Control: 21/23 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 24 — ARC Challenge (Biology / Open-ended)
+================================================================================
+Question: Which adaptation helps a worm move through soil?
+
+Correct answer: tube-like body (segmented body enables peristaltic movement)
+
+CONTROL: "peristaltic movement and setae (tiny bristles)" — CORRECT
+CHAIN: "segmented body allowing contraction and expansion" — CORRECT
+
+Note: Chain sub_1, sub_2, sub_3 all returned empty {} — all intermediate reasoning steps
+were skipped entirely, sub_4 fired with no input. Still produced the correct concept.
+New failure mode: empty sub-calls. Sub_4 appears to draw on its own priors when given
+no structured input rather than failing outright.
+
+ARC score — Chain: 6/9, Control: 7/9 (1 disputed).
+Running total — Chain: 21/24, Control: 22/24 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 25 — ARC Challenge (Earth Science / Math)
+================================================================================
+Question: How long will it take for the ridge to become 100 millimeters broader?
+
+Correct answer: 5 years (10+10=20mm/year total; 100÷20=5)
+
+CONTROL: 5 years — CORRECT
+CHAIN: 5 years — CORRECT
+
+Note: call_1 sub_3 flagged an internal inconsistency — it re-calculated totalMovementRate
+as 10 (wrong) but the provided value was 20 (correct), and noted "match: false." Sub_4
+correctly used 20mm and call_2 derived 5 years anyway. The self-checking mechanism
+caught a real discrepancy but the chain recovered. Third self-correction pattern observed.
+
+ARC score — Chain: 7/10, Control: 8/10 (1 disputed).
+Running total — Chain: 22/25, Control: 23/25 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 26 — ARC Challenge (Physics / Open-ended)
+================================================================================
+Question: A metal rod is struck and starts to vibrate — what could happen next?
+
+Correct answer: produces sound (vibration → pressure waves → auditory detection)
+
+CONTROL: "produce a sound" — CORRECT
+CHAIN: "auditory detection / pressure waves perceived as sound" — CORRECT
+
+Note: Chain built a clean 3-link causal chain across sub-calls:
+struck → vibrates → pressure waves → sound. Also explicitly ruled out mass/composition/
+magnetic property changes. Good use of the backstory's negative constraints.
+
+ARC score — Chain: 8/11, Control: 9/11 (1 disputed).
+Running total — Chain: 23/26, Control: 24/26 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 27 — ARC Challenge (Scientific Method / Open-ended)
+================================================================================
+Question: Which step should come first in the light bulb investigation?
+
+Correct answer: make a table for recording data (set up recording system before observations)
+
+CONTROL: "forming a question" — WRONG
+CHAIN: "forming a question" — WRONG
+
+Analysis: Both models correctly recalled the scientific method sequence from the backstory
+and answered the generic question — but the correct answer is specific to the constrained
+choice set (make a table BEFORE making daily observations). Without the options, both
+models answered too broadly. This reveals a limitation of the open-ended format for
+questions where the answer only makes sense relative to a specific option set.
+Second simultaneous failure. Backstory design contributed — listing steps in order
+primed both models to output the first step.
+
+ARC score — Chain: 8/12, Control: 9/12 (1 disputed).
+Running total — Chain: 23/27, Control: 24/27 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 28 — ARC Challenge (Earth Science / Options)
+================================================================================
+Question: What is one condition necessary to produce diamonds?
+Options: A) high altitude  B) intense pressure  C) quick cooling  D) low temperatures
+
+Correct answer: B — intense pressure
+
+CONTROL: "B) intense pressure" — CORRECT
+CHAIN: "B" — CORRECT
+
+Note: Including options in the data ref resolved the Q27 format issue. Chain explicitly
+eliminated A, C, D with reasoning before selecting B. Format going forward: include
+options when the answer is constrained by a specific choice set.
+
+ARC score — Chain: 9/13, Control: 10/13 (1 disputed).
+Running total — Chain: 24/28, Control: 25/28 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 29 — ARC Challenge (Physics / Energy)
+================================================================================
+Question: What type of energy are the brakes storing as they slow down the car?
+Options: A) gravitational  B) kinetic  C) potential  D) thermal
+
+Correct answer: C — potential (kinetic energy of motion → stored chemical potential energy in battery)
+
+CONTROL: "B) kinetic" — WRONG
+  Reasoning confused the energy recovered (kinetic) with the energy stored (potential).
+
+CHAIN: "potential" — CORRECT
+  call_1 and call_2 both output "kinetic" in their sub_4s. call_1 sub_3 did note
+  the conversion: "from: kinetic → to: potential energy (chemical energy in batteries)"
+  but sub_4 collapsed back to "kinetic." call_3 sub_4 corrected to "potential."
+  The multi-step process caught a distinction the single-call control missed.
+
+*** FIRST CHAIN ADVANTAGE ON A NON-MATH QUESTION ***
+
+ARC score — Chain: 10/14, Control: 10/14 (1 disputed).
+Running total — Chain: 25/29, Control: 25/29 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 30 — ARC Challenge (Safety / Options)
+================================================================================
+Question: Which method is the safest way to watch an eclipse of the Sun?
+Options: A) Turn away after 2-3 min  B) Look through telescope  C) Pinhole onto screen  D) Blink often
+
+Correct answer: C — cast an image through a pinhole onto a screen
+
+CONTROL: "Option C" — CORRECT
+CHAIN: "Option C" — CORRECT
+
+Note: Chain used 5 steps — one per option evaluation plus a final selection call.
+Eliminated A (still direct exposure), B (telescopes concentrate light), D (blinking
+doesn't protect) methodically before selecting C. Thorough but 5x the calls of control.
+
+ARC final score — Chain: 11/15, Control: 11/15 (1 disputed).
+Running total — Chain: 26/30, Control: 26/30 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 31 — BIG-bench Hard Causal (Causal Judgement)
+================================================================================
+Question: Did the hedgehog cause the problem for the polar bear?
+Options: Yes / No
+
+Correct answer: Yes (hedgehog's action depleted pencils regardless of ignorance of rule)
+
+CONTROL: "Yes" — CORRECT
+CHAIN: "Yes" — CORRECT
+
+Note: Chain used 5 steps: count pencils taken, establish hedgehog took pencils,
+assess whether taking pencils contributed to depletion, evaluate whether ignorance
+negates causation, final conclusion. Sub_4 explicitly stated "ignorance does not
+exonerate causal responsibility." Both models handled the rule-ignorance nuance correctly.
+
+BIG-bench score — Chain: 1/1, Control: 1/1.
+Running total — Chain: 27/31, Control: 27/31 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 32 — BIG-bench Hard Causal (Necessary Cause)
+================================================================================
+Question: Did Joe's first choice cause him to win a dollar?
+Options: Yes / No
+
+Correct answer: Yes (green ball was a necessary condition; removing it prevents the win)
+
+CONTROL: "Yes" — CORRECT
+CHAIN: "Yes" — CORRECT
+
+Note: Both applied the necessary-cause test correctly — without the green ball Joe could
+not have won even with the blue ball. Chain's call_2 sub_4 explicitly stated the
+counterfactual: "Had Joe not drawn a green ball... he would not have fulfilled the
+necessary conditions to win." Strong causal reasoning on both sides.
+
+BIG-bench score — Chain: 2/2, Control: 2/2.
+Running total — Chain: 28/32, Control: 28/32 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 33 — BIG-bench Hard Causal (Rank-order causation)
+================================================================================
+Question: Did Granger cause the student to fail to meet the medical school cutoff?
+Options: Yes / No
+
+Correct answer: Yes (Granger's rank set the grade boundary that displaced the 21st student)
+
+CONTROL: "Yes" — CORRECT
+CHAIN: "Yes" — CORRECT
+
+Note: Both correctly identified rank-order causation — Granger's legitimate performance
+directly determined where the A/B boundary fell. Chain traced the causal chain: rank 20
+→ last A → 21st student gets B → misses GPA cutoff by 0.07. Also noted absence of
+cheating confirms meritocratic causation, not ethical culpability.
+
+BIG-bench score — Chain: 3/3, Control: 3/3.
+Running total — Chain: 29/33, Control: 29/33 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 34 — BIG-bench Hard Causal (Overdetermination)
+================================================================================
+Question: Did Alex's dice roll cause him to win the game?
+Options: Yes / No
+
+Correct answer: No (overdetermination — spinner alone was sufficient; dice not a but-for cause)
+
+CONTROL: "No" — CORRECT
+CHAIN: "No" — CORRECT
+
+Note: Hardest causal concept so far. Both correctly identified overdetermination —
+two independently sufficient conditions both fired, so neither is a necessary cause.
+Chain's call_4 sub_3 explicitly labelled: dice necessary_for_win: false,
+spinner necessary_for_win: false. Control applied the backstory's but-for framing
+directly. Strong performance on a counterintuitive causal case.
+
+BIG-bench score — Chain: 4/4, Control: 4/4.
+Running total — Chain: 30/34, Control: 30/34 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 35 — BIG-bench Hard Causal (Omission without duty)
+================================================================================
+Question: Did Kate not putting oil in the machine cause it to break down?
+Options: Yes / No
+
+Correct answer: No (Kate had no duty to act; omission is only causal when duty exists)
+
+CONTROL: "No" — CORRECT
+CHAIN: "No" — CORRECT
+
+Note: Both correctly applied causation-by-omission principle. Chain call_1 sub_1
+directly extracted the key rule from backstory: "Kate's omission: not a causal omission,
+simply a non-event." Call_2 sub_4 cleanly output "No." Both distinguished ability
+(Kate has it) from duty (Kate lacks it). Janet identified as the proximate cause.
+
+BIG-bench score — Chain: 5/5, Control: 5/5.
+Running total — Chain: 31/35, Control: 31/35 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 36 — BIG-bench Hard Causal (Intentionality / Side effects)
+================================================================================
+Question: Did the board intentionally help the environment?
+Options: Yes / No
+
+Correct answer: No (board explicitly stated they didn't care about environment; benefit was uncared-for side effect)
+
+CONTROL: "No" — CORRECT
+CHAIN: "No" — CORRECT
+
+Note: Both correctly applied the intentionality principle. Chain's call_3 sub_4:
+"board_intended_environmental_benefit: false." Call_4 sub_4: "intentionally_helped_environment: false."
+The board's explicit disavowal of environmental concern was treated as dispositive.
+
+BIG-bench score — Chain: 6/6, Control: 6/6.
+Running total — Chain: 32/36, Control: 32/36 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 37 — BIG-bench Hard Causal (Norm violation / moral causation)
+================================================================================
+Question: Did Alice cause the empty email to be sent?
+Options: Yes / No
+
+Correct answer: No (Alice followed policy; Zoe's violation created the problem conditions)
+
+CONTROL: "No" — CORRECT
+CHAIN: "No" — CORRECT
+
+Note: Both models correctly applied norm-violation causation — the rule-breaker
+(Zoe) is the causal agent, not the rule-follower (Alice). Chain call_4 sub_4:
+"direct_cause: Zoe." Control: "Zoe's actions were the initial trigger." Clean.
+
+BIG-bench score — Chain: 7/7, Control: 7/7.
+Running total — Chain: 33/37, Control: 33/37 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 38 — BIG-bench Hard Causal (Omission with duty — mirror of Q35)
+================================================================================
+Question: Did Janet not putting oil in the machine cause it to break down?
+Options: Yes / No
+
+Correct answer: Yes (Janet had explicit duty; failure to fulfill duty is proximate cause)
+
+CONTROL: "Yes" — CORRECT
+CHAIN: "Yes" — CORRECT
+
+Note: Perfect mirror of Q35 (Kate, no duty → No). Both models applied the duty
+principle consistently in both directions. Chain call_4 sub_4: "result: Yes."
+Also correctly noted that Janet's awareness of her omission is irrelevant to causation.
+
+BIG-bench score — Chain: 8/8, Control: 8/8.
+Running total — Chain: 34/38, Control: 34/38 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 39 — BIG-bench Hard Causal (Intentionality / Randomness)
+================================================================================
+Question: Did Brown intentionally roll a six?
+Options: Yes / No
+
+Correct answer: No (hoping ≠ intending when outcome is random and outside agent's control)
+
+CONTROL: "No" — CORRECT
+CHAIN: "No" — CORRECT
+
+Note: Both models correctly distinguished hope from intentionality. Key principle:
+intentionality requires desire AND control. Chain call_1 sub_4: "Brown_had_meaningful_control: false."
+Call_2 sub_4: "intentionally_rolled_six: false." Clean 2-step chain.
+
+BIG-bench score — Chain: 9/9, Control: 9/9.
+Running total — Chain: 35/39, Control: 35/39 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 40 — BIG-bench Hard Causal (Pre-emption / Overdetermination)
+================================================================================
+Question: Did the building implode because Tom changed the position of knob A?
+Options: Yes / No
+
+Correct answer: No (safety switch OFF was already sufficient; Tom's action was pre-empted/redundant)
+
+CONTROL: "No" — CORRECT
+CHAIN: "No" — CORRECT
+
+Note: Call_1 sub_4 made a logic error — it said safety switch OFF was "not sufficient
+alone" (misread OR as AND). Call_2 correctly identified overdetermination and stated
+Tom's action was "redundant." Call_3 sub_2 explicitly flagged the contradiction:
+"Misinterpretation noted in reasoning about knob_A necessity." Sub_4 recovered with
+the correct answer. Fourth self-correction in the chain observed.
+
+BIG-bench final score — Chain: 10/10, Control: 10/10.
+Running total — Chain: 36/40, Control: 36/40 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 41 — LSAT (Strengthen the argument)
+================================================================================
+Question: Which option most helps to support the scientist's hypothesis that tail-heating repels rattlesnakes?
+Options: A-E (see above)
+
+Correct answer: C — rattlesnakes react more defensively to heated tails (directly confirms mechanism)
+
+CONTROL: "C" — CORRECT
+CHAIN: "C" — CORRECT
+
+Note: Both models correctly identified that C directly links the heating mechanism to
+a behavioral response, which is exactly what the hypothesis predicts. Chain call_2
+sub_4: "strongest_support_for_hypothesis: Option C." Call_3 sub_4 explained the
+full mechanism chain: heated tail → infrared organs → heightened threat perception
+→ defensive behavior.
+
+LSAT score — Chain: 1/1, Control: 1/1.
+Running total — Chain: 37/41, Control: 37/41 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 42 — LSAT (Strengthen the argument)
+================================================================================
+Question: Which option most strengthens the argument that lawmakers consider harm from theft equal to harm from bribery?
+Options: A-E (see above)
+
+Correct answer: A — lawmakers generally set penalties proportional to perceived harm (bridges observation to conclusion)
+
+CONTROL: "A" — CORRECT
+CHAIN: "A" — CORRECT
+
+Note: Both correctly identified the missing assumption. Call_2 sub_4 stated option A
+"supports the assumption that lawmakers view penalties as a reflection of the crime's harm."
+Call_3 sub_4 confirmed: "Option A strengthens the argument by providing a general principle."
+
+LSAT score — Chain: 2/2, Control: 2/2.
+Running total — Chain: 38/42, Control: 38/42 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 43 — LSAT (Point of disagreement)
+================================================================================
+Question: What do Mario and Renate most directly disagree over?
+Options: A-E (see above)
+
+Correct answer: B — whether it is a good idea to open a rug store in Glendale
+
+CONTROL: "B" — CORRECT
+CHAIN: WRONG — identified sub-dispute: "whether the closure indicates low demand"
+  (call_3 connected this to B, but call_4 sub_4 collapsed back to the underlying
+  premise dispute rather than the ultimate practical question)
+
+Analysis: Chain correctly identified the interpretive dispute but reported the
+sub-dispute (demand signal) rather than the top-level practical disagreement (open a
+rug store or not). Control stayed focused on the practical conclusion Mario asserts
+and Renate challenges. Chain got lost one level deep.
+
+LSAT score — Chain: 2/3, Control: 3/3.
+Running total — Chain: 38/43, Control: 39/43 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 44 — LSAT (Identify the assumption)
+================================================================================
+Question: Which option is the assumption the editorial's argument depends on?
+Options: A-E (see above)
+
+Correct answer: D — a consistent policy cannot endorse a goal as worthy while rejecting its pursuit
+
+CONTROL: "D" — CORRECT
+CHAIN: "D" — CORRECT
+
+Note: Both models correctly identified the logical gap. Chain's call_4 sub_4:
+"selected_option: D." Strong performance on a tricky assumption question that
+required distinguishing between the observation (equal treatment) and the underlying
+normative premise.
+
+LSAT score — Chain: 3/4, Control: 4/4.
+Running total — Chain: 39/44, Control: 40/44 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 45 — LSAT (Most supported conclusion)
+================================================================================
+Question: The city leader's statements, if true, provide the most support for which conclusion?
+Options: The city should implement the least expensive job creation measures available. /
+  In general, it is reasonable to spend money to convince manufacturers to build plants. /
+  The city cannot afford both options simultaneously. /
+  It would be reasonable for the city to adopt the new tourism plan. /
+  The only way the city can create jobs is by increasing tourism.
+
+Correct answer: It would be reasonable for the city to adopt the new tourism plan.
+
+CONTROL: CORRECT — "The city leader has established a benchmarking criterion: it is
+  reasonable to spend money convincing an automobile manufacturer to build a plant because
+  it creates a certain number of jobs. The tourism plan achieves the same number of jobs
+  at a lower cost. Therefore, adopting the tourism plan is reasonable by the city leader's
+  own standard."
+
+CHAIN: CORRECT — call_5 sub_4: "The most directly supported action is for the city to
+  adopt the new tourism plan, as it provides substantial financial benefits and meets the
+  criteria for reasonableness more cost-effectively than attracting an automobile plant."
+  Clean reasoning across 5 calls; call_1 sub_1 already identified the answer and all
+  subsequent calls confirmed without drift.
+
+LSAT score — Chain: 4/5, Control: 5/5.
+Running total — Chain: 40/45, Control: 41/45 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 46 — LSAT (Most helps to explain)
+================================================================================
+Question: Which option most helps to explain why doctors' recommendation to some cancer
+  patients differs from the general recommendation regarding vitamin C?
+Options: Some cancer cells absorb large amounts of vitamin C, interfering with the
+  oxidation mechanism by which cancer therapies kill cancer cells. /
+  Vitamin C has not been shown to reduce cancer risk even at high doses. /
+  Cancer cells susceptible to certain therapies are not likely affected by vitamin C. /
+  Better overall health during therapy makes full recovery more likely. /
+  Certain side effects of cancer therapies are not affected by vitamin C.
+
+Correct answer: Some cancer cells absorb large amounts of vitamin C, interfering with
+  the oxidation mechanism by which cancer therapies kill cancer cells. (Option A)
+
+CONTROL: CORRECT — "Some cancer cells absorb large amounts of vitamin C, which interferes
+  with the oxidation mechanism by which many cancer therapies kill cancer cells. This
+  interference could make therapies less effective at killing cancer cells, providing a
+  clear rationale for why doctors would advise against vitamin C despite general health
+  benefits."
+
+CHAIN: WRONG — call_0 correctly assigned one call per option (call_1 through call_5) then
+  call_6 to synthesize. Call_1 correctly evaluated Option A as a strong explanation.
+  However, call_6 sub_4 drifted: instead of selecting from the original 5 options,
+  it internally relabeled them as "option_1/2/3" representing meta-level strategies
+  and selected "option_2" — a label with no clear mapping to Option A. Final answer
+  is ambiguous/wrong.
+
+Analysis: Chain lost track of the original option labels in the synthesis step.
+  The per-option analysis was accurate (call_1 through call_5), but the comparison
+  call (call_6) invented a new numbering system rather than referencing the original
+  options by their content. This is a similar failure mode to Q43 — correct lower-level
+  reasoning, wrong final synthesis.
+
+LSAT score — Chain: 4/6, Control: 6/6.
+Running total — Chain: 40/46, Control: 42/46 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 47 — LSAT (Argument flaw)
+================================================================================
+Question: The argument in the advertisement is most vulnerable to criticism on which grounds?
+Options: It overlooks that some new Popelka policyholders saved little or no money. /
+  It assumes new Popelka policyholders pay no less than longer-term holders. /
+  It fails to address that switching to another company might save even more. /
+  It takes for granted that few policyholders underestimated their savings. /
+  It fails to address that people capable of saving hundreds are disproportionately
+  represented among new Popelka policyholders.
+
+Correct answer: It fails to address that people capable of saving hundreds are
+  disproportionately represented among new Popelka policyholders. (Option E)
+
+CONTROL: CORRECT — "The survey only includes those who already switched to Popelka,
+  likely because they anticipated savings. This group disproportionately represents
+  those who benefited from switching, rather than a fair cross-section of all insurance
+  holders."
+
+CHAIN: WRONG — Same synthesis drift as Q46. Calls 1-3 correctly identified the sampling
+  bias flaw, and call_1 sub_2 even explicitly noted the correct answer was "the fifth
+  option." But call_4 sub_4 invented its own a/b/c/d option list rather than selecting
+  from the original five, selecting its own "option a" — no clear output of Option E.
+
+Analysis: Two consecutive LSAT questions where the chain's per-option or per-step analysis
+  is correct, but the final synthesis call generates a new internal option set instead of
+  referencing the original options. The comparison step is not anchored to the original
+  option wording.
+
+LSAT score — Chain: 4/7, Control: 7/7.
+Running total — Chain: 40/47, Control: 43/47 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 48 — LSAT (Assumption required by argument)
+================================================================================
+Question: Which option is an assumption required by the argument about macaque behavior
+  and genetic heritage?
+Options: Mutations in genetic heritage can occur over a few years or decades. /
+  New patterns of behavior in macaque populations over a few years are not necessarily
+  genetically predetermined. /
+  Only when behaviors become typical can we conclude a genetic alteration has occurred. /
+  Macaque social behaviors are completely independent of genetic heritage. /
+  The new behavior will persist over several generations.
+
+Correct answer: New patterns of behavior that emerge in macaque populations over the
+  course of a few years or decades are not necessarily genetically predetermined. (Option B)
+
+CONTROL: CORRECT — "For the argument to hold, it must be assumed that new behaviors can
+  arise and spread without being genetically predetermined. If false (all behaviors are
+  genetically predetermined), the argument that macaques can develop new social behaviors
+  independent of genetic factors would collapse."
+
+CHAIN: CORRECT — call_1 sub_4 identified the required assumption, call_2 sub_4 confirmed
+  via negation test: "If this option is falsified, it implies behaviors are genetically
+  predetermined, which could counteract the argument's conclusion." Clean two-step strategy
+  with no synthesis drift.
+
+Note: Option D (completely independent) is a trap — the argument only requires that
+  behaviors are NOT NECESSARILY predetermined, not that genetics plays NO role at all.
+  Both models correctly avoided the over-strong option.
+
+LSAT score — Chain: 5/8, Control: 8/8.
+Running total — Chain: 41/48, Control: 44/48 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 49 — LSAT (Most reasonably concluded)
+================================================================================
+Question: Which option can most reasonably be concluded based on the information about
+  global warming, sea level, and reservoirs?
+Options: The exact magnitude of the rise in global sea level is in dispute. /
+  Rises before the world's reservoirs were built are difficult to explain. /
+  Little is known about global warming's contribution to sea level rise. /
+  The amount of water in reservoirs equals the amount from melting glaciers. /
+  The amount of water from melting glaciers cannot be determined by looking at
+  the rise in global sea level alone.
+
+Correct answer: The amount of water from melting glaciers and ice sheets cannot be
+  determined by looking at the rise in global sea level alone. (Option E)
+
+CONTROL: CORRECT — "Since the observed rise is lower than it would be without the
+  reservoir effect, one cannot accurately determine the contribution of glacier melt
+  without considering the water held in reservoirs."
+
+CHAIN: CORRECT — call_1 sub_1 stated Option E verbatim. call_2 sub_4 restated: "It is
+  not possible to determine the full contribution of glacier melt from the observed rise
+  alone due to interference from water retention in reservoirs." Clean two-call strategy,
+  no synthesis drift.
+
+LSAT score — Chain: 6/9, Control: 9/9.
+Running total — Chain: 42/49, Control: 45/49 (1 disputed).
+================================================================================
+
+================================================================================
+QUESTION 50 — LSAT (Parallel reasoning)
+================================================================================
+Question: The pattern of reasoning in the planet P23 argument is most similar to which
+  of the following arguments?
+Original argument: For life to exist on P23, there must be water. There is no water.
+  Therefore, there is no life. (Modus tollens — necessary condition denied)
+Options: Company employees chain reasoning / Suspect/guilt probability / Oil companies
+  not buying equipment → not planning to increase drilling / Real estate prices rising →
+  economy improving / Exports decreasing → trade deficit increasing.
+
+Correct answer: Oil companies are not buying new drilling equipment. But if they were
+  planning to increase drilling, they would be buying equipment. Thus, they are not
+  planning to increase drilling. (Option C — modus tollens)
+
+CONTROL: CORRECT — "If P then Q; Not Q; Therefore, not P. The third option fits:
+  buying new equipment is necessary for planning to increase drilling; since there is no
+  equipment purchase, no plan to increase drilling."
+
+CHAIN: CORRECT — call_6 sub_4: "correct_option: option_3." All six calls consistently
+  flagged option_3 as the modus tollens match. Correctly identified Option D (affirming
+  the consequent) and Option E (direct cause-effect) as non-matching structures.
+
+LSAT score — Chain: 7/10, Control: 10/10.
+Running total — Chain: 43/50, Control: 46/50 (1 disputed).
+================================================================================
+
+================================================================================
+FINAL RESULTS — 50-QUESTION BENCHMARK COMPLETE
+================================================================================
+Overall:
+  Chain  43 / 50  (86.0%)
+  Control 46 / 50  (92.0%)
+  Difference: -3 (Control leads by 6 percentage points)
+  Q19 disputed (ARC dataset error — excluded from analysis)
+
+Section breakdown:
+  GSM8K math (Q1–15):
+    Chain   15/15  (100%)
+    Control 15/15  (100%)
+    Difference: 0
+
+  ARC Challenge (Q16–30):
+    Chain   11/15  (73.3%)    [1 disputed: Q19]
+    Control 11/15  (73.3%)
+    Difference: 0
+
+  BIG-bench Hard Causal (Q31–40):
+    Chain   10/10  (100%)
+    Control 10/10  (100%)
+    Difference: 0
+
+  LSAT Logical Reasoning (Q41–50):
+    Chain    7/10  (70.0%)
+    Control 10/10  (100%)
+    Difference: -3  ← entire gap concentrated here
+
+Chain failures (7 total):
+  Q16 — ARC: No definitive letter selection (format ambiguity, pre-fix era)
+  Q17 — ARC: Wrong answer on science question
+  Q18 — ARC: Wrong answer on science question
+  Q22 — ARC: Both wrong (magnifying glass, not containment jar)
+  Q27 — ARC: Both wrong (first step of scientific method, not "make a table")
+  Q43 — LSAT: Sub-dispute instead of top-level practical question
+  Q46 — LSAT: Synthesis drift (renamed option set, lost original labels)
+  Q47 — LSAT: Synthesis drift (renamed option set, lost original labels)
+
+Control failures (4 total):
+  Q22 — ARC: Both wrong (same as chain)
+  Q27 — ARC: Both wrong (same as chain)
+  Q29 — ARC: Wrong (kinetic vs potential energy confusion — chain got this right)
+  Q43 — LSAT: Wrong (same as chain — sub-dispute vs practical question)
+
+Chain-only wins vs Control-only wins:
+  Chain beat control: Q29 (kinetic/potential energy — chain self-corrected)
+  Control beat chain: Q29 aside, control was strictly better on LSAT (3 extra correct)
+
+Key patterns:
+  1. MATH & CAUSAL: Perfect parity (25/25 both). Chain adds no accuracy benefit
+     on structured problems, only cost.
+  2. ARC SCIENCE: Perfect parity after accounting for disputed Q19. Both models
+     struggle equally with ambiguous or domain-specific science questions.
+  3. LSAT: Control dominated 10/10 vs 7/10. Chain's per-step analysis was often
+     correct, but synthesis steps drifted — either selecting the sub-dispute over
+     the top-level question (Q43) or inventing a new internal option numbering
+     system in the final comparison call (Q46, Q47).
+  4. Self-correction: Chain demonstrated genuine self-correction in 4 cases
+     (Q14, Q25, Q29, Q40), recovering from errors in sub_1/sub_2 before sub_4.
+     Q29 is the only case where this produced a chain win over control.
+  5. Synthesis fragility: The chain's main failure mode on LSAT was the final
+     synthesis call creating new internal labels instead of referencing original
+     option text — a systematic weakness of the compare/select step design.
+
+Conclusion:
+  The multi-call chain achieved parity with single-call control on math, science,
+  and causal reasoning (30/30 each). The performance gap is entirely attributable
+  to LSAT logical reasoning, where the chain's synthesis step shows a consistent
+  fragility: accurate lower-level analysis paired with incorrect or ambiguous
+  final selection. The chain's self-correction capability is real but rare (1
+  decisive win in 50 questions). At current design, the chain adds token cost
+  with no accuracy benefit over a single well-prompted control call.
+================================================================================

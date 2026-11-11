@@ -1,0 +1,54 @@
+{
+  "total_tokens": 3052,
+  "files": [
+    {
+      "path": "SOUL.md",
+      "size_bytes": 1673,
+      "size_kb": 1.6,
+      "tokens": 416,
+      "status": "OK"
+    },
+    {
+      "path": "USER.md",
+      "size_bytes": 586,
+      "size_kb": 0.6,
+      "tokens": 145,
+      "status": "OK"
+    },
+    {
+      "path": "IDENTITY.md",
+      "size_bytes": 340,
+      "size_kb": 0.3,
+      "tokens": 83,
+      "status": "OK"
+    },
+    {
+      "path": "AGENTS.md",
+      "size_bytes": 7874,
+      "size_kb": 7.7,
+      "tokens": 1948,
+      "status": "HARD LIMIT"
+    },
+    {
+      "path": "TOOLS.md",
+      "size_bytes": 860,
+      "size_kb": 0.8,
+      "tokens": 212,
+      "status": "OK"
+    },
+    {
+      "path": "HEARTBEAT.md",
+      "size_bytes": 168,
+      "size_kb": 0.2,
+      "tokens": 42,
+      "status": "OK"
+    },
+    {
+      "path": "memory/memory-usage.json",
+      "size_bytes": 826,
+      "size_kb": 0.8,
+      "tokens": 206,
+      "status": "OK"
+    }
+  ]
+}

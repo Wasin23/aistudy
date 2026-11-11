@@ -1,0 +1,17 @@
+Replace this entire file with whatever text you want the model to learn from.
+
+A few honest pointers before you paste something in:
+- More text = more for it to learn, but also more training steps needed
+  before it gets good at any of it. A giant novel with only 2000 training
+  steps will barely be dented.
+- Repetitive/structured text (like a FAQ, or dialogue with a consistent
+  format) is easier for a tiny model like this to pick up patterns from
+  than something like a novel with huge vocabulary and long-range plot.
+  This model has no ability to "understand" anything -- it just predicts
+  the next character from patterns it's seen. Simple, consistent patterns
+  work best at this scale.
+- Whatever characters appear in this file become the ENTIRE vocabulary
+  the model can ever use, including at generation time.
+- A few thousand characters is a reasonable starting size to experiment
+  with -- you can always swap this file out and retrain from scratch
+  later (just delete checkpoints/mini_transformer.pt first, see below).
